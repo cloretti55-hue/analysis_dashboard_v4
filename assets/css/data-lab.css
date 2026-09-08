@@ -1,0 +1,430 @@
+.data-lab-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1.05fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.data-lab-list,
+.data-lab-metrics,
+.data-lab-active {
+  padding: 18px;
+}
+
+.data-lab-list {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.data-lab-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.data-lab-filter {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+body.theme-light .data-lab-filter {
+  border-color: color-mix(in srgb, var(--focus) 38%, var(--line));
+  background: color-mix(in srgb, var(--focus) 7%, white);
+}
+
+.data-lab-filter[aria-pressed="true"] {
+  border-color: var(--focus);
+  background: var(--focus-soft);
+  color: var(--ink);
+}
+
+body.theme-light .data-lab-filter[aria-pressed="true"] {
+  border-color: var(--focus);
+  background: color-mix(in srgb, var(--focus) 17%, white);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--focus) 76%, #12324f);
+}
+
+.data-lab-instruments {
+  display: grid;
+  gap: 14px;
+}
+
+.data-lab-subgroup {
+  display: grid;
+  gap: 8px;
+}
+
+.data-lab-subgroup-title {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.data-lab-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.data-lab-chip {
+  min-height: 78px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  text-align: left;
+}
+
+body.theme-light .data-lab-chip {
+  background: rgba(10, 32, 55, 0.04);
+}
+
+.data-lab-chip[data-subgroup-tone] {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 38%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--subgroup-color, var(--focus)) 17%, transparent), transparent 72%),
+    rgba(255, 255, 255, 0.04);
+}
+
+body.theme-light .data-lab-chip[data-subgroup-tone] {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 54%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--subgroup-color, var(--focus)) 24%, transparent), transparent 72%),
+    rgba(10, 32, 55, 0.045);
+}
+
+.data-lab-chip[aria-pressed="true"] {
+  border-color: var(--focus);
+  background: var(--focus-soft);
+  box-shadow: inset 0 -2px 0 var(--focus);
+}
+
+body.theme-light .data-lab-chip[data-subgroup-tone][aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 78%, #12324f);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--subgroup-color, var(--focus)) 31%, white), white 78%);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--subgroup-color, var(--focus)) 78%, #12324f);
+}
+
+.data-lab-chip strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.data-lab-chip span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.data-lab-active {
+  display: grid;
+  gap: 18px;
+  align-self: start;
+}
+
+.data-lab-active h2 {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 48px);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.data-lab-active p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.data-lab-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.data-lab-badges span {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+body.theme-light .data-lab-badges span {
+  background: rgba(10, 32, 55, 0.05);
+}
+
+.data-lab-badges b {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.data-lab-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.data-lab-metric {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.theme-light .data-lab-metric {
+  background: rgba(10, 32, 55, 0.04);
+}
+
+.data-lab-metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.data-lab-metric span span {
+  display: block;
+}
+
+.data-lab-metric strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 24px;
+}
+
+.data-lab-active-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-lab-active-table th,
+.data-lab-active-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  text-align: left;
+}
+
+.data-lab-active-table td:last-child,
+.data-lab-active-table th:last-child {
+  text-align: right;
+}
+
+.data-lab-charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.data-lab-chart {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+body.theme-light .data-lab-chart {
+  background: rgba(10, 32, 55, 0.04);
+}
+
+.data-lab-chart h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+.data-lab-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.data-lab-bar-row {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) 62px;
+  gap: 9px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.data-lab-track {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light .data-lab-track {
+  background: rgba(10, 32, 55, 0.1);
+}
+
+.data-lab-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w);
+  border-radius: inherit;
+  background: var(--tone, var(--focus));
+}
+
+.data-lab-bar.is-negative {
+  right: 0;
+  left: auto;
+  background: var(--negative);
+}
+
+.data-lab-line-card {
+  display: grid;
+  gap: 12px;
+}
+
+.data-lab-chart-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.data-lab-legend,
+.data-lab-chart-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.data-lab-legend span,
+.data-lab-chart-summary span,
+.data-lab-chart-summary strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.data-lab-legend span::before {
+  content: "";
+  width: 18px;
+  height: 3px;
+  margin-right: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.data-lab-legend .is-etf,
+.data-lab-chart-summary strong:first-of-type {
+  color: var(--focus);
+}
+
+.data-lab-legend .is-spy,
+.data-lab-chart-summary strong:last-of-type {
+  color: var(--inflation);
+}
+
+.data-lab-legend .is-cpi {
+  color: #73b96e;
+}
+
+.data-lab-line-chart {
+  width: 100%;
+  height: auto;
+  min-height: 280px;
+}
+
+.chart-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.data-lab-line {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.data-lab-line.is-etf {
+  stroke: var(--focus);
+}
+
+.data-lab-line.is-spy {
+  stroke: var(--inflation);
+  opacity: 0.9;
+}
+
+.data-lab-line.is-cpi {
+  stroke: #73b96e;
+  stroke-width: 3;
+  opacity: 0.92;
+}
+
+.data-lab-dot.is-etf {
+  fill: var(--focus);
+}
+
+.data-lab-dot.is-spy {
+  fill: var(--inflation);
+}
+
+.data-lab-dot.is-cpi {
+  fill: #73b96e;
+}
+
+.data-lab-axis-label,
+.data-lab-date-label {
+  fill: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.data-lab-date-label.is-end {
+  text-anchor: end;
+}
+
+.data-lab-result-card {
+  fill: color-mix(in srgb, var(--surface) 92%, transparent);
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+body.theme-light .data-lab-result-card {
+  fill: rgba(255, 255, 255, 0.92);
+}
+
+.data-lab-end-label {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.data-lab-end-label.is-end {
+  text-anchor: end;
+}

@@ -1,0 +1,437 @@
+{
+  "version": 2,
+  "asOf": "2026-06-30",
+  "generatedAt": "2026-09-07T12:20:04+00:00",
+  "methodology": "Pesos por país atualizados mensalmente a partir das lâminas oficiais da Vanguard, iShares US e SPDR e das páginas oficiais estruturadas da iShares UCITS. Em falha temporária, o último dado válido é preservado e marcado como stale.",
+  "instruments": {
+    "EIMI": {
+      "weights": [
+        [
+          "Taiwan",
+          27.38
+        ],
+        [
+          "Coreia do Sul",
+          19.75
+        ],
+        [
+          "China",
+          19.0
+        ],
+        [
+          "Índia",
+          12.42
+        ],
+        [
+          "Outros",
+          5.42
+        ],
+        [
+          "Brasil",
+          3.32
+        ]
+      ],
+      "asOf": "2026-08-28",
+      "source": "iShares UCITS",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/264659/ishares-core-msci-em-imi-ucits-etf",
+      "status": "stale",
+      "refreshError": "data não reconhecida: 04/Sept/2026"
+    },
+    "EMXC": {
+      "weights": [
+        [
+          "Taiwan",
+          33.63
+        ],
+        [
+          "Coreia do Sul",
+          29.24
+        ],
+        [
+          "Índia",
+          13.66
+        ],
+        [
+          "Outros",
+          6.4
+        ],
+        [
+          "Brasil",
+          4.66
+        ],
+        [
+          "África do Sul",
+          3.6
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "iShares",
+      "sourceUrl": "https://www.ishares.com/us/literature/fact-sheet/emxc-ishares-msci-emerging-markets-ex-china-etf-fund-fact-sheet-en-us.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "EXCH": {
+      "weights": [
+        [
+          "Taiwan",
+          34.6
+        ],
+        [
+          "Coreia do Sul",
+          26.01
+        ],
+        [
+          "Índia",
+          14.28
+        ],
+        [
+          "Outros",
+          5.36
+        ],
+        [
+          "Alemanha",
+          4.92
+        ],
+        [
+          "África do Sul",
+          4.04
+        ]
+      ],
+      "asOf": "2026-08-31",
+      "source": "iShares UCITS",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/315592/ishares-msci-em-ex-china-ucits-etf",
+      "status": "stale",
+      "refreshError": "data não reconhecida: 04/Sept/2026"
+    },
+    "FEZ": {
+      "weights": [
+        [
+          "França",
+          32.27
+        ],
+        [
+          "Alemanha",
+          28.88
+        ],
+        [
+          "Holanda",
+          14.98
+        ],
+        [
+          "Espanha",
+          11.36
+        ],
+        [
+          "Itália",
+          8.38
+        ],
+        [
+          "Bélgica",
+          2.85
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "SPDR",
+      "sourceUrl": "https://www.ssga.com/library-content/products/factsheets/etfs/us/factsheet-us-en-fez.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "IEFA": {
+      "weights": [
+        [
+          "Japão",
+          25.36
+        ],
+        [
+          "Reino Unido",
+          13.98
+        ],
+        [
+          "Outros",
+          11.69
+        ],
+        [
+          "França",
+          9.02
+        ],
+        [
+          "Suíça",
+          8.8
+        ],
+        [
+          "Alemanha",
+          8.05
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "iShares",
+      "sourceUrl": "https://www.ishares.com/us/literature/fact-sheet/iefa-ishares-core-msci-eafe-etf-fund-fact-sheet-en-us.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "IEMG": {
+      "weights": [
+        [
+          "Taiwan",
+          27.41
+        ],
+        [
+          "Coreia do Sul",
+          22.5
+        ],
+        [
+          "China",
+          17.71
+        ],
+        [
+          "Índia",
+          12.24
+        ],
+        [
+          "Outros",
+          7.06
+        ],
+        [
+          "Brasil",
+          3.71
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "iShares",
+      "sourceUrl": "https://www.ishares.com/us/literature/fact-sheet/iemg-ishares-core-msci-emerging-markets-etf-fund-fact-sheet-en-us.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "IEUR": {
+      "weights": [
+        [
+          "Reino Unido",
+          22.5
+        ],
+        [
+          "França",
+          14.5
+        ],
+        [
+          "Suíça",
+          14.15
+        ],
+        [
+          "Alemanha",
+          12.89
+        ],
+        [
+          "Holanda",
+          9.14
+        ],
+        [
+          "Espanha",
+          5.79
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "iShares",
+      "sourceUrl": "https://www.ishares.com/us/literature/fact-sheet/ieur-ishares-core-msci-europe-etf-fund-fact-sheet-en-us.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "IMEU": {
+      "weights": [
+        [
+          "Reino Unido",
+          22.1
+        ],
+        [
+          "França",
+          14.89
+        ],
+        [
+          "Suíça",
+          14.25
+        ],
+        [
+          "Alemanha",
+          13.98
+        ],
+        [
+          "Holanda",
+          8.86
+        ],
+        [
+          "Espanha",
+          6.19
+        ]
+      ],
+      "asOf": "2026-08-28",
+      "source": "iShares UCITS",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251861/ishares-msci-europe-ucits-etf-inc-fund",
+      "status": "stale",
+      "refreshError": "data não reconhecida: 04/Sept/2026"
+    },
+    "IWDA": {
+      "weights": [
+        [
+          "EUA",
+          72.09
+        ],
+        [
+          "Japão",
+          5.79
+        ],
+        [
+          "Outros",
+          5.2
+        ],
+        [
+          "Reino Unido",
+          3.51
+        ],
+        [
+          "Canadá",
+          3.42
+        ],
+        [
+          "França",
+          2.37
+        ]
+      ],
+      "asOf": "2026-08-31",
+      "source": "iShares UCITS",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251882/ishares-core-msci-world-ucits-etf-acc-fund",
+      "status": "stale",
+      "refreshError": "data não reconhecida: 04/Sept/2026"
+    },
+    "SWDA": {
+      "weights": [
+        [
+          "EUA",
+          72.09
+        ],
+        [
+          "Japão",
+          5.79
+        ],
+        [
+          "Outros",
+          5.2
+        ],
+        [
+          "Reino Unido",
+          3.51
+        ],
+        [
+          "Canadá",
+          3.42
+        ],
+        [
+          "França",
+          2.37
+        ]
+      ],
+      "asOf": "2026-08-31",
+      "source": "iShares UCITS",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251882/ishares-core-msci-world-ucits-etf-acc-fund",
+      "status": "stale",
+      "refreshError": "data não reconhecida: 04/Sept/2026"
+    },
+    "VEA": {
+      "weights": [
+        [
+          "Japão",
+          21.0
+        ],
+        [
+          "Reino Unido",
+          10.9
+        ],
+        [
+          "Canadá",
+          10.5
+        ],
+        [
+          "Coreia do Sul",
+          10.2
+        ],
+        [
+          "Suíça",
+          6.9
+        ],
+        [
+          "França",
+          6.9
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "Vanguard",
+      "sourceUrl": "https://institutional.vanguard.com/iippdf/pdfs/FS936.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "VGK": {
+      "weights": [
+        [
+          "Reino Unido",
+          22.5
+        ],
+        [
+          "Suíça",
+          14.3
+        ],
+        [
+          "França",
+          14.2
+        ],
+        [
+          "Alemanha",
+          12.9
+        ],
+        [
+          "Holanda",
+          8.7
+        ],
+        [
+          "Espanha",
+          6.0
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "Vanguard",
+      "sourceUrl": "https://institutional.vanguard.com/iippdf/pdfs/FS963.pdf",
+      "status": "ok",
+      "refreshError": null
+    },
+    "VWO": {
+      "weights": [
+        [
+          "Taiwan",
+          34.3
+        ],
+        [
+          "China",
+          25.6
+        ],
+        [
+          "Índia",
+          16.5
+        ],
+        [
+          "Brasil",
+          4.1
+        ],
+        [
+          "África do Sul",
+          3.6
+        ],
+        [
+          "Arábia Saudita",
+          3.1
+        ]
+      ],
+      "asOf": "2026-06-30",
+      "source": "Vanguard",
+      "sourceUrl": "https://institutional.vanguard.com/iippdf/pdfs/FS964.pdf",
+      "status": "ok",
+      "refreshError": null
+    }
+  }
+}

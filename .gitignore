@@ -1,0 +1,16 @@
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+
+# Local installers and generated backups
+assets/themes/Git-*.exe
+assets/themes/*.backup-*.png
+
+# Operating system and editor metadata
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Local Vercel metadata
+.vercel/

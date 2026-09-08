@@ -1,0 +1,49 @@
+name: Update S&P 500 P/E history
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 13 2 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dashboard-data-updates-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update-sp500-pe-history:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update S&P 500 P/E history JSON
+        run: python scripts/update-sp500-pe-history.py
+
+      - name: Validate datasets and refresh manifest
+        run: python scripts/validate-data.py --write-manifest --fail-on sp500-pe-history
+
+      - name: Publicar diagnóstico em português
+        if: always()
+        run: python scripts/write-action-summary.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/sp500-pe-history.json data/manifest.json
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Update S&P 500 P/E history"
+            git pull --rebase origin main
+            git push
+          fi

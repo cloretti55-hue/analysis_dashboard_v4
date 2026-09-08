@@ -1,0 +1,450 @@
+@media (min-width: 721px) {
+  .mobile-shell {
+    display: none;
+  }
+}
+
+@media (max-width: 1120px) {
+  .layout,
+  .main-grid,
+  .equity-grid,
+  .core-layout,
+  .satellite-layout,
+  .allocation,
+  .tech-main,
+  .data-lab-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .controls,
+  .core-detail,
+  .satellite-detail {
+    position: static;
+  }
+
+  .kpis,
+  .equity-kpis,
+  .core-cards,
+  .diagnosis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .work-surface::before {
+    inset: -12px;
+  }
+
+  .app {
+    padding: 12px;
+  }
+
+  .topbar {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+    padding: 14px;
+  }
+
+  .view-tabs {
+    flex-wrap: nowrap;
+    gap: 7px;
+    margin: 0 -12px 12px;
+    padding: 0 12px 8px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .view-tab {
+    flex: 0 0 auto;
+    min-height: 32px;
+    padding: 7px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .etf-subtabs {
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .etf-subtabs button {
+    flex: 0 0 auto;
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  h1 {
+    font-size: 27px;
+    line-height: 1.05;
+  }
+
+  .lead {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .header-side {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-switch,
+  .market-stamp {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .mobile-shell .panel,
+  .mobile-shell .mobile-module-card,
+  .mobile-shell .mobile-hero,
+  .mobile-shell .mobile-module-head {
+    width: min(100%, 366px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .market-stamp strong {
+    font-size: 25px;
+  }
+
+  .kpis,
+  .equity-kpis,
+  .core-cards,
+  .detail-grid,
+  .diagnosis,
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi {
+    min-height: 0;
+    padding: 14px;
+  }
+
+  .kpi strong {
+    font-size: 28px;
+  }
+
+  .controls,
+  .panel,
+  .core-detail,
+  .satellite-detail {
+    border-radius: 12px;
+  }
+
+  .controls {
+    padding: 12px;
+  }
+
+  .segmented {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-curve .curve-view-segmented {
+    display: flex;
+    width: max-content;
+    grid-template-columns: none;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 6px;
+  }
+
+  .mobile-curve .curve-view-segmented button {
+    width: auto;
+    min-width: 58px;
+    max-width: none;
+    min-height: 34px;
+    padding: 4px 8px;
+    font-size: 13px;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .mobile-curve .curve-view-segmented button:nth-child(2) {
+    min-width: 46px;
+  }
+
+  .mobile-curve .curve-view-segmented button:nth-child(3) {
+    min-width: 66px;
+  }
+
+  .main-grid,
+  .equity-grid,
+  .core-layout,
+  .satellite-layout,
+  .allocation,
+  .tech-main,
+  .data-lab-layout {
+    gap: 12px;
+  }
+
+  .data-lab-list,
+  .data-lab-active {
+    padding: 14px;
+  }
+
+  .data-lab-instruments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .data-lab-chip {
+    min-height: 68px;
+    padding: 10px;
+  }
+
+  .data-lab-chip strong {
+    font-size: 16px;
+  }
+
+  .data-lab-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0;
+  }
+
+  .data-lab-metric strong {
+    font-size: 20px;
+  }
+
+  .data-lab-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .data-lab-bar-row {
+    grid-template-columns: 72px minmax(0, 1fr) 58px;
+    gap: 7px;
+  }
+
+  .core-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .core-layout > .panel:first-child {
+    order: 2;
+  }
+
+  .core-layout > .core-detail {
+    order: 1;
+  }
+
+  .core-detail h2 {
+    scroll-margin-top: 78px;
+  }
+
+  .section-head {
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 14px 0;
+  }
+
+  .section-head h2 {
+    font-size: 16px;
+    line-height: 1.15;
+  }
+
+  .core-function,
+  .satellite-card {
+    grid-template-columns: 1fr;
+  }
+
+  .core-function-grid,
+  .satellite-grid,
+  .satellite-filters,
+  .equity-cards,
+  .diagnosis,
+  .benefits {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .core-function {
+    align-items: start;
+  }
+
+  .core-legend-row {
+    display: grid;
+    gap: 10px;
+    margin: 14px 12px 12px;
+  }
+
+  .ucits-toggle {
+    justify-self: start;
+  }
+
+  .etf-token {
+    min-width: 58px;
+    min-height: 34px;
+    padding: 7px 9px;
+    font-size: 12px;
+  }
+
+  .filter-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .satellite-mobile-hide {
+    display: none;
+  }
+
+  .filter-label {
+    min-width: 0;
+  }
+
+  .risk-legend {
+    gap: 6px;
+  }
+
+  .risk-legend span {
+    width: 100%;
+  }
+
+  .satellite-detail h2 {
+    font-size: 22px;
+    scroll-margin-top: 78px;
+  }
+
+  .detail-box {
+    padding: 10px;
+  }
+
+  .satellite-tags {
+    justify-content: start;
+  }
+
+  .chart-wrap,
+  .cycle-table-wrap,
+  .mega-table-wrap,
+  .table-shell {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chart {
+    min-width: 400px;
+    min-height: 260px;
+  }
+
+  .chart-wrap {
+    padding-bottom: 16px;
+  }
+
+  .axis-label,
+  .tick {
+    font-size: 18px;
+  }
+
+  .point-value-label {
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .spread-row {
+    grid-template-columns: 64px minmax(0, 1fr) 58px;
+    gap: 8px;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-step {
+    min-height: 0;
+  }
+
+  .ai-stack {
+    display: grid;
+    overflow-x: visible;
+  }
+
+  .stack-layer {
+    min-width: 0;
+  }
+
+  .stack-arrow {
+    height: 18px;
+  }
+
+  .mega-table,
+  .cycle-table,
+  .policy-table {
+    min-width: 760px;
+  }
+
+  .pe-bar-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .pe-bar-row > span:last-child {
+    display: none;
+  }
+
+  .pe-premium-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-country-row {
+    grid-template-columns: 72px minmax(0, 1fr) 44px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 460px) {
+  .app {
+    padding: 10px;
+  }
+
+  .view-tabs {
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .lead {
+    font-size: 14px;
+  }
+
+  .chart {
+    min-width: 390px;
+  }
+
+  .satellite-card,
+  .core-function,
+  .diag-item,
+  .equity-card {
+    padding: 12px;
+  }
+
+  .satellite-title-row {
+    align-items: flex-start;
+  }
+
+  .satellite-icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+
+  .satellite-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
