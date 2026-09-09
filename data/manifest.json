@@ -124,14 +124,14 @@
       "path": "data/mag7-valuation.json",
       "kind": "generated",
       "status": "ok",
-      "asOf": "2026-09-07",
+      "asOf": "2026-09-09",
       "maxAgeDays": 5,
       "consumer": [
         "Equity Valuation"
       ],
       "producer": "scripts/update-mag7-valuation.py",
       "workflow": ".github/workflows/update-mag7-valuation.yml",
-      "sha256": "06365c0599483e3055c937a80b7075e3017931270f0da6e9e4c794f2baf4d804",
+      "sha256": "8d526db9d56518e695ca7b69644f44cb9d9ee9443b51c55634da66d5a21e3724",
       "recordCount": 7,
       "issues": []
     },
