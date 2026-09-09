@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-09T15:19:01+00:00",
+  "generatedAt": "2026-09-09T15:21:16+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
       "manual": 1,
-      "ok": 6,
+      "ok": 7,
       "partial": 1,
-      "stale": 3
+      "stale": 2
     },
     "blockingErrorCount": 0
   },
@@ -34,22 +34,16 @@
       "id": "fed-policy",
       "path": "data/fed-policy.json",
       "kind": "generated",
-      "status": "stale",
-      "asOf": "2026-09-03",
+      "status": "ok",
+      "asOf": "2026-09-08",
       "maxAgeDays": 5,
       "consumer": [
         "Yield Curves"
       ],
       "producer": "scripts/update-fed-policy.py",
       "workflow": ".github/workflows/update-fed-policy.yml",
-      "sha256": "e70baf2e6505c00a986237f9e39d3aa6603e15627a3be34324d45fca3f2851c2",
-      "issues": [
-        {
-          "severity": "warning",
-          "code": "stale_dataset",
-          "message": "Dataset asOf=2026-09-03 exceeds maxAgeDays=5"
-        }
-      ]
+      "sha256": "c08a09056c1eae0dac0d9479bf88601a26bf9edb9ad505cf790c0c6415ccc625",
+      "issues": []
     },
     {
       "id": "equity-valuation",
