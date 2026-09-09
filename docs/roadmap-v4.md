@@ -5,10 +5,10 @@ Atualizado em 2026-07-30.
 ## Escopo e governança
 
 - Pasta local de trabalho: `C:\Users\Christian\Desktop\Codex\v4`
-- Repositório: `cloretti55-hue/analysis_dashboard_v3`
+- Repositório: `cloretti55-hue/analysis_dashboard_v4`
 - Domínio: `labs.generalchannels.co`
 - Branch inicial: `labs-platform-foundation`
-- Fora do escopo: `analysis_dashboard_v2` e `platform.generalchannels.co`
+- Fora do escopo: `analysis_dashboard_v1b` e `platform.generalchannels.co`
 - A pasta local `v3` permanece congelada.
 
 ## Princípios
@@ -27,7 +27,7 @@ Status: concluída localmente.
 
 Entregas:
 
-- `v4` vinculada a `analysis_dashboard_v3`;
+- `v4` vinculada a `analysis_dashboard_v4`;
 - branch `labs-platform-foundation`;
 - JSONs locais alinhados à `origin/main`;
 - `.gitignore` para caches, instaladores e artefatos temporários;
@@ -245,7 +245,7 @@ Entregas:
 - `.github/workflows/validate-interface.yml` passou a executar a verificação de
   interface automaticamente quando o frontend ou o próprio teste muda;
 - as verificações permanecem restritas ao projeto Labs e não modificam
-  `analysis_dashboard_v2` ou `platform.generalchannels.co`.
+  `analysis_dashboard_v1b` ou `platform.generalchannels.co`.
 
 Critério de passagem:
 
