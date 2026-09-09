@@ -34,7 +34,7 @@
       "has": [
         {
           "type": "host",
-          "value": "analysis-dashboard-v3.vercel.app"
+          "value": "analysis-dashboard-v4.vercel.app"
         }
       ],
       "destination": "https://labs.generalchannels.co/$1",
