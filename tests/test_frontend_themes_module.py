@@ -29,7 +29,7 @@ class FrontendThemesModuleTests(unittest.TestCase):
             "tech-cycles",
         ):
             self.assertIn(f'key: "{key}"', THEMES_JS)
-        self.assertEqual(THEMES_JS.count('src: "assets/themes/'), 30)
+        self.assertEqual(THEMES_JS.count('src: "assets/themes/'), 31)
 
     def test_image_lightbox_zoom_and_history_are_preserved(self):
         self.assertIn("const imageZoomLevels = [0.5, 0.6, 0.8, 1, 1.2", THEMES_JS)
