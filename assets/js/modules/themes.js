@@ -93,9 +93,14 @@ const THEME_BRIEFINGS = [
     date: "10/09/26",
     label: "When Equities Struggle",
     title: "When Equities Struggle",
-    summary: "Equity crises, hedging and portfolio diversification: ten slides exploring risk management, alternative strategies and institutional portfolio models.",
+    summary: "Equity crises, hedging and portfolio diversification: eleven slides exploring risk management, alternative strategies and institutional portfolio models.",
     tags: ["Equities", "Risk management", "Diversification"],
     images: [
+      {
+        src: "assets/themes/four-crises-one-playbook.png",
+        title: "Four Crises. One Playbook.",
+        comment: "1929, 1987, Japan in the 1990s and 2008: crisis triggers, transmission, policy responses and lessons.",
+      },
       {
         src: "assets/themes/when-equities-struggle.png",
         title: "When Equities Struggle",
