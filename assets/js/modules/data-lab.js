@@ -72,7 +72,9 @@ function EtfContextLink({ ticker }) {
 
 function DataLabLineChart({ active }) {
   const rawPoints = active?.performanceChart?.points || [];
-  const benchmarks = chartBenchmarksFor(active, rawPoints);
+  const benchmarks = chartBenchmarksFor(active, rawPoints).filter(({ key }) =>
+    rawPoints.filter((point) => Number.isFinite(point.etf) && Number.isFinite(point[key])).length > 1
+  );
   const benchmarkLabels = benchmarks.map(({ label }) => label).join(" and ");
   const points = rawPoints.filter((point) => {
     const hasEtf = typeof point.etf === "number" && Number.isFinite(point.etf);
