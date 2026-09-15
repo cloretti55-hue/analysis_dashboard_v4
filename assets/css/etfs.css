@@ -611,6 +611,17 @@ body.theme-light .data-lab-direct-link:hover {
   line-height: 1.45;
 }
 
+.etf-trading-details {
+  display: grid;
+  gap: 6px;
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+.etf-trading-details .data-note {
+  margin: 0;
+}
+
 .core-detail-list {
   display: grid;
   gap: 6px;
