@@ -131,7 +131,7 @@
       ],
       "producer": "scripts/update-mag7-valuation.py",
       "workflow": ".github/workflows/update-mag7-valuation.yml",
-      "sha256": "1d888bdea0e5159d6bb79f803e34b9b13907c61490d931c61b3c42b2d2d2a843",
+      "sha256": "28ebed5ad6fa0b7b84a9974d9a48724e374f9fe11c5252ed6a284609149eda05",
       "recordCount": 7,
       "issues": []
     },
