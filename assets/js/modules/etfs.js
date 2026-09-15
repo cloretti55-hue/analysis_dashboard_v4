@@ -622,6 +622,7 @@ function SatelliteModule({ initialTheme = "Semiconductors / AI hardware" } = {})
       { className: "panel satellite-detail" },
       React.createElement("span", { className: "detail-role" }, "Selected theme"),
       React.createElement("div", { className: `satellite-detail-head sat-risk-${active.aggression}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -630,7 +631,6 @@ function SatelliteModule({ initialTheme = "Semiconductors / AI hardware" } = {})
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF quality"), React.createElement("strong", null, active.quality))
       ),
       React.createElement("p", null, active.reading),
-      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
       active.extraCompanies
         ? React.createElement(
@@ -773,6 +773,7 @@ function EuropeModule({ initialTheme = "European defence" } = {}) {
       { className: "panel satellite-detail" },
       React.createElement("span", { className: "detail-role" }, "Selected theme"),
       React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+      React.createElement(EtfTradingDetails, { instruments: active.etfs }),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -782,7 +783,6 @@ function EuropeModule({ initialTheme = "European defence" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "First layer"), React.createElement("strong", null, active.etfs))
       ),
       React.createElement("p", null, active.thesis),
-      React.createElement(EtfTradingDetails, { instruments: active.etfs }),
       React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
       React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Examples"), React.createElement("strong", null, active.names.join(" · "))),
       React.createElement("p", { className: "data-note" }, "Source: ETF examples and proxies, June 2026. Non-exhaustive list.")
@@ -962,6 +962,7 @@ function ChinaModule({ initialTheme = "Direct China" } = {}) {
       { className: "panel satellite-detail" },
       React.createElement("span", { className: "detail-role" }, "Selected channel"),
       React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -970,7 +971,6 @@ function ChinaModule({ initialTheme = "Direct China" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Main risk"), React.createElement("strong", null, active.risk))
       ),
       React.createElement("p", null, active.reading),
-      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
       React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Examples"), React.createElement("strong", null, active.names.join(" · "))),
       React.createElement("p", { className: "data-note" }, "Source: channel and instrument examples, June 2026. Holdings should be checked with the provider.")
@@ -1165,6 +1165,7 @@ function HedgeModule({ initialTheme = "Option income" } = {}) {
       { className: "panel satellite-detail" },
       React.createElement("span", { className: "detail-role" }, "Selected hedge"),
       React.createElement("div", { className: `satellite-detail-head ${active.tone}` }, React.createElement(SatelliteIcon, { type: active.icon }), React.createElement("h2", null, active.theme)),
+      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -1174,7 +1175,6 @@ function HedgeModule({ initialTheme = "Option income" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitation"), React.createElement("strong", null, active.limit))
       ),
       React.createElement("p", null, active.reading),
-      React.createElement(EtfTradingDetails, { instruments: active.etfs || active.instruments }),
       React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point))),
       React.createElement("p", { className: "data-note" }, "Source: liquid instruments and common structures, June 2026. Tactical products require checks of term, liquidity, cost and daily reset rules.")
     )
@@ -1469,9 +1469,9 @@ function CoreModule({ functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", leg
           React.createElement("h2", null, selectedEtf),
           React.createElement(DataLabTickerLink, { ticker: selectedEtf, availableTickers: dataLabTickers })
         ),
+        React.createElement(EtfTradingDetails, { instruments: selectedEtf }),
         React.createElement("span", { className: "detail-role" }, detail[0]),
         React.createElement("p", null, detail[1]),
-      React.createElement(EtfTradingDetails, { instruments: selectedEtf }),
         React.createElement("p", null, detail[2]),
         countryWeights
           ? React.createElement(
@@ -1619,8 +1619,8 @@ function SectorGicsModule({ dataLabTickers, initialSector = "XLK" }) {
           React.createElement(DataLabTickerLink, { ticker: selectedSector, availableTickers: dataLabTickers })
         )
       ),
-      React.createElement("p", null, activeMeta.sector),
       React.createElement(EtfTradingDetails, { instruments: selectedSector }),
+      React.createElement("p", null, activeMeta.sector),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -1806,8 +1806,8 @@ function CommodityModule({ dataLabTickers, initialEtf = "GLD" }) {
         React.createElement("h2", null, active.ticker),
         React.createElement(DataLabTickerLink, { ticker: active.ticker, availableTickers: dataLabTickers })
       ),
-      React.createElement("p", null, active.name),
       React.createElement(EtfTradingDetails, { instruments: active.ticker }),
+      React.createElement("p", null, active.name),
       React.createElement(
         "div",
         { className: "detail-grid" },
