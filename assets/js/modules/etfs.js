@@ -1338,7 +1338,7 @@ function EtfTradingDetails({ instruments }) {
     tickers.map((ticker) => {
       const [symbol, exchange, currency] = ETF_TRADING_LISTINGS[ticker];
       return React.createElement("p", { className: "data-note", key: ticker },
-        `${ticker} — Exchange: ${exchange} · Trading currency: ${currencies[currency] || currency} · Listing: ${symbol}`);
+        `${tickers.length > 1 ? `${ticker} — ` : ""}Exchange: ${exchange} · Trading currency: ${currencies[currency] || currency} · Listing: ${symbol}`);
     })
   );
 }
