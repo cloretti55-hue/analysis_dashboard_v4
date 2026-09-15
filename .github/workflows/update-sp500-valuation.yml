@@ -19,6 +19,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,21 +32,11 @@ jobs:
         run: python scripts/update-sp500-valuation.py
 
       - name: Validate datasets and refresh manifest
-        run: python scripts/validate-data.py --write-manifest --fail-on sp500-valuation
+        run: python scripts/validate-data.py --write-manifest --fail-on sp500-valuation --strict-freshness
 
       - name: Publicar diagnóstico em português
         if: always()
         run: python scripts/write-action-summary.py
 
       - name: Commit updated data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/sp500-valuation.json data/manifest.json
-          if git diff --cached --quiet; then
-            echo "No data changes to commit."
-          else
-            git commit -m "Update S&P 500 valuation data"
-            git pull --rebase origin main
-            git push
-          fi
+        run: python scripts/publish-data.py --message "Update S&P 500 valuation data" data/sp500-valuation.json
