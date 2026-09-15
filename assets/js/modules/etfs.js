@@ -1469,8 +1469,8 @@ function CoreModule({ functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", leg
           React.createElement("h2", null, selectedEtf),
           React.createElement(DataLabTickerLink, { ticker: selectedEtf, availableTickers: dataLabTickers })
         ),
-        React.createElement(EtfTradingDetails, { instruments: selectedEtf }),
         React.createElement("span", { className: "detail-role" }, detail[0]),
+        React.createElement(EtfTradingDetails, { instruments: selectedEtf }),
         React.createElement("p", null, detail[1]),
         React.createElement("p", null, detail[2]),
         countryWeights
@@ -1619,8 +1619,8 @@ function SectorGicsModule({ dataLabTickers, initialSector = "XLK" }) {
           React.createElement(DataLabTickerLink, { ticker: selectedSector, availableTickers: dataLabTickers })
         )
       ),
-      React.createElement(EtfTradingDetails, { instruments: selectedSector }),
       React.createElement("p", null, activeMeta.sector),
+      React.createElement(EtfTradingDetails, { instruments: selectedSector }),
       React.createElement(
         "div",
         { className: "detail-grid" },
@@ -1806,8 +1806,8 @@ function CommodityModule({ dataLabTickers, initialEtf = "GLD" }) {
         React.createElement("h2", null, active.ticker),
         React.createElement(DataLabTickerLink, { ticker: active.ticker, availableTickers: dataLabTickers })
       ),
-      React.createElement(EtfTradingDetails, { instruments: active.ticker }),
       React.createElement("p", null, active.name),
+      React.createElement(EtfTradingDetails, { instruments: active.ticker }),
       React.createElement(
         "div",
         { className: "detail-grid" },
