@@ -107,14 +107,14 @@
       "path": "data/sp500-pe-history.json",
       "kind": "generated",
       "status": "ok",
-      "asOf": "2026-09-04",
+      "asOf": "2026-09-15",
       "maxAgeDays": 45,
       "consumer": [
         "Equity Valuation"
       ],
       "producer": "scripts/update-sp500-pe-history.py",
       "workflow": ".github/workflows/update-sp500-pe-history.yml",
-      "sha256": "ebc835b98d0f363f19fdfe6cbe98380131b082f67e06ad87c0e80b76c4e7ff26",
+      "sha256": "d9618f6fa35e42eb74b054abc4df3d66706b6871cf7c339109f845ad04d3a36b",
       "recordCount": 1868,
       "yearEndCount": 156,
       "issues": []
