@@ -31,6 +31,14 @@ class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, _format: str, *args) -> None:
         return
 
+    def do_GET(self) -> None:
+        # Browsers request this implicitly; the local test server has no favicon.
+        if self.path == "/favicon.ico" and not (PROJECT_ROOT / "favicon.ico").exists():
+            self.send_response(204)
+            self.end_headers()
+            return
+        super().do_GET()
+
 
 def assert_no_horizontal_overflow(page: Page, context: str) -> None:
     has_overflow = page.evaluate(
@@ -69,7 +77,12 @@ def check_instrument_registry(page: Page, label: str) -> None:
     counts = [int(value) for text in state["filters"] for value in re.findall(r"\((\d+)\)", text)]
     if not state["hasCatalogFactory"]:
         raise AssertionError(f"Registro de instrumentos indisponível em {label}")
-    if len(counts) != 7 or sum(counts) != 110:
+    expected_filters = [
+        "Fixed Income (21)", "Core Equities (19)", "Sectors (21)",
+        "US Satellites (17)", "European Themes (4)", "China / China+1 (14)",
+        "Commodities (31)", "Hedge (21)",
+    ]
+    if state["filters"] != expected_filters or sum(counts) != 148:
         raise AssertionError(f"Cobertura do catálogo alterada em {label}: {state['filters']}")
     if state["visibleInstrumentCount"] < 1:
         raise AssertionError(f"Nenhum instrumento visível no Data Lab em {label}")
