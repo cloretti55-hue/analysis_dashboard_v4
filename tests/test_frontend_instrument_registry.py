@@ -59,7 +59,7 @@ class FrontendInstrumentRegistryTests(unittest.TestCase):
     def test_current_instrument_coverage_is_preserved(self):
         universe_tickers = [item["ticker"] for item in UNIVERSE["instruments"]]
         performance_tickers = [item["ticker"] for item in PERFORMANCE["instruments"]]
-        self.assertEqual(len(universe_tickers), 148)
+        self.assertEqual(len(universe_tickers), 156)
         self.assertEqual(len(universe_tickers), len(set(universe_tickers)))
         self.assertEqual(set(universe_tickers), set(performance_tickers))
 

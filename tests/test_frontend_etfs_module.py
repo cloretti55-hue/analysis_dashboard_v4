@@ -36,7 +36,7 @@ class FrontendEtfsModuleTests(unittest.TestCase):
         self.assertIn("function DataLabTickerLink", ETFS_JS)
         self.assertIn('DataClient.load("etf-universe")', ETFS_JS)
         self.assertIn("if (!availableTickers?.has(ticker)) return null", ETFS_JS)
-        self.assertIn('href: `#dataLab/${encodeURIComponent(ticker)}`', ETFS_JS)
+        self.assertIn('href: `#dataLab/${encodeURIComponent(ticker)}${group === "Caps/Style" ? "/caps" : ""}`', ETFS_JS)
 
     def test_data_lab_instruments_can_open_direct_or_aggregate_etf_destinations(self):
         self.assertIn("const ETF_DESTINATIONS = new Map()", ETFS_JS)
