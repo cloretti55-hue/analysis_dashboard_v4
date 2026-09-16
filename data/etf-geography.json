@@ -1,7 +1,7 @@
 {
   "version": 2,
   "asOf": "2026-06-30",
-  "generatedAt": "2026-09-15T23:01:34+00:00",
+  "generatedAt": "2026-09-16T04:08:36+00:00",
   "methodology": "Pesos por país atualizados mensalmente a partir das lâminas oficiais da Vanguard, iShares US e SPDR e das páginas oficiais estruturadas da iShares UCITS. Em falha temporária, o último dado válido é preservado e marcado como stale.",
   "instruments": {
     "EIMI": {
