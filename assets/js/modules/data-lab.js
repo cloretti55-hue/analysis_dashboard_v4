@@ -9,6 +9,7 @@ const InstrumentRegistry = window.GCInstrumentRegistry;
 const { etfHrefForTicker } = window.GCEtfs;
 const {
   DATA_LAB_GROUPS,
+  belongsToGroup,
   DATA_LAB_SUBGROUP_ORDER,
   groupFor: dataLabGroupFor,
   subgroupFor: dataLabSubgroupFor,
@@ -56,8 +57,8 @@ const requestedDataLabTicker = () => {
   }
 };
 
-function EtfContextLink({ ticker }) {
-  const href = etfHrefForTicker?.(ticker);
+function EtfContextLink({ ticker, group }) {
+  const href = etfHrefForTicker?.(ticker, group);
   if (!href) return null;
   return React.createElement(
     "a",
@@ -221,7 +222,10 @@ function DataLabModule() {
         const firstOk = requestedInstrument || payload.instruments.find((item) => item.status === "ok" && dataLabGroupFor(item) === "Fixed Income" && item.performanceChart?.points?.length > 1) || payload.instruments.find((item) => item.status === "ok" && item.performanceChart?.points?.length > 1) || payload.instruments?.[0];
         if (firstOk) {
           setSelectedTicker(firstOk.ticker);
-          if (requestedInstrument) setSelectedGroup(dataLabGroupFor(requestedInstrument));
+          if (requestedInstrument) {
+            if (window.location.hash.endsWith("/caps") && belongsToGroup(requestedInstrument, "Caps/Style")) setSelectedGroup("Caps/Style");
+            else setSelectedGroup(dataLabGroupFor(requestedInstrument));
+          }
         }
       })
     return () => {
@@ -230,13 +234,13 @@ function DataLabModule() {
   }, []);
 
   const instruments = data?.instruments || [];
-  const filteredInstruments = instruments.filter((item) => dataLabGroupFor(item) === selectedGroup);
+  const filteredInstruments = instruments.filter((item) => belongsToGroup(item, selectedGroup));
   const groupCounts = DATA_LAB_GROUPS.reduce((acc, group) => {
-    acc[group] = instruments.filter((item) => dataLabGroupFor(item) === group).length;
+    acc[group] = instruments.filter((item) => belongsToGroup(item, group)).length;
     return acc;
   }, {});
   const subgroupMap = filteredInstruments.reduce((acc, item) => {
-    const subgroup = dataLabSubgroupFor(item);
+    const subgroup = dataLabSubgroupFor(item, selectedGroup);
     if (!acc[subgroup]) acc[subgroup] = [];
     acc[subgroup].push(item);
     return acc;
@@ -295,7 +299,7 @@ function DataLabModule() {
         subgroupEntries.map(([subgroup, items]) =>
           React.createElement(
             "section",
-            { className: "data-lab-subgroup", key: subgroup },
+            { className: "data-lab-subgroup", key: subgroup, style: selectedGroup === "Caps/Style" ? { alignSelf: "start" } : undefined },
             React.createElement("span", { className: "data-lab-subgroup-title" }, subgroup),
             React.createElement(
               "div",
@@ -313,7 +317,7 @@ function DataLabModule() {
                     onClick: () => setSelectedTicker(item.ticker),
                   },
                   React.createElement("strong", null, item.ticker),
-                  React.createElement("span", null, item.status === "ok" ? item.category : (DATASET_STATUS_LABELS[item.dataStatus || item.status] || item.status || "unavailable"))
+                  React.createElement("span", null, item.status === "ok" ? (selectedGroup === "Caps/Style" ? item.capsStyle?.market : item.category) : (DATASET_STATUS_LABELS[item.dataStatus || item.status] || item.status || "unavailable"))
                 )
               )
             )
@@ -337,7 +341,7 @@ function DataLabModule() {
                 "div",
                 { className: "instrument-detail-heading" },
                 React.createElement("h2", null, active.ticker),
-                React.createElement(EtfContextLink, { ticker: active.ticker })
+                React.createElement(EtfContextLink, { ticker: active.ticker, group: selectedGroup })
               ),
               React.createElement("p", null, active.name || active.category)
             ),

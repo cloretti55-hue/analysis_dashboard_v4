@@ -40,7 +40,17 @@ const HEDGE_MACRO_TICKERS = new Set(["GLD", "IAU", "FXF / CHF"]);
 const FIXED_INCOME_FUNCTIONS = CORE_FUNCTIONS.filter((row) => row.tickers.some((ticker) => FIXED_INCOME_TICKERS.has(ticker)));
 const CORE_EQUITY_FUNCTIONS = CORE_FUNCTIONS.filter((row) => !row.tickers.some((ticker) => FIXED_INCOME_TICKERS.has(ticker) || HEDGE_MACRO_TICKERS.has(ticker)));
 
+const CAPS_FUNCTIONS = [{"fn": "US large caps", "why": "S&P 500 exposure through US-listed and UCITS vehicles.", "tickers": ["VOO", "CSPX", "VUAA"], "note": "These instruments also remain available in Core Equities."}, {"fn": "US mid caps", "why": "S&P MidCap 400 exposure.", "tickers": ["IJH", "SPY4"], "note": "US-listed and accumulating UCITS vehicles tracking the same equity index."}, {"fn": "US small caps", "why": "S&P SmallCap 600 exposure.", "tickers": ["IJR", "IDP6"], "note": "Both follow the S&P small-cap universe, including its earnings eligibility rules."}, {"fn": "US micro caps", "why": "Russell Microcap exposure.", "tickers": ["IWC"], "note": "This selection currently includes a US-listed vehicle."}, {"fn": "International small caps", "why": "Small companies outside the United States.", "tickers": ["SCZ", "VSS"], "note": "SCZ covers EAFE; VSS also includes Canada and emerging markets. They are not equivalent portfolios."}, {"fn": "Global small caps · UCITS", "why": "Small companies across developed markets, including the United States.", "tickers": ["WSML"], "note": "MSCI World Small Cap exposure with income reinvested."}];
+
 const CORE_TOKEN_GROUPS = {
+  WSML: "etf-global",
+  VSS: "etf-developed",
+  SCZ: "etf-developed",
+  IWC: "etf-us",
+  IDP6: "etf-us",
+  IJR: "etf-us",
+  SPY4: "etf-us",
+  IJH: "etf-us",
   VOO: "etf-us",
   CSPX: "etf-us",
   VUAA: "etf-us",
@@ -89,6 +99,9 @@ const CORE_TOKEN_GROUPS = {
 };
 
 const UCITS_TICKERS = new Set([
+  "WSML",
+  "IDP6",
+  "SPY4",
   "CSPX",
   "VUAA",
   "CNDX",
@@ -241,6 +254,14 @@ const CORE_COUNTRY_WEIGHTS = {
 };
 
 const CORE_DETAILS = {
+  WSML: ["Small cap", "Tracks the MSCI World Small Cap Index through an accumulating UCITS fund, covering small companies across developed markets, including the United States.", "This is global developed-market exposure, not an ex-US portfolio. The selected London listing trades in US dollars, while the fund’s underlying holdings retain their local-currency exposure.", [], "https://www.ishares.com/uk/individual/en/products/296576/ishares-msci-world-small-cap-ucits-etf-usd-(acc"],
+  VSS: ["Small cap", "Tracks the FTSE Global Small Cap ex US Index, covering small companies across developed and emerging markets outside the United States.", "The broader geographic universe distinguishes VSS from EAFE-only small-cap funds. A US-dollar trading price does not hedge the currencies of the underlying international holdings.", [], "https://advisors.vanguard.com/investments/products/vss/vanguard-ftse-all-world-ex-us-small-cap-etf"],
+  SCZ: ["Small cap", "Tracks small companies in developed markets outside the United States and Canada through the MSCI EAFE Small Cap Index.", "The ETF trades in US dollars on Nasdaq, but its portfolio spans multiple local currencies. Its geographic coverage differs from VSS, which also includes emerging markets, and WSML, which includes the United States.", [], "https://www.ishares.com/us/products/239627/ishares-msci-eafe-smallcap-etf"],
+  IWC: ["Micro cap", "Tracks the Russell Microcap Index, providing exposure to very small publicly traded US companies.", "The underlying shares generally have less trading liquidity than larger companies. Micro-cap and small-cap universes can overlap; these labels do not imply mutually exclusive portfolios or fixed dollar thresholds.", [], "https://www.ishares.com/us/products/239716/ishares-microcap-etf"],
+  IDP6: ["Small cap", "Tracks the S&P SmallCap 600 through a distributing UCITS fund. It provides exposure to the same underlying US small-cap index as IJR.", "IDP6 is the London listing traded in US dollars. Income is distributed, and the fund remains exposed to US small-company equity risk regardless of the investor’s home currency.", [], "https://www.ishares.com/uk/individual/en/products/251920/ishares-s-p-smallcap-600-ucits-etf"],
+  IJR: ["Small cap", "Tracks the S&P SmallCap 600, a portfolio of small US companies selected under S&P index eligibility rules.", "The earnings requirements distinguish this universe from broader small-cap benchmarks such as the Russell 2000. Returns can therefore differ materially even when both are described as small-cap exposure.", [], "https://www.ishares.com/us/products/239774/ishares-core-sp-smallcap-etf"],
+  SPY4: ["Mid cap", "Tracks the S&P MidCap 400 through an accumulating UCITS fund. It provides US mid-cap exposure using the same underlying equity index as IJH.", "This selection uses the London listing in US dollars. The fund reinvests income; its wrapper, fees and trading hours differ from the US-listed vehicle.", [], "https://www.ssga.com/uk/en_gb/institutional/etfs/state-street-spdr-sp-400-us-mid-cap-ucits-etf-acc-spy4-gy"],
+  IJH: ["Mid cap", "Tracks the S&P MidCap 400, providing exposure to medium-sized US companies outside the S&P 500.", "The index applies its own eligibility rules, including earnings requirements. Its sector composition and company mix differ from both large-cap and small-cap benchmarks.", [], "https://www.ishares.com/us/products/239763/ishares-core-sp-midcap-etf"],
   VOO: [
     "US structural beta",
     "Tracks the S&P 500, providing broad exposure to large US companies.",
@@ -1399,6 +1420,14 @@ function HedgeModule({ initialTheme = "Option income" } = {}) {
 
 // Trading listings verified against Yahoo Finance chart metadata on 14/09/2026.
 const ETF_TRADING_LISTINGS = {
+  WSML: ["WSML.L", "London Stock Exchange", "USD"],
+  VSS: ["VSS", "NYSE Arca", "USD"],
+  SCZ: ["SCZ", "Nasdaq", "USD"],
+  IWC: ["IWC", "NYSE Arca", "USD"],
+  IDP6: ["IDP6.L", "London Stock Exchange", "USD"],
+  IJR: ["IJR", "NYSE Arca", "USD"],
+  SPY4: ["SPY4.L", "London Stock Exchange", "USD"],
+  IJH: ["IJH", "NYSE Arca", "USD"],
   SPY: ["SPY", "NYSE Arca", "USD"],
   VOO: ["VOO", "NYSE Arca", "USD"],
   QQQ: ["QQQ", "Nasdaq", "USD"],
@@ -1551,6 +1580,14 @@ const ETF_TRADING_LISTINGS = {
 
 // Full instrument names from the ETF catalog.
 const ETF_FULL_NAMES = {
+  WSML: "iShares MSCI World Small Cap UCITS ETF USD (Acc)",
+  VSS: "Vanguard FTSE All-World ex-US Small-Cap ETF",
+  SCZ: "iShares MSCI EAFE Small-Cap ETF",
+  IWC: "iShares Micro-Cap ETF",
+  IDP6: "iShares S&P SmallCap 600 UCITS ETF USD (Dist)",
+  IJR: "iShares Core S&P Small-Cap ETF",
+  SPY4: "State Street SPDR S&P 400 U.S. Mid Cap UCITS ETF (Acc)",
+  IJH: "iShares Core S&P Mid-Cap ETF",
   "SPY": "SPDR S&P 500 ETF Trust",
   "VOO": "Vanguard S&P 500 ETF",
   "QQQ": "Invesco QQQ Trust",
@@ -1724,20 +1761,20 @@ function EtfTradingDetails({ instruments }) {
   );
 }
 
-function DataLabTickerLink({ ticker, availableTickers }) {
+function DataLabTickerLink({ ticker, availableTickers, group }) {
   if (!availableTickers?.has(ticker)) return null;
   return React.createElement(
     "a",
     {
       className: "data-lab-direct-link",
-      href: `#dataLab/${encodeURIComponent(ticker)}`,
+      href: `#dataLab/${encodeURIComponent(ticker)}${group === "Caps/Style" ? "/caps" : ""}`,
       "aria-label": `Open ${ticker} in Data Lab`,
     },
     "Data Lab ↗"
   );
 }
 
-function CoreModule({ functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", legendMode = "equity", showVehicleToggle = true, dataLabTickers = new Set() } = {}) {
+function CoreModule({ contextGroup = null, functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", legendMode = "equity", showVehicleToggle = true, dataLabTickers = new Set() } = {}) {
   const [selectedEtf, setSelectedEtf] = useState(initialEtf);
   const [vehicleView, setVehicleView] = useState("all");
   const [geoData, setGeoData] = useState(null);
@@ -1844,12 +1881,14 @@ function CoreModule({ functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", leg
           "div",
           { className: "instrument-detail-heading" },
           React.createElement("h2", null, selectedEtf),
-          React.createElement(DataLabTickerLink, { ticker: selectedEtf, availableTickers: dataLabTickers })
+          React.createElement(DataLabTickerLink, { ticker: selectedEtf, availableTickers: dataLabTickers, group: contextGroup })
         ),
         React.createElement(EtfFullNames, { instruments: selectedEtf }),
         React.createElement(EtfTradingDetails, { instruments: selectedEtf }),
         React.createElement("p", null, detail[1]),
         React.createElement("p", null, detail[2]),
+        contextGroup === "Caps/Style" ? React.createElement("p", { className: "data-note" }, "Size definitions follow each index provider. S&P 500 is the common market comparison in Data Lab, not necessarily the fund’s tracked index.") : null,
+        detail[4] ? React.createElement("p", { className: "data-note" }, React.createElement("a", { href: detail[4], target: "_blank", rel: "noopener noreferrer" }, "Fund information ↗")) : null,
         countryWeights
           ? React.createElement(
               "div",
@@ -2300,6 +2339,7 @@ function CommodityModule({ dataLabTickers, initialEtf = "GLD" }) {
 const ETF_SUBMODULES = [
   ["fixed", "Fixed Income"],
   ["core", "Core Equities"],
+  ["caps", "Caps/Style"],
   ["sectors", "Sectors"],
   ["satellites", "US Satellites"],
   ["europe", "European Themes"],
@@ -2319,6 +2359,9 @@ const registerEtfDestination = (ticker, tab, target) => {
 COMMODITY_INSTRUMENTS.forEach((item) => registerEtfDestination(item.ticker, "commodities", item.ticker));
 FIXED_INCOME_FUNCTIONS.forEach((row) => row.tickers.forEach((ticker) => registerEtfDestination(ticker, "fixed", ticker)));
 registerEtfDestination("TIP5", "fixed", "TI5A");
+CAPS_FUNCTIONS.forEach((row) => row.tickers.forEach((ticker) => {
+  if (!["VOO", "CSPX", "VUAA"].includes(ticker)) registerEtfDestination(ticker, "caps", ticker);
+}));
 CORE_EQUITY_FUNCTIONS.forEach((row) => row.tickers.forEach((ticker) => registerEtfDestination(ticker, "core", ticker)));
 SECTOR_GICS_ETFS.forEach((item) => item.tickers.forEach((ticker) => registerEtfDestination(ticker, "sectors", ticker)));
 
@@ -2350,7 +2393,8 @@ SECTOR_GICS_ETFS.forEach((item) => item.tickers.forEach((ticker) => registerEtfD
 
 const etfDestinationForTicker = (ticker) => ETF_DESTINATIONS.get(String(ticker || "").trim().toUpperCase()) || null;
 
-const etfHrefForTicker = (ticker) => {
+const etfHrefForTicker = (ticker, group) => {
+  if (group === "Caps/Style" && CAPS_FUNCTIONS.some((row) => row.tickers.includes(ticker))) return `#etfs/caps/${encodeURIComponent(ticker)}`;
   const destination = etfDestinationForTicker(ticker);
   return destination ? `#etfs/${destination.tab}/${encodeURIComponent(destination.target)}` : null;
 };
@@ -2395,6 +2439,7 @@ function EtfsModule() {
 
   const renderActive = () => {
     const requestedTarget = routeDestination?.tab === activeEtfTab ? routeDestination.target : null;
+    if (activeEtfTab === "caps") return React.createElement(CoreModule, { key: `caps-${requestedTarget || "default"}`, functions: CAPS_FUNCTIONS, contextGroup: "Caps/Style", dataLabTickers, initialEtf: CAPS_FUNCTIONS.some((row) => row.tickers.includes(requestedTarget)) ? requestedTarget : "VOO" });
     if (activeEtfTab === "core") return React.createElement(CoreModule, { key: `core-${requestedTarget || "default"}`, dataLabTickers, initialEtf: requestedTarget || "VOO" });
     if (activeEtfTab === "fixed") return React.createElement(FixedIncomeModule, { key: `fixed-${requestedTarget || "default"}`, dataLabTickers, initialEtf: requestedTarget || "IB01" });
     if (activeEtfTab === "sectors") return React.createElement(SectorGicsModule, { key: `sectors-${requestedTarget || "default"}`, dataLabTickers, initialSector: requestedTarget || "XLK" });
