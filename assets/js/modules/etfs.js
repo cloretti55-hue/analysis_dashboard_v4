@@ -241,51 +241,276 @@ const CORE_COUNTRY_WEIGHTS = {
 };
 
 const CORE_DETAILS = {
-  VOO: ["US structural beta", "Tracks the S&P 500 and provides broad exposure to large US companies.", "Its role as a long-term equity holding differs from using SPY for frequent options trades.", ["The fund provides index exposure within a single US-listed vehicle.", "Its US listing and distribution policy are relevant when comparing it with UCITS alternatives.", "Holding the fund leaves the portfolio exposed to changes in US equity prices."]],
-  CSPX: ["US structural beta", "Provides S&P 500 exposure through an accumulating UCITS ETF.", "Income is reinvested within the fund rather than paid out as cash distributions.", ["The fund offers a UCITS structure for exposure to large US companies.", "Accumulation changes how income is handled; it does not remove equity-market risk.", "Its trading and options markets differ from those available for SPY."]],
-  VUAA: ["US structural beta", "Tracks the S&P 500 through an accumulating UCITS ETF.", "The fund reinvests income and provides ongoing exposure to large US companies.", ["The accumulating structure keeps distributions invested within the fund.", "Its domicile and listing distinguish it from US-listed S&P 500 ETFs.", "It remains exposed to the same broad US equity-market movements as its benchmark."]],
-  SPY: ["US execution / hedge", "Provides S&P 500 exposure through an ETF with an established market for trading and options.", "The fund can be used for equity exposure or as the underlying instrument for options strategies.", ["Puts, collars and other options structures can be implemented using SPY options.", "Trading liquidity matters when entering, adjusting or closing a position.", "Its listing, distributions and costs should be distinguished from those of accumulating UCITS funds."]],
-  QQQ: ["Tactical growth / hedge", "Tracks the Nasdaq-100 and has an established market for trading and options.", "Its growth-oriented composition creates a different exposure from a broad US equity index.", ["The ETF can be traded directly or used as the underlying instrument for options strategies.", "QQQM and UCITS alternatives offer other structures for Nasdaq-100 exposure.", "Concentration in large growth and technology-related companies is a defining feature of the exposure."]],
-  QQQM: ["Structural growth", "Provides Nasdaq-100 exposure in a vehicle positioned for long-term index holdings.", "Its trading profile differs from QQQ, even though both follow the same index.", ["The fund retains the growth and company concentration of the Nasdaq-100.", "Costs and trading liquidity are separate considerations when comparing it with QQQ.", "A longer holding period does not remove the risk of losses in the underlying equities."]],
-  CNDX: ["Structural growth", "Provides Nasdaq-100 exposure through an accumulating UCITS ETF.", "The fund reinvests income within a UCITS structure.", ["It offers another vehicle for holding the growth-oriented Nasdaq-100 index.", "Its listing and distribution policy differ from those of QQQ.", "The UCITS structure does not reduce the concentration inherent in the index."]],
-  EQQQ: ["Structural growth", "Invesco EQQQ NASDAQ-100 UCITS ETF Dist.", "Distribution, cost and trading currency differ from accumulating alternatives.", ["A European alternative for Nasdaq-100 exposure.", "Distributes income rather than reinvesting it within the fund.", "Compare with CNDX according to domicile and distribution policy."]],
-  RSP: ["Concentration reduction", "Tracks an equal-weighted version of the S&P 500.", "Equal weighting reduces the dominance of the largest companies while changing the portfolio composition.", ["Smaller index constituents receive more weight than in the market-cap-weighted S&P 500.", "Sector weights and sensitivity to the economic cycle can consequently differ.", "Lower concentration does not guarantee higher returns or protection during a market decline."]],
-  VEA: ["Developed ex-US core", "Provides exposure to developed equity markets outside the United States.", "Its geographic and sector mix differs from that of a US equity portfolio.", ["The portfolio covers developed markets including Europe, Japan and the Pacific.", "It adds international exposure rather than replicating the S&P 500.", "Combining it with regional funds can create overlapping holdings."]],
-  IEFA: ["Developed ex-US core", "Provides broad exposure to developed equity markets outside the United States and Canada.", "Geographic diversification also changes the mix of sectors and companies in the portfolio.", ["The fund offers a broad allocation across its developed-market universe.", "It can overlap with European and other regional equity ETFs.", "Index coverage, costs and listing are relevant when comparing it with other international funds."]],
-  IWDA: ["Developed global core", "Tracks the MSCI World Index through a UCITS ETF.", "The index includes US companies, so it can overlap substantially with an S&P 500 allocation.", ["The fund brings several developed equity markets into one vehicle.", "A global label does not imply equal weights across countries.", "Its US holdings should be considered alongside any separate VOO, CSPX or VUAA position."]],
-  SWDA: ["Developed global core", "Provides accumulating UCITS exposure to the MSCI World Index.", "The portfolio includes a substantial US allocation and is not an ex-US fund.", ["Income is reinvested within the fund.", "The portfolio covers developed markets through one index-based vehicle.", "Combining it with US equity funds increases overlap with its existing US holdings."]],
-  VGK: ["European core", "Provides broad exposure to European equities.", "A regional index combines businesses with different sector and economic drivers.", ["The fund offers a single vehicle for European equity exposure.", "Its holdings can overlap with global and developed ex-US ETFs.", "It does not isolate specific themes such as luxury goods, defence or digital infrastructure."]],
-  IEUR: ["European core", "Provides broad European equity exposure through an iShares ETF.", "Its role is regional diversification across companies and sectors.", ["The fund can form part of a broader developed-market allocation.", "It can overlap with the European holdings of VEA and IEFA.", "Costs, listing and trading liquidity distinguish it from other European equity vehicles."]],
-  FEZ: ["European core", "Tracks the EURO STOXX 50, which represents large companies in the eurozone.", "Its narrower universe creates a more concentrated exposure than a broad European equity fund.", ["The portfolio focuses on eurozone blue-chip companies.", "Large individual constituents can have a significant influence on returns.", "Eurozone exposure does not cover the whole European equity market."]],
-  IMEU: ["European core", "Provides MSCI Europe exposure through the iShares Core MSCI Europe UCITS ETF EUR Dist.", "The share class distributes income and is available through listings in different trading currencies.", ["The fund holds a broad portfolio of developed European equities.", "The trading currency of the selected listing is shown separately from the share-class currency.", "Its UCITS structure and index coverage distinguish it from VGK, IEUR and FEZ."]],
-  VWO: ["Broad emerging markets", "Provides diversified exposure to emerging-market equities.", "Country weights, including the allocation to China, influence the overall risk profile.", ["The fund combines companies across several emerging markets.", "It can overlap with funds focused on individual countries or regions.", "Currency, political and economic developments in those markets affect returns."]],
-  IEMG: ["Broad emerging markets", "Provides emerging-market equity exposure across large, mid-sized and small companies.", "The portfolio includes China rather than excluding it from the investment universe.", ["Its coverage extends beyond the largest emerging-market companies.", "Country and sector weights determine the sources of concentration.", "An ex-China fund represents a different allocation rather than an equivalent substitute."]],
-  EIMI: ["Broad emerging markets", "Provides broad emerging-market equity exposure through a UCITS ETF.", "Country concentration and differences from the benchmark remain relevant to its performance.", ["The UCITS structure offers an alternative to US-listed emerging-market funds.", "A broad portfolio still carries risks associated with individual countries.", "The share class and trading currency are separate characteristics of the vehicle."]],
-  EMXC: ["Emerging markets ex-China", "Provides emerging-market equity exposure while excluding China from the index.", "Removing Chinese equities changes the portfolio weights; it does not eliminate geopolitical risk.", ["Other markets, including India and Taiwan, receive a greater relative weight.", "The portfolio can still be affected by trade and economic links with China.", "Its returns can differ materially from those of an emerging-market index that includes China."]],
-  EXCH: ["Emerging markets ex-China", "Provides emerging-market exposure excluding China through an accumulating UCITS ETF.", "The allocation separates direct Chinese equity exposure from the rest of the emerging-market universe.", ["Income is reinvested within the fund.", "The remaining countries retain their own market, currency and geopolitical risks.", "Combining it with VWO, IEMG or EIMI changes the portfolio country weights and creates overlap."]],
-  IB01: ["USD liquidity", "iShares $ Treasury Bond 0-1yr UCITS ETF USD Acc.", "The fund holds very short-dated US Treasuries, with lower interest-rate sensitivity than longer-maturity bond funds.", ["The underlying Treasury holdings generate income while maintaining a short maturity profile.", "Short maturities limit interest-rate sensitivity, although the ETF price can still fluctuate.", "The accumulating share class reinvests income within the fund."]],
-  IBTA: ["Short duration", "iShares $ Treasury Bond 1-3yr UCITS ETF USD Acc.", "Short-maturity bonds generally respond less to interest-rate changes than longer-maturity bonds.", ["The 1–3 year maturity range adds interest-rate exposure beyond Treasury bills.", "Income and price movements both contribute to the return on these short-term bonds.", "This maturity range sits between Treasury bills and intermediate-term Treasury exposure."]],
-  CBU7: ["Short-intermediate duration", "iShares $ Treasury Bond 3-7yr UCITS ETF USD Acc.", "The fund focuses on the 3–7 year segment of the US Treasury market.", ["Returns combine bond income with price changes as Treasury yields move.", "Falling yields can support prices, while rising yields can cause losses.", "The maturity range can be combined with shorter and longer Treasury exposures."]],
-  IB7A: ["Intermediate duration", "iShares $ Treasury Bond 7-10yr UCITS ETF USD Acc.", "The fund provides intermediate-maturity Treasury exposure, whose price generally rises when the relevant yields fall.", ["Price movements reflect changes in yields across the 7–10 year maturity range.", "A decline in the relevant yields can generate price gains in addition to bond income.", "The longer maturity range brings more price sensitivity than short-term Treasury holdings."]],
-  DTLA: ["Long duration", "iShares $ Treasury Bond 20+yr UCITS ETF USD Acc.", "Long-maturity Treasuries carry substantial exposure to changes in long-term interest rates.", ["Small changes in long-term yields can produce large changes in the fund price.", "Falling long-term yields support bond prices, while rising yields have the opposite effect.", "The fund can experience substantial price volatility despite holding government bonds."]],
-  TI5A: ["Short inflation", "iShares $ TIPS 0-5 UCITS ETF USD Acc.", "The fund holds shorter-maturity inflation-linked Treasuries, combining inflation adjustments with exposure to real yields.", ["The return reflects inflation adjustments, bond income and changes in real yields.", "Its shorter maturity range limits real-rate sensitivity relative to longer-duration TIPS funds.", "Inflation linkage does not prevent losses when real yields rise."]],
-  IDTP: ["Broad inflation", "iShares $ TIPS UCITS ETF USD Acc.", "A broader TIPS maturity range adds real-rate sensitivity alongside inflation adjustments.", ["The underlying Treasury securities adjust for measured inflation.", "Changes in real yields can have a significant effect on the fund price.", "The broader maturity range creates a different risk profile from a short-term TIPS fund."]],
-  LQDA: ["USD investment-grade credit", "iShares $ Corp Bond UCITS ETF USD Acc.", "The fund holds investment-grade corporate bonds denominated in US dollars.", ["Corporate bonds add exposure to credit spreads alongside interest-rate risk.", "Does not replace Treasuries as a crisis hedge.", "Prices depend on Treasury yields, credit spreads and the financial condition of the issuers."]],
-  IHYA: ["USD high yield", "iShares $ High Yield Corp Bond UCITS ETF USD Acc.", "The fund holds high-yield corporate bonds, which carry greater credit risk than investment-grade debt.", ["Higher credit spreads compensate for greater default risk and uncertainty about recoveries.", "Stronger credit conditions can support prices, while widening spreads can reduce returns.", "It is not usually treated as defensive fixed income."]],
-  AGGU: ["Global core bonds", "iShares Core Global Aggregate Bond UCITS ETF USD Hedged Acc.", "The fund combines global bond exposure with currency hedging to the US dollar.", ["Its portfolio includes government bonds and credit exposure from global markets.", "The broad investment universe differs from a fund focused on one country or bond segment.", "Currency hedging, duration and composition change its role as a core holding."]],
-  SGOV: ["USD liquidity", "iShares 0-3 Month Treasury Bond ETF.", "Very short US Treasury exposure in a US-listed distributing vehicle.", ["Tracks Treasury bills with minimal duration.", "Monthly distributions differ from an accumulating UCITS structure.", "Market price can still vary even with very short maturity exposure."]],
-  SHY: ["Short duration", "iShares 1-3 Year Treasury Bond ETF.", "Short US Treasury exposure through a US-listed vehicle.", ["Adds limited duration beyond Treasury bills.", "Distributes income monthly.", "Rate sensitivity is lower than in intermediate and long Treasury funds."]],
-  IEI: ["Short-intermediate duration", "iShares 3-7 Year Treasury Bond ETF.", "The fund holds US Treasuries in the 3–7 year maturity range through a US-listed vehicle.", ["Combines more duration with government-credit exposure.", "Distributes income monthly.", "Price sensitivity rises as maturity extends."]],
-  IEF: ["Intermediate duration", "iShares 7-10 Year Treasury Bond ETF.", "Intermediate US Treasury exposure through a US-listed vehicle.", ["Has greater sensitivity to changes in medium-term yields.", "Distributes income monthly.", "Its role differs from both cash-like and long-duration Treasury funds."]],
-  TLT: ["Long duration", "iShares 20+ Year Treasury Bond ETF.", "Long US Treasury exposure through a US-listed vehicle.", ["Carries substantial sensitivity to long-term yields.", "Distributes income monthly.", "Price volatility can be material despite the government-bond holdings."]],
-  STIP: ["Short inflation", "iShares 0-5 Year TIPS Bond ETF.", "Short-maturity US inflation-linked bonds in a US-listed vehicle.", ["Combines realised-inflation exposure with lower duration.", "Distributes income monthly.", "Real-rate changes still affect market value."]],
-  TIP: ["Broad inflation", "iShares TIPS Bond ETF.", "Broad US inflation-linked Treasury exposure in a US-listed vehicle.", ["Includes more duration than a short TIPS fund.", "Distributes income monthly.", "Performance reflects both inflation adjustments and changes in real yields."]],
-  LQD: ["USD investment-grade credit", "iShares iBoxx $ Investment Grade Corporate Bond ETF.", "US dollar investment-grade corporate-bond exposure.", ["Adds corporate spread exposure to fixed income.", "Distributes income monthly.", "Credit spreads and duration both affect performance."]],
-  HYG: ["USD high yield", "iShares iBoxx $ High Yield Corporate Bond ETF.", "US dollar below-investment-grade corporate-bond exposure.", ["Carries greater credit and default risk than investment-grade funds.", "Distributes income monthly.", "Its behaviour is more cyclical than government-bond exposure."]],
-  AGG: ["US core bonds", "iShares Core U.S. Aggregate Bond ETF.", "Broad US investment-grade bond-market exposure.", ["Combines US Treasuries, agency mortgages and investment-grade credit.", "Distributes income monthly.", "Its US-only scope differs from AGGU's global USD-hedged universe."]],
-  GLD: ["Macro hedge", "SPDR Gold Shares.", "A highly liquid physical-gold ETF.", ["Functions as a real/monetary asset.", "Helps during confidence shocks and adverse regimes.", "Most useful when liquidity and depth matter."]],
-  IAU: ["Macro hedge", "iShares Gold Trust.", "A competitively priced physical-gold ETF.", ["An efficient alternative for holding gold exposure.", "Useful as a long-term macro diversifier.", "Less focused on heavy trading than GLD."]],
-  "FXF / CHF": ["Macro hedge", "Invesco CurrencyShares Swiss Franc Trust.", "Swiss-franc exposure against the US dollar.", ["A historical haven during confidence shocks.", "Low carry, lower liquidity than large ETFs and risk of SNB intervention.", "The dollar is the natural hedge against Brazil. The Swiss franc represents monetary quality; gold is a regime hedge."]],
+  VOO: [
+    "US structural beta",
+    "Tracks the S&P 500, providing broad exposure to large US companies.",
+    "It can serve as a core US equity holding, with market-cap weighting giving the largest companies the greatest influence on returns.",
+    []
+  ],
+  CSPX: [
+    "US structural beta",
+    "Tracks the S&P 500 through an accumulating UCITS ETF, reinvesting income within the fund.",
+    "It provides large-cap US equity exposure; the UCITS wrapper changes the investment vehicle, not the concentration of the underlying index.",
+    []
+  ],
+  VUAA: [
+    "US structural beta",
+    "Tracks the S&P 500 through an accumulating UCITS ETF, reinvesting income rather than paying cash distributions.",
+    "Its domicile and trading arrangements distinguish it from US-listed alternatives, while the underlying exposure remains large-cap US equities.",
+    []
+  ],
+  SPY: [
+    "US execution / hedge",
+    "Tracks the S&P 500 and has an established market for share trading and options.",
+    "Its options can be used for puts, collars and other strategies. Trading liquidity, costs and distribution policy are relevant when comparing it with other S&P 500 vehicles.",
+    []
+  ],
+  QQQ: [
+    "Tactical growth / hedge",
+    "Tracks the Nasdaq-100, with a portfolio concentrated in large growth and technology-related companies.",
+    "An established options market supports trading and hedging strategies. QQQM and UCITS funds offer alternative vehicles for the same index exposure.",
+    []
+  ],
+  QQQM: [
+    "Structural growth",
+    "Tracks the Nasdaq-100 in a vehicle positioned for long-term index holdings.",
+    "It follows the same index as QQQ, so the underlying company concentration remains. Costs and trading liquidity distinguish the two vehicles.",
+    []
+  ],
+  CNDX: [
+    "Structural growth",
+    "Tracks the Nasdaq-100 through an accumulating UCITS ETF, reinvesting income within the fund.",
+    "Its wrapper and distribution policy differ from QQQ, while its concentration remains tied to the same growth-oriented index.",
+    []
+  ],
+  EQQQ: [
+    "Structural growth",
+    "Provides Nasdaq-100 exposure through a distributing UCITS ETF.",
+    "Income is paid out rather than accumulated. Distribution policy, costs and the currency of the selected listing distinguish it from accumulating alternatives such as CNDX.",
+    []
+  ],
+  RSP: [
+    "Concentration reduction",
+    "Tracks an equal-weighted version of the S&P 500, reducing the dominance of its largest companies.",
+    "Smaller index constituents receive greater weight than in the market-cap-weighted index. This also changes sector exposure and sensitivity to the economic cycle; lower concentration does not ensure protection in a market decline.",
+    []
+  ],
+  VEA: [
+    "Developed ex-US core",
+    "Provides diversified exposure to developed equity markets outside the United States, including Canada, Europe, Japan and the Pacific.",
+    "Its geographic and sector mix differs from a US equity allocation. Combining it with regional funds can duplicate holdings.",
+    []
+  ],
+  IEFA: [
+    "Developed ex-US core",
+    "Provides broad developed-market equity exposure outside the United States and Canada.",
+    "Its holdings can overlap with European and other regional funds. The exclusion of Canada is one distinction from VEA.",
+    []
+  ],
+  IWDA: [
+    "Developed global core",
+    "Tracks the MSCI World Index through a UCITS ETF, combining developed equity markets in one portfolio.",
+    "Country weights are unequal, and the US allocation can overlap substantially with separate S&P 500 holdings.",
+    []
+  ],
+  SWDA: [
+    "Developed global core",
+    "Provides accumulating UCITS exposure to the MSCI World Index, reinvesting income across a developed-market portfolio.",
+    "It includes a substantial US allocation. Adding a separate US equity fund increases exposure to companies already held in the portfolio.",
+    []
+  ],
+  VGK: [
+    "European core",
+    "Provides broad European equity exposure across companies and sectors.",
+    "It can overlap with global and developed ex-US funds, and does not isolate themes such as defence, luxury or digital infrastructure.",
+    []
+  ],
+  IEUR: [
+    "European core",
+    "Provides broad European equity exposure through an iShares ETF.",
+    "It can form the regional component of a developed-market allocation, but overlaps with the European holdings of funds such as VEA and IEFA.",
+    []
+  ],
+  FEZ: [
+    "European core",
+    "Tracks the EURO STOXX 50, a portfolio of large eurozone companies.",
+    "Its narrower universe gives individual constituents greater influence than in a broad European fund and excludes European markets outside the eurozone.",
+    []
+  ],
+  IMEU: [
+    "European core",
+    "Tracks MSCI Europe through a distributing UCITS share class, covering developed European equities.",
+    "The share-class currency and the trading currency of a particular listing are separate characteristics. Its index coverage also differs from the eurozone-only universe of FEZ.",
+    []
+  ],
+  VWO: [
+    "Broad emerging markets",
+    "Provides diversified emerging-market equity exposure, including China.",
+    "Country and sector weights shape the risk profile. Adding country funds can increase existing concentrations, alongside currency, political and economic risks.",
+    []
+  ],
+  IEMG: [
+    "Broad emerging markets",
+    "Provides emerging-market equity exposure across large, mid-sized and small companies, including China.",
+    "Its coverage extends beyond the largest companies. An ex-China fund changes the country allocation rather than providing equivalent exposure.",
+    []
+  ],
+  EIMI: [
+    "Broad emerging markets",
+    "Provides broad emerging-market equity exposure through a UCITS ETF.",
+    "Diversification across countries does not eliminate country-specific risks. The share class and selected listing determine how income is handled and in which currency shares trade.",
+    []
+  ],
+  EMXC: [
+    "Emerging markets ex-China",
+    "Provides emerging-market equity exposure excluding China.",
+    "The exclusion raises the relative weights of other markets, including India and Taiwan. Economic links with China and geopolitical risks remain.",
+    []
+  ],
+  EXCH: [
+    "Emerging markets ex-China",
+    "Provides emerging-market exposure excluding China through an accumulating UCITS ETF.",
+    "Income is reinvested. Combining the fund with VWO, IEMG or EIMI creates overlapping holdings and changes the overall country mix.",
+    []
+  ],
+  IB01: [
+    "USD liquidity",
+    "Holds US Treasuries with up to one year remaining to maturity through an accumulating UCITS share class.",
+    "Short maturities limit interest-rate sensitivity relative to longer Treasury funds, although the share price can still fluctuate. Income is reinvested.",
+    []
+  ],
+  IBTA: [
+    "Short duration",
+    "Holds US Treasuries in the 1–3 year maturity range through an accumulating UCITS share class.",
+    "Returns combine reinvested income with price changes. Interest-rate sensitivity sits above Treasury bills and below longer-maturity Treasury exposure.",
+    []
+  ],
+  CBU7: [
+    "Short-intermediate duration",
+    "Holds US Treasuries in the 3–7 year maturity range through an accumulating UCITS share class.",
+    "Returns combine reinvested income with price movements: falling Treasury yields support bond prices, while rising yields can produce losses.",
+    []
+  ],
+  IB7A: [
+    "Intermediate duration",
+    "Holds US Treasuries in the 7–10 year maturity range through an accumulating UCITS share class.",
+    "This segment carries greater interest-rate sensitivity than short-term Treasuries. Returns reflect reinvested income and changes in the relevant yields.",
+    []
+  ],
+  DTLA: [
+    "Long duration",
+    "Holds US Treasuries with more than 20 years remaining to maturity through an accumulating UCITS share class.",
+    "Long duration makes prices highly sensitive to long-term yields. Government-bond holdings can therefore experience substantial price volatility even as income is reinvested.",
+    []
+  ],
+  TI5A: [
+    "Short inflation",
+    "Holds US inflation-linked Treasuries with maturities of up to five years through an accumulating UCITS share class.",
+    "Returns reflect inflation adjustments, reinvested income and real-yield movements. Shorter maturities reduce real-rate sensitivity relative to longer TIPS funds, but do not prevent losses.",
+    []
+  ],
+  IDTP: [
+    "Broad inflation",
+    "Provides broad US inflation-linked Treasury exposure through an accumulating UCITS share class.",
+    "The wider maturity range adds real-rate sensitivity compared with short-term TIPS. Inflation adjustments and reinvested income do not eliminate price losses when real yields rise.",
+    []
+  ],
+  LQDA: [
+    "USD investment-grade credit",
+    "Holds US dollar-denominated investment-grade corporate bonds through an accumulating UCITS share class.",
+    "Returns reflect reinvested income, Treasury yields, credit spreads and issuer financial strength. Corporate-credit exposure distinguishes it from a Treasury allocation.",
+    []
+  ],
+  IHYA: [
+    "USD high yield",
+    "Holds high-yield corporate bonds through an accumulating UCITS share class.",
+    "Reinvested income comes with greater default and recovery risk than investment-grade debt. Widening credit spreads can cause losses, especially when economic conditions weaken.",
+    []
+  ],
+  AGGU: [
+    "Global core bonds",
+    "Combines global government and corporate bonds in a UCITS portfolio with USD currency hedging and income accumulation.",
+    "Its global universe differs from AGG’s US-only allocation. Duration, credit composition and the currency hedge all affect returns.",
+    []
+  ],
+  SGOV: [
+    "USD liquidity",
+    "Holds US Treasury bills with maturities of up to three months and distributes income monthly.",
+    "Its very short maturity profile limits interest-rate sensitivity, although the fund’s market price can still vary.",
+    []
+  ],
+  SHY: [
+    "Short duration",
+    "Holds US Treasuries with maturities of 1–3 years and distributes income monthly.",
+    "It adds interest-rate exposure beyond Treasury bills, with less price sensitivity than intermediate- and long-maturity Treasury funds.",
+    []
+  ],
+  IEI: [
+    "Short-intermediate duration",
+    "Holds US Treasuries with maturities of 3–7 years and distributes income monthly.",
+    "Its intermediate maturity range brings greater price sensitivity to yield changes than shorter Treasury holdings.",
+    []
+  ],
+  IEF: [
+    "Intermediate duration",
+    "Holds US Treasuries with maturities of 7–10 years and distributes income monthly.",
+    "Returns depend on changes in medium-term yields as well as bond income, giving it a different risk profile from both Treasury bills and long-duration funds.",
+    []
+  ],
+  TLT: [
+    "Long duration",
+    "Holds US Treasuries with more than 20 years remaining to maturity and distributes income monthly.",
+    "Long duration creates substantial sensitivity to long-term yields, so prices can fluctuate sharply despite the government-bond holdings.",
+    []
+  ],
+  STIP: [
+    "Short inflation",
+    "Holds US inflation-linked Treasuries with maturities of up to five years and distributes income monthly.",
+    "Inflation adjustments contribute to returns, while real-yield changes affect prices. Its shorter maturity range limits duration relative to broad TIPS funds.",
+    []
+  ],
+  TIP: [
+    "Broad inflation",
+    "Provides broad US inflation-linked Treasury exposure and distributes income monthly.",
+    "It carries more duration than a short-maturity TIPS fund. Returns reflect inflation adjustments, bond income and changes in real yields.",
+    []
+  ],
+  LQD: [
+    "USD investment-grade credit",
+    "Holds US dollar-denominated investment-grade corporate bonds and distributes income monthly.",
+    "Both Treasury yields and credit spreads affect prices, adding corporate-credit risk to the portfolio’s duration exposure.",
+    []
+  ],
+  HYG: [
+    "USD high yield",
+    "Holds US dollar-denominated below-investment-grade corporate bonds and distributes income monthly.",
+    "Default risk and sensitivity to the credit cycle are greater than in investment-grade funds; its behaviour can be more cyclical than government-bond exposure.",
+    []
+  ],
+  AGG: [
+    "US core bonds",
+    "Combines US Treasuries, agency mortgages and investment-grade corporate bonds, with monthly income distributions.",
+    "It covers the US investment-grade bond market; AGGU instead has a global universe with USD currency hedging.",
+    []
+  ],
+  GLD: [
+    "Macro hedge",
+    "SPDR Gold Shares.",
+    "A highly liquid physical-gold ETF.",
+    ["Functions as a real/monetary asset.", "Helps during confidence shocks and adverse regimes.", "Most useful when liquidity and depth matter."]
+  ],
+  IAU: [
+    "Macro hedge",
+    "iShares Gold Trust.",
+    "A competitively priced physical-gold ETF.",
+    ["An efficient alternative for holding gold exposure.", "Useful as a long-term macro diversifier.", "Less focused on heavy trading than GLD."]
+  ],
+  "FXF / CHF": [
+    "Macro hedge",
+    "Invesco CurrencyShares Swiss Franc Trust.",
+    "Swiss-franc exposure against the US dollar.",
+    ["A historical haven during confidence shocks.", "Low carry, lower liquidity than large ETFs and risk of SNB intervention.", "The dollar is the natural hedge against Brazil. The Swiss franc represents monetary quality; gold is a regime hedge."]
+  ]
 };
 
 const SATELLITE_FILTERS = {
@@ -333,13 +558,8 @@ const SATELLITES = [
     reading: "Semiconductor companies supply the hardware used in AI systems, while their earnings remain sensitive to investment cycles.",
     names: ["Nvidia", "TSMC", "Broadcom", "ASML", "AMD"],
     extraTitle: "Strategic companies outside the ETF",
-    extraCompanies: [
-      "Samsung Electronics: HBM, DRAM and NAND memory.",
-      "SK Hynix: a leader in HBM for AI.",
-      "Tokyo Electron: chip-manufacturing equipment.",
-      "Advantest: advanced-chip testing.",
-    ],
-    points: ["The ETFs provide exposure to several parts of the semiconductor value chain, with different weights across companies.", "Valuation and the semiconductor cycle need to be monitored.", "The funds cover semiconductor businesses within the broader AI infrastructure theme."],
+    extraCompanies: ["Samsung Electronics: HBM, DRAM and NAND memory.", "SK Hynix: a leader in HBM for AI.", "Tokyo Electron: chip-manufacturing equipment.", "Advantest: advanced-chip testing."],
+    points: ["The ETFs provide exposure to several parts of the semiconductor value chain, with different weights across companies.", "Valuation and the semiconductor cycle need to be monitored."]
   },
   {
     theme: "US defence",
@@ -353,7 +573,7 @@ const SATELLITES = [
     implementation: "ETF",
     reading: "Geopolitics, public budgets and dual-use technology support structural demand.",
     names: ["Lockheed Martin", "RTX", "Northrop Grumman", "General Dynamics"],
-    points: ["The ETFs provide exposure to major US aerospace and defence contractors.", "Government demand reduces dependence on consumers.", "The holdings span different aerospace and defence activities, with a business mix that varies by fund."],
+    points: ["The ETFs provide exposure to major US aerospace and defence contractors.", "Government demand reduces dependence on consumers."]
   },
   {
     theme: "Cybersecurity",
@@ -367,7 +587,7 @@ const SATELLITES = [
     implementation: "ETF",
     reading: "Cybersecurity demand is supported by recurring protection needs, although spending and valuations still vary across companies.",
     names: ["Palo Alto", "CrowdStrike", "Fortinet", "Zscaler"],
-    points: ["The ETF represents the theme, but its composition should be monitored.", "Businesses require ongoing security services as their systems and threats evolve.", "The risks depend on software demand, competition and execution rather than on a single technological breakthrough."],
+    points: ["The ETF represents the theme, but its composition should be monitored.", "The risks depend on software demand, competition and execution rather than on a single technological breakthrough."]
   },
   {
     theme: "Robotics / automation",
@@ -381,7 +601,7 @@ const SATELLITES = [
     implementation: "ETF + basket",
     reading: "Robotics and automation ETFs combine companies whose demand, customers and investment cycles can differ substantially.",
     names: ["Rockwell", "ABB", "Fanuc", "Teradyne"],
-    points: ["An ETF provides a broad starting universe for examining robotics and automation exposure.", "A selected equity basket can distinguish industrial automation from other businesses included in the ETFs.", "Industrial automation is a relevant subtheme of reindustrialisation."],
+    points: ["An ETF provides a broad starting universe for examining robotics and automation exposure.", "A selected equity basket can distinguish industrial automation from other businesses included in the ETFs.", "Industrial automation is a relevant subtheme of reindustrialisation."]
   },
   {
     theme: "Energy / grid",
@@ -395,7 +615,7 @@ const SATELLITES = [
     implementation: "ETF + basket",
     reading: "The thesis is electrification, transmission and equipment, not only traditional energy.",
     names: ["Eaton", "Hubbell", "Quanta Services", "Constellation", "NextEra"],
-    points: ["A broad fund may include businesses whose revenues are only partly linked to grid investment.", "Selecting individual companies can distinguish utility operations from equipment manufacturing and engineering services.", "Data-centre development depends on available power and grid connections, which can constrain project delivery."],
+    points: ["A broad fund may include businesses whose revenues are only partly linked to grid investment.", "Selecting individual companies can distinguish utility operations from equipment manufacturing and engineering services.", "Data-centre development depends on available power and grid connections, which can constrain project delivery."]
   },
   {
     theme: "Infrastructure / utilities",
@@ -409,7 +629,7 @@ const SATELLITES = [
     implementation: "ETF + basket",
     reading: "The theme combines essential-service demand with investment in physical infrastructure and exposure to regulation.",
     names: ["Duke Energy", "Southern Company", "NextEra", "Quanta Services"],
-    points: ["Essential-service revenues can behave differently from those of more cyclical industries.", "Higher interest rates can affect financing costs and the valuation of long-lived assets.", "A broad ETF combines a defensive profile with interest-rate sensitivity."],
+    points: ["Higher interest rates can affect financing costs and the valuation of long-lived assets.", "A broad ETF combines a defensive profile with interest-rate sensitivity."]
   },
   {
     theme: "Residential construction",
@@ -423,7 +643,7 @@ const SATELLITES = [
     implementation: "ETF",
     reading: "The theme examines how constraints on housing supply, land and construction capacity affect homebuilders.",
     names: ["D.R. Horton", "Lennar", "PulteGroup", "NVR"],
-    points: ["Housing demand is structural but interest-rate sensitive.", "The ETF helps capture the homebuilder cycle.", "The thesis strengthens when new supply remains constrained."],
+    points: ["Housing demand is structural but interest-rate sensitive.", "The ETF helps capture the homebuilder cycle.", "The thesis strengthens when new supply remains constrained."]
   },
   {
     theme: "Construction materials and infrastructure",
@@ -437,7 +657,7 @@ const SATELLITES = [
     implementation: "ETF",
     reading: "These businesses supply materials, equipment and services used in housing and infrastructure construction.",
     names: ["Builders FirstSource", "Vulcan Materials", "Martin Marietta", "Masco"],
-    points: ["The fund includes businesses that supply the construction industry beyond homebuilders themselves.", "The exposure connects housing demand with infrastructure activity and construction materials.", "Demand reflects construction activity and can weaken even when long-term infrastructure needs remain."],
+    points: ["Demand reflects construction activity and can weaken even when long-term infrastructure needs remain."]
   },
   {
     theme: "Senior care",
@@ -451,7 +671,7 @@ const SATELLITES = [
     implementation: "Basket",
     reading: "Ageing increases demand for assisted living, nursing and long-term care services.",
     names: ["Brookdale Senior Living", "The Ensign Group", "Option Care Health"],
-    points: ["Population ageing can support long-term demand for care services.", "Supply grows slowly because of labour constraints and regulation.", "A selected equity basket can focus on care providers, but leaves greater exposure to individual companies."],
+    points: ["Supply grows slowly because of labour constraints and regulation.", "A selected equity basket can focus on care providers, but leaves greater exposure to individual companies."]
   },
   {
     theme: "Pharmaceutical distribution",
@@ -465,7 +685,7 @@ const SATELLITES = [
     implementation: "Equity basket",
     reading: "Pharmaceutical distributors connect medicine manufacturers with pharmacies and healthcare providers in a concentrated US market.",
     names: ["McKesson", "Cencora", "Cardinal Health"],
-    points: ["The business model combines recurring distribution activity with large-scale logistics networks.", "Population ageing and medicine use influence the long-term demand for distribution services.", "Risks include thin margins, regulatory pressure, reimbursement-system changes and customer concentration."],
+    points: ["The business model combines recurring distribution activity with large-scale logistics networks.", "Population ageing and medicine use influence the long-term demand for distribution services.", "Risks include thin margins, regulatory pressure, reimbursement-system changes and customer concentration."]
   },
   {
     theme: "Physical data centres",
@@ -479,7 +699,7 @@ const SATELLITES = [
     implementation: "Basket",
     reading: "The ETFs listed here cover only parts of the power, cooling, equipment and networking value chain.",
     names: ["Vertiv", "Eaton", "Schneider", "Equinix", "Digital Realty", "Arista", "Broadcom"],
-    points: ["The value chain spans buildings, power systems, cooling, networking and equipment.", "REITs and proxies do not capture the full value chain.", "A selected equity basket can target parts of that value chain that the listed ETFs cover only partially."],
+    points: ["A selected equity basket can target parts of that value chain that the listed ETFs cover only partially."]
   },
   {
     theme: "Onshoring / reindustrialisation",
@@ -493,7 +713,7 @@ const SATELLITES = [
     implementation: "Basket",
     reading: "Broad industrial funds include businesses with varying exposure to domestic manufacturing investment.",
     names: ["Rockwell", "Emerson", "Honeywell", "Caterpillar", "Nucor", "Union Pacific"],
-    points: ["Automation, transport, steel and capital-goods companies participate in different stages of the investment cycle.", "Existing index weights need not match the businesses that receive future manufacturing investment.", "A selected basket can target particular activities, with greater dependence on company selection."],
+    points: ["Automation, transport, steel and capital-goods companies participate in different stages of the investment cycle.", "Existing index weights need not match the businesses that receive future manufacturing investment.", "A selected basket can target particular activities, with greater dependence on company selection."]
   },
   {
     theme: "Quantum / frontier computing",
@@ -507,8 +727,8 @@ const SATELLITES = [
     implementation: "Small basket",
     reading: "Commercial outcomes remain uncertain, and companies can follow very different development paths.",
     names: ["IBM", "IonQ", "Rigetti", "D-Wave", "Microsoft"],
-    points: ["Uncertain commercial timelines make position size and company-specific risk important considerations.", "The eventual commercial leaders are not yet established.", "An ETF may include companies with little exposure to the actual driver."],
-  },
+    points: ["An ETF may include companies with little exposure to the actual driver."]
+  }
 ];
 
 function SatelliteIcon({ type }) {
@@ -630,8 +850,8 @@ function SatelliteModule({ initialTheme = "Semiconductors / AI hardware" } = {})
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Alternative"), React.createElement("strong", null, active.implementation)),
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "ETF quality"), React.createElement("strong", null, active.quality))
       ),
-      React.createElement("p", null, active.reading),
-      React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+      active.reading ? React.createElement("p", null, active.reading) : null,
+      active.theme === "Direct China" ? React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))) : React.createElement("p", null, active.points.join(" ")),
       active.extraCompanies
         ? React.createElement(
             "div",
@@ -658,7 +878,7 @@ const EUROPE_THEMES = [
     why: "Demand is linked to defence spending, NATO commitments and efforts to strengthen military capabilities.",
     thesis: "European defence exposure is spread across countries and contractors whose revenues depend on different procurement programmes.",
     names: ["Rheinmetall", "BAE Systems", "Leonardo", "Saab", "Thales", "Dassault Aviation", "Airbus", "Safran", "Rolls-Royce", "Hensoldt", "Kongsberg", "Indra"],
-    points: ["Military spending has become a priority.", "A broad ETF dilutes defence exposure.", "A selected equity basket can focus on national defence contractors and their specific business activities."],
+    points: ["A broad ETF dilutes defence exposure.", "A selected equity basket can focus on national defence contractors and their specific business activities."]
   },
   {
     theme: "Digital sovereignty",
@@ -672,7 +892,7 @@ const EUROPE_THEMES = [
     why: "The theme covers local cloud services, telecommunications, software, cybersecurity and data infrastructure.",
     thesis: "The theme examines European control over digital infrastructure, software and security, including the role of regulation and local providers.",
     names: ["SAP", "OVHcloud", "Deutsche Telekom", "Orange", "Telefónica", "Capgemini", "Dassault Systèmes", "Sopra Steria", "Thales", "Schneider", "Siemens", "Legrand"],
-    points: ["The theme centres on control over data and digital infrastructure rather than an assumption of rapid revenue growth.", "Regulatory requirements influence demand for local infrastructure, software and security services.", "Holding several companies spreads company-specific exposure, although it does not remove sector risk."],
+    points: ["The theme centres on control over data and digital infrastructure rather than an assumption of rapid revenue growth.", "Regulatory requirements influence demand for local infrastructure, software and security services.", "Holding several companies spreads company-specific exposure, although it does not remove sector risk."]
   },
   {
     theme: "Luxury / indirect China",
@@ -686,7 +906,7 @@ const EUROPE_THEMES = [
     why: "Luxury businesses connect brand pricing power with demand from consumers in Asia and other markets.",
     thesis: "European luxury companies differ in brand strength, product mix and customer exposure. A sector ETF combines these businesses, while a selected basket focuses on particular brands.",
     names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "Kering", "L’Oréal", "EssilorLuxottica", "Pernod Ricard"],
-    points: ["LUXU/GLUX provide straightforward exposure.", "A sector ETF combines many brands, while a selected equity basket can focus on particular businesses.", "Selecting individual holdings changes the mix of brands and increases the importance of company analysis."],
+    points: ["Selecting individual holdings changes the mix of brands and increases the importance of company analysis."]
   },
   {
     theme: "Pharma / healthcare",
@@ -700,7 +920,7 @@ const EUROPE_THEMES = [
     why: "The theme combines relatively stable healthcare demand with research-driven products and revenue from multiple markets.",
     thesis: "European pharma combines research, global scale and lower dependence on the economic cycle.",
     names: ["Novo Nordisk", "Roche", "Novartis", "AstraZeneca", "Sanofi", "GSK", "Merck KGaA", "Lonza", "Genmab", "UCB"],
-    points: ["Many of these companies earn revenue across several geographic markets.", "Demand for healthcare is generally less dependent on discretionary consumer spending.", "These characteristics can reduce cyclicality, although company-specific and regulatory risks remain."],
+    points: ["These characteristics can reduce cyclicality, although company-specific and regulatory risks remain."]
   },
   {
     theme: "Electrification / industrials",
@@ -714,7 +934,7 @@ const EUROPE_THEMES = [
     why: "The theme focuses on companies that supply grids, industrial automation and electrical equipment.",
     thesis: "Europe has leaders in electrical equipment, automation and critical components for infrastructure, AI and data centres.",
     names: ["Schneider Electric", "Siemens", "ABB", "Legrand", "Prysmian", "Assa Abloy", "Atlas Copco", "Sandvik", "Infineon", "STMicroelectronics", "ASML"],
-    points: ["These businesses supply infrastructure and equipment used in energy systems and data centres.", "A broad industrial ETF includes businesses with different levels of exposure to electrification.", "A selected basket can focus specifically on equipment and automation suppliers."],
+    points: ["A broad industrial ETF includes businesses with different levels of exposure to electrification.", "A selected basket can focus specifically on equipment and automation suppliers."]
   },
   {
     theme: "European semiconductors",
@@ -728,8 +948,8 @@ const EUROPE_THEMES = [
     why: "The theme covers semiconductor equipment and specialist chip businesses, including power semiconductors.",
     thesis: "Europe does not dominate the entire chain, but it controls critical elements in equipment, analogue and power semiconductors.",
     names: ["ASML", "Infineon", "STMicroelectronics", "ASM International", "BE Semiconductor", "Soitec"],
-    points: ["ASML provides specialised exposure to semiconductor manufacturing equipment.", "A small number of companies account for much of the exposure to this theme.", "A selected equity basket can focus on these companies instead of including unrelated businesses."],
-  },
+    points: ["ASML provides specialised exposure to semiconductor manufacturing equipment.", "A small number of companies account for much of the exposure to this theme.", "A selected equity basket can focus on these companies instead of including unrelated businesses."]
+  }
 ];
 
 function EuropeModule({ initialTheme = "European defence" } = {}) {
@@ -783,7 +1003,7 @@ function EuropeModule({ initialTheme = "European defence" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "First layer"), React.createElement("strong", null, active.etfs))
       ),
       React.createElement("p", null, active.thesis),
-      React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+      active.theme === "Direct China" ? React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))) : React.createElement("p", null, active.points.join(" ")),
       React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Examples"), React.createElement("strong", null, active.names.join(" · "))),
       React.createElement("p", { className: "data-note" }, "Source: ETF examples and proxies, June 2026. Non-exhaustive list.")
     )
@@ -817,9 +1037,9 @@ const CHINA_CHANNELS = [
     instruments: "MCHI, FXI, KWEB, ASHR, KBA",
     captures: "The funds provide different combinations of Chinese equities, including internet companies and onshore A-shares.",
     risk: "Risks include corporate governance, state intervention, geopolitical developments, variable-interest-entity structures and deflationary pressure.",
-    reading: "These ETFs cover different segments of Chinese equities. Broad-market, internet and onshore A-share funds have different holdings and risks.",
+    reading: "",
     points: ["MCHI provides broad China exposure.", "FXI concentrates on large caps and Hong Kong.", "KWEB provides exposure to Chinese internet companies.", "ASHR/KBA provide exposure to onshore A-shares."],
-    names: ["Alibaba", "Tencent", "PDD", "Baidu", "A-shares", "large caps Hong Kong"],
+    names: ["Alibaba", "Tencent", "PDD", "Baidu", "A-shares", "large caps Hong Kong"]
   },
   {
     theme: "Indirect China — luxury",
@@ -832,7 +1052,7 @@ const CHINA_CHANNELS = [
     risk: "The Chinese consumption cycle, tourism, confidence and slowing income growth.",
     reading: "Global luxury companies provide indirect exposure to Asian consumers while retaining company-specific, valuation and demand risks.",
     points: ["The theme focuses on global brands whose profitability depends partly on pricing power.", "The holdings provide indirect exposure to Chinese demand, with different legal and political risks from Chinese-listed companies.", "A luxury-sector ETF provides broad exposure, while a selected basket can focus on specific brands."],
-    names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "L'Oréal", "EssilorLuxottica"],
+    names: ["LVMH", "Hermès", "Ferrari", "Richemont", "Moncler", "Prada", "L'Oréal", "EssilorLuxottica"]
   },
   {
     theme: "Indirect China — commodities",
@@ -843,9 +1063,9 @@ const CHINA_CHANNELS = [
     instruments: "BHP, Rio Tinto, Freeport, Glencore, Vale, COPX, PICK",
     captures: "The holdings are exposed to Chinese demand for industrial materials and infrastructure inputs.",
     risk: "Returns depend on industrial activity, construction demand, government stimulus and changes in commodity prices.",
-    reading: "Here China appears as a physical buyer rather than an equity market.",
-    points: ["The link to China comes through demand for physical resources and its effect on producer earnings.", "Demand and company earnings can respond strongly to the industrial cycle and government stimulus.", "The exposure comes through commodity demand rather than direct ownership of Chinese equities."],
-    names: ["BHP", "Rio Tinto", "Freeport-McMoRan", "Glencore", "Vale", "COPX", "PICK"],
+    reading: "",
+    points: ["Producer earnings also depend on operating costs and company execution, so these equity funds differ from direct commodity exposure."],
+    names: ["BHP", "Rio Tinto", "Freeport-McMoRan", "Glencore", "Vale", "COPX", "PICK"]
   },
   {
     theme: "Indirect China — technology",
@@ -858,7 +1078,7 @@ const CHINA_CHANNELS = [
     risk: "Sanctions, export controls and tensions involving Taiwan can affect sales and supply-chain access.",
     reading: "The theme combines technology demand with substantial exposure to export policy and geopolitical developments.",
     points: ["The theme focuses on specialised semiconductor and equipment suppliers within the technology value chain.", "Company revenues also depend on business investment and demand from other markets.", "Export controls can change the thesis quickly."],
-    names: ["ASML", "TSMC", "Applied Materials", "Lam Research", "KLA", "Nvidia", "Broadcom"],
+    names: ["ASML", "TSMC", "Applied Materials", "Lam Research", "KLA", "Nvidia", "Broadcom"]
   },
   {
     theme: "China+1",
@@ -869,9 +1089,9 @@ const CHINA_CHANNELS = [
     instruments: "INDA, FLIN, EWW, VNM, EWT, EWY",
     captures: "The theme examines countries that participate in supply-chain diversification and the relocation of production.",
     risk: "Outcomes depend on valuations and on each country’s infrastructure, execution and institutional capacity.",
-    reading: "China+1 describes the diversification of production across additional countries to reduce dependence on a single supply chain.",
+    reading: "",
     points: ["India combines a domestic market, services and demographic scale.", "Mexico is exposed to manufacturing investment linked to proximity to the US market.", "Vietnam and other Southeast Asian economies participate in the diversification of manufacturing locations."],
-    names: ["India", "Mexico", "Vietnam", "Indonesia", "Taiwan", "South Korea"],
+    names: ["India", "Mexico", "Vietnam", "Indonesia", "Taiwan", "South Korea"]
   },
   {
     theme: "EM ex-China",
@@ -882,10 +1102,10 @@ const CHINA_CHANNELS = [
     instruments: "EMXC / EXCH",
     captures: "The funds provide emerging-market equity exposure while excluding direct Chinese equity holdings.",
     risk: "The funds do not directly participate in Chinese equity gains and may not isolate particular supply-chain themes.",
-    reading: "A structural way to reduce China risk without abandoning emerging markets.",
-    points: ["The allocation excludes direct Chinese equity holdings but retains indirect economic links to China.", "It changes the sources of geopolitical exposure rather than eliminating them.", "The principal distinction is the long-term country mix of the emerging-market allocation."],
-    names: ["India", "Taiwan", "South Korea", "Brazil", "Mexico", "Southeast Asia"],
-  },
+    reading: "",
+    points: ["The remaining holdings retain economic links with China. Excluding Chinese equities changes geopolitical exposure rather than eliminating it."],
+    names: ["India", "Taiwan", "South Korea", "Brazil", "Mexico", "Southeast Asia"]
+  }
 ];
 
 function ChinaModule({ initialTheme = "Direct China" } = {}) {
@@ -970,8 +1190,8 @@ function ChinaModule({ initialTheme = "Direct China" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Exposure captured"), React.createElement("strong", null, active.captures)),
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Main risk"), React.createElement("strong", null, active.risk))
       ),
-      React.createElement("p", null, active.reading),
-      React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))),
+      active.reading ? React.createElement("p", null, active.reading) : null,
+      active.theme === "Direct China" ? React.createElement("ul", { className: "satellite-list" }, active.points.map((point) => React.createElement("li", { key: point }, point))) : React.createElement("p", null, active.points.join(" ")),
       React.createElement("div", { className: "detail-box proxy-box" }, React.createElement("span", null, "Examples"), React.createElement("strong", null, active.names.join(" · "))),
       React.createElement("p", { className: "data-note" }, "Source: channel and instrument examples, June 2026. Holdings should be checked with the provider.")
     )
@@ -999,7 +1219,7 @@ const HEDGE_STRATEGIES = [
     use: "These exposures are used to diversify currency and macroeconomic risks, with results that depend on the nature of the shock.",
     limit: "Not a perfect hedge against equity declines; it may remain flat in a bull market.",
     reading: "For a portfolio measured in Brazilian reais, dollar exposure changes currency risk. Swiss-franc and gold positions add different monetary exposures, without guaranteeing protection in every crisis.",
-    examples: ["GLD provides gold exposure through a trust backed by physical bullion.", "IAU also provides physical-gold exposure, with a different cost and trading profile from GLD.", "FXF provides exposure to the Swiss franc relative to the US dollar."],
+    examples: ["GLD provides gold exposure through a trust backed by physical bullion.", "IAU also provides physical-gold exposure, with a different cost and trading profile from GLD.", "FXF provides exposure to the Swiss franc relative to the US dollar."]
   },
   {
     theme: "Option income",
@@ -1010,8 +1230,8 @@ const HEDGE_STRATEGIES = [
     does: "Sells calls to convert part of the expected upside into current income.",
     use: "The strategy prioritises distributions from option premiums while retaining exposure to equity-market movements.",
     limit: "Equity losses remain possible, and sold calls can limit participation in strong market rallies.",
-    reading: "Option premiums contribute to current distributions, while sold calls limit participation in some market gains.",
-    examples: ["JEPI: defensive equity + options", "JEPQ: Nasdaq/growth + options", "XYLD: S&P 500 covered call", "QYLD: Nasdaq 100 covered call"],
+    reading: "",
+    examples: ["JEPI: defensive equity + options", "JEPQ: Nasdaq/growth + options", "XYLD: S&P 500 covered call", "QYLD: Nasdaq 100 covered call"]
   },
   {
     theme: "Defensive equity / min-vol",
@@ -1022,8 +1242,8 @@ const HEDGE_STRATEGIES = [
     does: "Replaces aggressive equity exposure with a basket that has historically been less volatile.",
     use: "The strategy seeks lower equity volatility while keeping the portfolio invested in stocks.",
     limit: "It can still decline during a crisis and may lag in a concentrated bull market.",
-    reading: "The portfolio remains invested in equities, with a construction method intended to reduce volatility.",
-    examples: ["USMV: US minimum volatility", "SPLV: low volatility within the S&P 500", "MVOL / UCITS: global or regional versions"],
+    reading: "",
+    examples: ["USMV: US minimum volatility", "SPLV: low volatility within the S&P 500", "MVOL / UCITS: global or regional versions"]
   },
   {
     theme: "Volatility / VIX",
@@ -1035,11 +1255,7 @@ const HEDGE_STRATEGIES = [
     use: "Tactical exposure to volatility futures around market stress or specific events; protection is not guaranteed.",
     limit: "Contango can erode returns through contract rolling. UVXY adds daily leverage and compounding risk; VXX adds Barclays issuer credit risk.",
     reading: "These products reference first- and second-month VIX futures with a weighted average maturity of approximately one month. They do not directly track the spot VIX or provide a fixed inverse return to equities.",
-    examples: [
-      "VIXY — ProShares VIX Short-Term Futures ETF: unleveraged (1x) exposure to the S&P 500 VIX Short-Term Futures Index, before fees and expenses.",
-      "VXX — iPath Series B S&P 500 VIX Short-Term Futures ETN: unleveraged exposure linked to the S&P 500 VIX Short-Term Futures Index Total Return, less applicable fees. An unsecured debt obligation of Barclays Bank PLC, subject to issuer credit risk.",
-      "UVXY — ProShares Ultra VIX Short-Term Futures ETF: targets 1.5x the DAILY return of the S&P 500 VIX Short-Term Futures Index, before fees and expenses. The target resets daily; returns over longer periods can differ significantly from 1.5x the index return.",
-    ],
+    examples: ["VIXY — ProShares VIX Short-Term Futures ETF: unleveraged (1x) exposure to the S&P 500 VIX Short-Term Futures Index, before fees and expenses.", "VXX — iPath Series B S&P 500 VIX Short-Term Futures ETN: unleveraged exposure linked to the S&P 500 VIX Short-Term Futures Index Total Return, less applicable fees. An unsecured debt obligation of Barclays Bank PLC, subject to issuer credit risk.", "UVXY — ProShares Ultra VIX Short-Term Futures ETF: targets 1.5x the DAILY return of the S&P 500 VIX Short-Term Futures Index, before fees and expenses. The target resets daily; returns over longer periods can differ significantly from 1.5x the index return."]
   },
   {
     theme: "Tactical directional hedge",
@@ -1050,8 +1266,8 @@ const HEDGE_STRATEGIES = [
     does: "These funds target an inverse multiple of an index’s daily return, before fees and expenses.",
     use: "An inverse position can offset some short-term market exposure while the original holdings remain in place.",
     limit: "Daily compounding means returns over several days can differ substantially from the stated inverse multiple of the index’s cumulative return.",
-    reading: "The return target applies to a single day; compounding can change the result over longer holding periods.",
-    examples: ["SH: -1x S&P 500", "PSQ: -1x Nasdaq-100", "RWM: -1x small caps", "EUM: -1x emerging markets", "SDS / QID / SQQQ / SPXU: leveraged"],
+    reading: "",
+    examples: ["SH: -1x S&P 500", "PSQ: -1x Nasdaq-100", "RWM: -1x small caps", "EUM: -1x emerging markets", "SDS / QID / SQQQ / SPXU: leveraged"]
   },
   {
     theme: "Buffered / defined outcome",
@@ -1063,7 +1279,7 @@ const HEDGE_STRATEGIES = [
     use: "The structure exchanges some potential upside for a defined range of downside protection.",
     limit: "The effective protection depends on the outcome period, the buffer and cap, and the price and date at which shares are bought.",
     reading: "The buffer covers a defined range of losses over a specified outcome period; losses beyond that range remain possible.",
-    examples: ["Innovator Buffer ETFs: series such as BJAN/BJUN/BJUL", "FT Vest Buffer ETFs: families such as FJAN/FJUN/FJUL", "AllianzIM Buffered Outcome ETFs: defined buffers and caps", "Collars/put spreads: structures rather than ready-made ETFs"],
+    examples: ["Innovator Buffer ETFs: series such as BJAN/BJUN/BJUL", "FT Vest Buffer ETFs: families such as FJAN/FJUN/FJUL", "AllianzIM Buffered Outcome ETFs: defined buffers and caps", "Collars/put spreads: structures rather than ready-made ETFs"]
   },
   {
     theme: "Deconcentration",
@@ -1074,8 +1290,8 @@ const HEDGE_STRATEGIES = [
     does: "Reduces dependence on mega-caps and narrow market leadership.",
     use: "The approach changes the portfolio weights when exposure is dominated by a small number of companies.",
     limit: "It does not usually mitigate a broad market decline.",
-    reading: "Reducing the weight of the largest companies changes concentration but does not provide direct protection against a broad market decline.",
-    examples: ["RSP: S&P 500 equal weight", "EQWL: S&P 100 equal weight", "QQEW: Nasdaq 100 equal weight", "USMV: min-vol with a defensive bias"],
+    reading: "",
+    examples: ["RSP: S&P 500 equal weight", "EQWL: S&P 100 equal weight", "QQEW: Nasdaq 100 equal weight", "USMV: min-vol with a defensive bias"]
   },
   {
     theme: "Direct index options",
@@ -1086,9 +1302,9 @@ const HEDGE_STRATEGIES = [
     does: "The chosen options structure determines the range of downside protection, its expiry and the remaining upside participation.",
     use: "Options on SPY, QQQ or liquid indices allow the protection range and expiry to be selected explicitly.",
     limit: "Protection involves a premium, a limit on potential gains, a limit on loss coverage, or a combination of these trade-offs.",
-    reading: "The strike prices, expiry dates and option premiums determine the range and cost of protection.",
-    examples: ["A protective put establishes protection below its strike price until expiry, in exchange for the premium paid.", "A put spread limits protection to the interval between two strike prices.", "A collar combines a purchased put with a sold call, limiting both downside exposure and upside participation over its term.", "Selling a call can help finance a put spread, while capping upside and keeping downside protection limited to the spread."],
-  },
+    reading: "",
+    examples: ["A protective put establishes protection below its strike price until expiry, in exchange for the premium paid.", "A put spread limits protection to the interval between two strike prices.", "A collar combines a purchased put with a sold call, limiting both downside exposure and upside participation over its term.", "Selling a call can help finance a put spread, while capping upside and keeping downside protection limited to the spread."]
+  }
 ];
 
 function HedgeModule({ initialTheme = "Option income" } = {}) {
@@ -1174,7 +1390,7 @@ function HedgeModule({ initialTheme = "Option income" } = {}) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Typical use"), React.createElement("strong", null, active.use)),
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitation"), React.createElement("strong", null, active.limit))
       ),
-      React.createElement("p", null, active.reading),
+      active.reading ? React.createElement("p", null, active.reading) : null,
       React.createElement("ul", { className: "satellite-list" }, active.examples.map((point) => React.createElement("li", { key: point }, point))),
       React.createElement("p", { className: "data-note" }, "Source: liquid instruments and common structures, June 2026. Tactical products require checks of term, liquidity, cost and daily reset rules.")
     )
@@ -1183,154 +1399,154 @@ function HedgeModule({ initialTheme = "Option income" } = {}) {
 
 // Trading listings verified against Yahoo Finance chart metadata on 14/09/2026.
 const ETF_TRADING_LISTINGS = {
-  "SPY": ["SPY", "NYSE Arca", "USD"],
-  "VOO": ["VOO", "NYSE Arca", "USD"],
-  "QQQ": ["QQQ", "Nasdaq", "USD"],
-  "RSP": ["RSP", "NYSE Arca", "USD"],
-  "EQWL": ["EQWL", "NYSE Arca", "USD"],
-  "SMH": ["SMH", "Nasdaq", "USD"],
-  "SOXX": ["SOXX", "Nasdaq", "USD"],
-  "CIBR": ["CIBR", "Nasdaq", "USD"],
-  "ITA": ["ITA", "Cboe US", "USD"],
-  "GLD": ["GLD", "NYSE Arca", "USD"],
-  "XLK": ["XLK", "NYSE Arca", "USD"],
-  "IUIT": ["IUIT.L", "London Stock Exchange", "USD"],
-  "XLC": ["XLC", "NYSE Arca", "USD"],
-  "IUCM": ["IUCM.L", "London Stock Exchange", "USD"],
-  "XLY": ["XLY", "NYSE Arca", "USD"],
-  "IUCD": ["IUCD.L", "London Stock Exchange", "USD"],
-  "XLV": ["XLV", "NYSE Arca", "USD"],
-  "IUHC": ["IUHC.L", "London Stock Exchange", "USD"],
-  "XLF": ["XLF", "NYSE Arca", "USD"],
-  "IUFS": ["IUFS.L", "London Stock Exchange", "USD"],
-  "XLI": ["XLI", "NYSE Arca", "USD"],
-  "IUIS": ["IUIS.L", "London Stock Exchange", "USD"],
-  "XLE": ["XLE", "NYSE Arca", "USD"],
-  "IUES": ["IUES.L", "London Stock Exchange", "USD"],
-  "XLP": ["XLP", "NYSE Arca", "USD"],
-  "IUCS": ["IUCS.L", "London Stock Exchange", "USD"],
-  "XLU": ["XLU", "NYSE Arca", "USD"],
-  "IUUS": ["IUUS.L", "London Stock Exchange", "USD"],
-  "XLB": ["XLB", "NYSE Arca", "USD"],
-  "IUMS": ["IUMS.L", "London Stock Exchange", "USD"],
-  "XLRE": ["XLRE", "NYSE Arca", "USD"],
-  "VEA": ["VEA", "NYSE Arca", "USD"],
-  "IEFA": ["IEFA", "Cboe US", "USD"],
-  "IWDA": ["IWDA.L", "London Stock Exchange", "USD"],
-  "SWDA": ["SWDA.L", "London Stock Exchange", "GBp"],
-  "VGK": ["VGK", "NYSE Arca", "USD"],
-  "IEUR": ["IEUR", "NYSE Arca", "USD"],
-  "FEZ": ["FEZ", "NYSE Arca", "USD"],
-  "IMEU": ["IMEU.L", "London Stock Exchange", "GBp"],
-  "VWO": ["VWO", "NYSE Arca", "USD"],
-  "IEMG": ["IEMG", "NYSE Arca", "USD"],
-  "EIMI": ["EIMI.L", "London Stock Exchange", "USD"],
-  "EMXC": ["EMXC", "Nasdaq", "USD"],
-  "EXCH": ["EXCH.AS", "Euronext Amsterdam", "USD"],
-  "LUXU": ["LUXU.PA", "Euronext Paris", "USD"],
-  "IB01": ["IB01.L", "London Stock Exchange", "USD"],
-  "CSPX": ["CSPX.L", "London Stock Exchange", "USD"],
-  "VUAA": ["VUAA.L", "London Stock Exchange", "USD"],
-  "QQQM": ["QQQM", "Nasdaq", "USD"],
-  "CNDX": ["CNDX.L", "London Stock Exchange", "USD"],
-  "EQQQ": ["EQQQ.L", "London Stock Exchange", "GBp"],
-  "IAU": ["IAU", "NYSE Arca", "USD"],
-  "FXF": ["FXF", "NYSE Arca", "USD"],
-  "IBTA": ["IBTA.L", "London Stock Exchange", "USD"],
-  "CBU7": ["CBU7.L", "London Stock Exchange", "USD"],
-  "IB7A": ["IB7A.AS", "Euronext Amsterdam", "USD"],
-  "DTLA": ["DTLA.L", "London Stock Exchange", "USD"],
-  "TIP5": ["TIP5.L", "London Stock Exchange", "USD"],
-  "IDTP": ["IDTP.L", "London Stock Exchange", "USD"],
-  "TI5A": ["TI5A.AS", "Euronext Amsterdam", "USD"],
-  "LQDA": ["LQDA.L", "London Stock Exchange", "USD"],
-  "IHYA": ["IHYA.L", "London Stock Exchange", "USD"],
-  "AGGU": ["AGGU.L", "London Stock Exchange", "USD"],
-  "SGOV": ["SGOV", "New York Stock Exchange", "USD"],
-  "SHY": ["SHY", "Nasdaq", "USD"],
-  "IEI": ["IEI", "Nasdaq", "USD"],
-  "IEF": ["IEF", "Nasdaq", "USD"],
-  "TLT": ["TLT", "Nasdaq", "USD"],
-  "STIP": ["STIP", "NYSE Arca", "USD"],
-  "TIP": ["TIP", "NYSE Arca", "USD"],
-  "LQD": ["LQD", "NYSE Arca", "USD"],
-  "HYG": ["HYG", "NYSE Arca", "USD"],
-  "AGG": ["AGG", "NYSE Arca", "USD"],
-  "PPA": ["PPA", "NYSE Arca", "USD"],
-  "HACK": ["HACK", "NYSE Arca", "USD"],
-  "BOTZ": ["BOTZ", "Nasdaq", "USD"],
-  "ROBO": ["ROBO", "NYSE Arca", "USD"],
-  "GRID": ["GRID", "Nasdaq", "USD"],
-  "PAVE": ["PAVE", "Cboe US", "USD"],
-  "ITB": ["ITB", "Cboe US", "USD"],
-  "XHB": ["XHB", "NYSE Arca", "USD"],
-  "PKB": ["PKB", "NYSE Arca", "USD"],
-  "SRVR": ["SRVR", "NYSE Arca", "USD"],
-  "VPN": ["VPN", "Nasdaq", "USD"],
-  "AIRR": ["AIRR", "Nasdaq", "USD"],
-  "QTUM": ["QTUM", "Nasdaq", "USD"],
-  "GLUX": ["GLUX.PA", "Euronext Paris", "EUR"],
-  "EXV4": ["EXV4.DE", "Xetra", "EUR"],
-  "XDWH": ["XDWH.DE", "Xetra", "EUR"],
-  "MCHI": ["MCHI", "Nasdaq", "USD"],
-  "FXI": ["FXI", "NYSE Arca", "USD"],
-  "KWEB": ["KWEB", "NYSE Arca", "USD"],
-  "ASHR": ["ASHR", "NYSE Arca", "USD"],
-  "KBA": ["KBA", "NYSE Arca", "USD"],
-  "COPX": ["COPX", "NYSE Arca", "USD"],
-  "PICK": ["PICK", "Cboe US", "USD"],
-  "INDA": ["INDA", "Cboe US", "USD"],
-  "FLIN": ["FLIN", "NYSE Arca", "USD"],
-  "EWW": ["EWW", "NYSE Arca", "USD"],
-  "VNM": ["VNM", "Cboe US", "USD"],
-  "EWT": ["EWT", "NYSE Arca", "USD"],
-  "EWY": ["EWY", "NYSE Arca", "USD"],
-  "JEPI": ["JEPI", "NYSE Arca", "USD"],
-  "JEPQ": ["JEPQ", "Nasdaq", "USD"],
-  "XYLD": ["XYLD", "NYSE Arca", "USD"],
-  "QYLD": ["QYLD", "Nasdaq", "USD"],
-  "USMV": ["USMV", "Cboe US", "USD"],
-  "SPLV": ["SPLV", "NYSE Arca", "USD"],
-  "VIXY": ["VIXY", "Cboe US", "USD"],
-  "VXX": ["VXX", "Cboe US", "USD"],
-  "UVXY": ["UVXY", "Cboe US", "USD"],
-  "SH": ["SH", "NYSE Arca", "USD"],
-  "PSQ": ["PSQ", "NYSE Arca", "USD"],
-  "RWM": ["RWM", "NYSE Arca", "USD"],
-  "EUM": ["EUM", "NYSE Arca", "USD"],
-  "SDS": ["SDS", "NYSE Arca", "USD"],
-  "QID": ["QID", "NYSE Arca", "USD"],
-  "SQQQ": ["SQQQ", "Nasdaq", "USD"],
-  "SPXU": ["SPXU", "NYSE Arca", "USD"],
-  "QQEW": ["QQEW", "Nasdaq", "USD"],
-  "GLDM": ["GLDM", "NYSE Arca", "USD"],
-  "SIVR": ["SIVR", "NYSE Arca", "USD"],
-  "SLV": ["SLV", "NYSE Arca", "USD"],
-  "PPLT": ["PPLT", "NYSE Arca", "USD"],
-  "PALL": ["PALL", "NYSE Arca", "USD"],
-  "USO": ["USO", "NYSE Arca", "USD"],
-  "BNO": ["BNO", "NYSE Arca", "USD"],
-  "UNG": ["UNG", "NYSE Arca", "USD"],
-  "CPER": ["CPER", "NYSE Arca", "USD"],
-  "DBA": ["DBA", "NYSE Arca", "USD"],
-  "CORN": ["CORN", "NYSE Arca", "USD"],
-  "WEAT": ["WEAT", "NYSE Arca", "USD"],
-  "SOYB": ["SOYB", "NYSE Arca", "USD"],
-  "CATL": ["CATL.L", "London Stock Exchange", "USD"],
-  "PDBC": ["PDBC", "Nasdaq", "USD"],
-  "COMT": ["COMT", "Nasdaq", "USD"],
-  "MOO": ["MOO", "NYSE Arca", "USD"],
-  "GDX": ["GDX", "NYSE Arca", "USD"],
-  "GDXJ": ["GDXJ", "NYSE Arca", "USD"],
-  "SIL": ["SIL", "NYSE Arca", "USD"],
-  "SILJ": ["SILJ", "NYSE Arca", "USD"],
-  "VDE": ["VDE", "NYSE Arca", "USD"],
-  "URA": ["URA", "NYSE Arca", "USD"],
-  "URNM": ["URNM", "NYSE Arca", "USD"],
-  "LIT": ["LIT", "NYSE Arca", "USD"],
-  "REMX": ["REMX", "NYSE Arca", "USD"],
-  "WOOD": ["WOOD", "Nasdaq", "USD"],
-  "PHO": ["PHO", "Nasdaq", "USD"],
+  SPY: ["SPY", "NYSE Arca", "USD"],
+  VOO: ["VOO", "NYSE Arca", "USD"],
+  QQQ: ["QQQ", "Nasdaq", "USD"],
+  RSP: ["RSP", "NYSE Arca", "USD"],
+  EQWL: ["EQWL", "NYSE Arca", "USD"],
+  SMH: ["SMH", "Nasdaq", "USD"],
+  SOXX: ["SOXX", "Nasdaq", "USD"],
+  CIBR: ["CIBR", "Nasdaq", "USD"],
+  ITA: ["ITA", "Cboe US", "USD"],
+  GLD: ["GLD", "NYSE Arca", "USD"],
+  XLK: ["XLK", "NYSE Arca", "USD"],
+  IUIT: ["IUIT.L", "London Stock Exchange", "USD"],
+  XLC: ["XLC", "NYSE Arca", "USD"],
+  IUCM: ["IUCM.L", "London Stock Exchange", "USD"],
+  XLY: ["XLY", "NYSE Arca", "USD"],
+  IUCD: ["IUCD.L", "London Stock Exchange", "USD"],
+  XLV: ["XLV", "NYSE Arca", "USD"],
+  IUHC: ["IUHC.L", "London Stock Exchange", "USD"],
+  XLF: ["XLF", "NYSE Arca", "USD"],
+  IUFS: ["IUFS.L", "London Stock Exchange", "USD"],
+  XLI: ["XLI", "NYSE Arca", "USD"],
+  IUIS: ["IUIS.L", "London Stock Exchange", "USD"],
+  XLE: ["XLE", "NYSE Arca", "USD"],
+  IUES: ["IUES.L", "London Stock Exchange", "USD"],
+  XLP: ["XLP", "NYSE Arca", "USD"],
+  IUCS: ["IUCS.L", "London Stock Exchange", "USD"],
+  XLU: ["XLU", "NYSE Arca", "USD"],
+  IUUS: ["IUUS.L", "London Stock Exchange", "USD"],
+  XLB: ["XLB", "NYSE Arca", "USD"],
+  IUMS: ["IUMS.L", "London Stock Exchange", "USD"],
+  XLRE: ["XLRE", "NYSE Arca", "USD"],
+  VEA: ["VEA", "NYSE Arca", "USD"],
+  IEFA: ["IEFA", "Cboe US", "USD"],
+  IWDA: ["IWDA.L", "London Stock Exchange", "USD"],
+  SWDA: ["SWDA.L", "London Stock Exchange", "GBp"],
+  VGK: ["VGK", "NYSE Arca", "USD"],
+  IEUR: ["IEUR", "NYSE Arca", "USD"],
+  FEZ: ["FEZ", "NYSE Arca", "USD"],
+  IMEU: ["IMEU.L", "London Stock Exchange", "GBp"],
+  VWO: ["VWO", "NYSE Arca", "USD"],
+  IEMG: ["IEMG", "NYSE Arca", "USD"],
+  EIMI: ["EIMI.L", "London Stock Exchange", "USD"],
+  EMXC: ["EMXC", "Nasdaq", "USD"],
+  EXCH: ["EXCH.AS", "Euronext Amsterdam", "USD"],
+  LUXU: ["LUXU.PA", "Euronext Paris", "USD"],
+  IB01: ["IB01.L", "London Stock Exchange", "USD"],
+  CSPX: ["CSPX.L", "London Stock Exchange", "USD"],
+  VUAA: ["VUAA.L", "London Stock Exchange", "USD"],
+  QQQM: ["QQQM", "Nasdaq", "USD"],
+  CNDX: ["CNDX.L", "London Stock Exchange", "USD"],
+  EQQQ: ["EQQQ.L", "London Stock Exchange", "GBp"],
+  IAU: ["IAU", "NYSE Arca", "USD"],
+  FXF: ["FXF", "NYSE Arca", "USD"],
+  IBTA: ["IBTA.L", "London Stock Exchange", "USD"],
+  CBU7: ["CBU7.L", "London Stock Exchange", "USD"],
+  IB7A: ["IB7A.AS", "Euronext Amsterdam", "USD"],
+  DTLA: ["DTLA.L", "London Stock Exchange", "USD"],
+  TIP5: ["TIP5.L", "London Stock Exchange", "USD"],
+  IDTP: ["IDTP.L", "London Stock Exchange", "USD"],
+  TI5A: ["TI5A.AS", "Euronext Amsterdam", "USD"],
+  LQDA: ["LQDA.L", "London Stock Exchange", "USD"],
+  IHYA: ["IHYA.L", "London Stock Exchange", "USD"],
+  AGGU: ["AGGU.L", "London Stock Exchange", "USD"],
+  SGOV: ["SGOV", "New York Stock Exchange", "USD"],
+  SHY: ["SHY", "Nasdaq", "USD"],
+  IEI: ["IEI", "Nasdaq", "USD"],
+  IEF: ["IEF", "Nasdaq", "USD"],
+  TLT: ["TLT", "Nasdaq", "USD"],
+  STIP: ["STIP", "NYSE Arca", "USD"],
+  TIP: ["TIP", "NYSE Arca", "USD"],
+  LQD: ["LQD", "NYSE Arca", "USD"],
+  HYG: ["HYG", "NYSE Arca", "USD"],
+  AGG: ["AGG", "NYSE Arca", "USD"],
+  PPA: ["PPA", "NYSE Arca", "USD"],
+  HACK: ["HACK", "NYSE Arca", "USD"],
+  BOTZ: ["BOTZ", "Nasdaq", "USD"],
+  ROBO: ["ROBO", "NYSE Arca", "USD"],
+  GRID: ["GRID", "Nasdaq", "USD"],
+  PAVE: ["PAVE", "Cboe US", "USD"],
+  ITB: ["ITB", "Cboe US", "USD"],
+  XHB: ["XHB", "NYSE Arca", "USD"],
+  PKB: ["PKB", "NYSE Arca", "USD"],
+  SRVR: ["SRVR", "NYSE Arca", "USD"],
+  VPN: ["VPN", "Nasdaq", "USD"],
+  AIRR: ["AIRR", "Nasdaq", "USD"],
+  QTUM: ["QTUM", "Nasdaq", "USD"],
+  GLUX: ["GLUX.PA", "Euronext Paris", "EUR"],
+  EXV4: ["EXV4.DE", "Xetra", "EUR"],
+  XDWH: ["XDWH.DE", "Xetra", "EUR"],
+  MCHI: ["MCHI", "Nasdaq", "USD"],
+  FXI: ["FXI", "NYSE Arca", "USD"],
+  KWEB: ["KWEB", "NYSE Arca", "USD"],
+  ASHR: ["ASHR", "NYSE Arca", "USD"],
+  KBA: ["KBA", "NYSE Arca", "USD"],
+  COPX: ["COPX", "NYSE Arca", "USD"],
+  PICK: ["PICK", "Cboe US", "USD"],
+  INDA: ["INDA", "Cboe US", "USD"],
+  FLIN: ["FLIN", "NYSE Arca", "USD"],
+  EWW: ["EWW", "NYSE Arca", "USD"],
+  VNM: ["VNM", "Cboe US", "USD"],
+  EWT: ["EWT", "NYSE Arca", "USD"],
+  EWY: ["EWY", "NYSE Arca", "USD"],
+  JEPI: ["JEPI", "NYSE Arca", "USD"],
+  JEPQ: ["JEPQ", "Nasdaq", "USD"],
+  XYLD: ["XYLD", "NYSE Arca", "USD"],
+  QYLD: ["QYLD", "Nasdaq", "USD"],
+  USMV: ["USMV", "Cboe US", "USD"],
+  SPLV: ["SPLV", "NYSE Arca", "USD"],
+  VIXY: ["VIXY", "Cboe US", "USD"],
+  VXX: ["VXX", "Cboe US", "USD"],
+  UVXY: ["UVXY", "Cboe US", "USD"],
+  SH: ["SH", "NYSE Arca", "USD"],
+  PSQ: ["PSQ", "NYSE Arca", "USD"],
+  RWM: ["RWM", "NYSE Arca", "USD"],
+  EUM: ["EUM", "NYSE Arca", "USD"],
+  SDS: ["SDS", "NYSE Arca", "USD"],
+  QID: ["QID", "NYSE Arca", "USD"],
+  SQQQ: ["SQQQ", "Nasdaq", "USD"],
+  SPXU: ["SPXU", "NYSE Arca", "USD"],
+  QQEW: ["QQEW", "Nasdaq", "USD"],
+  GLDM: ["GLDM", "NYSE Arca", "USD"],
+  SIVR: ["SIVR", "NYSE Arca", "USD"],
+  SLV: ["SLV", "NYSE Arca", "USD"],
+  PPLT: ["PPLT", "NYSE Arca", "USD"],
+  PALL: ["PALL", "NYSE Arca", "USD"],
+  USO: ["USO", "NYSE Arca", "USD"],
+  BNO: ["BNO", "NYSE Arca", "USD"],
+  UNG: ["UNG", "NYSE Arca", "USD"],
+  CPER: ["CPER", "NYSE Arca", "USD"],
+  DBA: ["DBA", "NYSE Arca", "USD"],
+  CORN: ["CORN", "NYSE Arca", "USD"],
+  WEAT: ["WEAT", "NYSE Arca", "USD"],
+  SOYB: ["SOYB", "NYSE Arca", "USD"],
+  CATL: ["CATL.L", "London Stock Exchange", "USD"],
+  PDBC: ["PDBC", "Nasdaq", "USD"],
+  COMT: ["COMT", "Nasdaq", "USD"],
+  MOO: ["MOO", "NYSE Arca", "USD"],
+  GDX: ["GDX", "NYSE Arca", "USD"],
+  GDXJ: ["GDXJ", "NYSE Arca", "USD"],
+  SIL: ["SIL", "NYSE Arca", "USD"],
+  SILJ: ["SILJ", "NYSE Arca", "USD"],
+  VDE: ["VDE", "NYSE Arca", "USD"],
+  URA: ["URA", "NYSE Arca", "USD"],
+  URNM: ["URNM", "NYSE Arca", "USD"],
+  LIT: ["LIT", "NYSE Arca", "USD"],
+  REMX: ["REMX", "NYSE Arca", "USD"],
+  WOOD: ["WOOD", "Nasdaq", "USD"],
+  PHO: ["PHO", "Nasdaq", "USD"],
 };
 
 function EtfTradingDetails({ instruments }) {
@@ -1496,7 +1712,7 @@ function CoreModule({ functions = CORE_EQUITY_FUNCTIONS, initialEtf = "VOO", leg
               )
             )
           : null,
-        React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point)))
+        detail[3].length ? React.createElement("ul", { className: "core-detail-list" }, detail[3].map((point) => React.createElement("li", { key: point }, point))) : null
       )
     )
   );
@@ -1507,17 +1723,116 @@ function FixedIncomeModule({ dataLabTickers, initialEtf = "IB01" }) {
 }
 
 const SECTOR_GICS_ETFS = [
-  { tickers: ["XLK", "IUIT"], sector: "Information Technology", icon: "chip", tone: "sat-risk-high", role: "Growth / quality", why: "The sector covers software, semiconductors and technology infrastructure businesses.", limit: "Large holdings can dominate returns, and valuations are sensitive to changes in expected growth.", points: ["These funds isolate the information technology sector within the S&P 500.", "Large technology companies can account for a substantial share of the portfolio.", "Its returns can be compared with the broader index to examine the contribution of technology exposure."] },
-  { tickers: ["XLC", "IUCM"], sector: "Communication Services", icon: "phone", tone: "sat-risk-high", role: "Platforms / media", why: "The sector brings together digital platforms, media, streaming services and telecommunications.", limit: "Combines very different businesses and may be concentrated in a few names.", points: ["It captures communication-services businesses that sit outside the information technology sector.", "Company revenues depend on activities such as advertising, content subscriptions and distribution.", "The inclusion of telecoms does not make the whole portfolio defensive, because its other businesses have different risks."] },
-  { tickers: ["XLY", "IUCD"], sector: "Consumer Discretionary", icon: "diamond", tone: "sat-risk-high", role: "Cyclical consumption", why: "The sector includes e-commerce, automobiles and other businesses dependent on discretionary consumer spending.", limit: "Carries economic-cycle, consumer-confidence and concentration risks.", points: ["Demand depends partly on household confidence and the willingness to make discretionary purchases.", "The portfolio can include premium-consumption businesses and large retail platforms.", "Slower economic activity and higher financing costs can weigh on consumer demand."] },
-  { tickers: ["XLB", "IUMS"], sector: "Materials", icon: "factory", tone: "sat-risk-medium", role: "Cycle / commodities", why: "The sector covers chemicals, metals and other materials used in industrial production.", limit: "Closely linked to the global cycle, the US dollar and commodity demand.", points: ["Company earnings are influenced by industrial production and demand for materials.", "Its exposure differs from energy producers and industrial businesses, even though their cycles can overlap.", "These funds own company shares, so returns also reflect operating costs and equity-market conditions."] },
-  { tickers: ["XLE", "IUES"], sector: "Energy", icon: "oil", tone: "sat-risk-medium", role: "Traditional energy", why: "The sector includes oil and gas businesses whose earnings depend on energy markets and operating performance.", limit: "Sensitive to oil prices, geopolitics and CAPEX discipline.", points: ["Rising energy prices can support some producers, but their shares do not provide guaranteed protection against an energy shock.", "Shareholder returns can include distributions and the effects of company share repurchases.", "The portfolio primarily represents traditional energy businesses rather than a dedicated energy-transition strategy."] },
-  { tickers: ["XLF", "IUFS"], sector: "Financials", icon: "money", tone: "sat-risk-medium", role: "Rates / credit", why: "The sector includes banks, insurers, payment businesses, brokers and capital-market firms.", limit: "Depends on the yield curve, credit conditions and the default cycle.", points: ["The portfolio reflects several channels through which credit and financial activity affect company earnings.", "A steeper yield curve can support some financial businesses, although its effects differ across holdings.", "Risk rises when credit deteriorates."] },
-  { tickers: ["XLI", "IUIS"], sector: "Industrials", icon: "factory", tone: "sat-risk-medium", role: "Cycle / CAPEX", why: "The sector spans industrial production, transport, defence, machinery and infrastructure-related businesses.", limit: "A broad ETF dilutes specific theses such as defence or reindustrialisation.", points: ["Company revenues are linked to investment in equipment, construction and other physical assets.", "Some holdings participate in domestic manufacturing investment and infrastructure projects.", "A selected equity basket can narrow the exposure to a specific industry, while increasing company-selection risk."] },
-  { tickers: ["XLP", "IUCS"], sector: "Consumer Staples", icon: "home", tone: "sat-risk-defensive", role: "Defensive / essential consumption", why: "The sector includes food, beverages, household products and retailers focused on essential consumption.", limit: "May lag during a growth-led bull market.", points: ["Essential demand can make these businesses less cyclical than discretionary-consumption businesses.", "Essential-consumption businesses can have steadier demand, but their margins still depend on input costs and pricing.", "Margins depend on input costs and on how customers respond to price changes."] },
-  { tickers: ["XLV", "IUHC"], sector: "Health Care", icon: "pulse", tone: "sat-risk-defensive", role: "Defensive quality", why: "The sector includes pharmaceuticals, healthcare services, medical equipment and managed-care businesses.", limit: "Combines defensive characteristics with regulatory risk and innovation-pipeline risk.", points: ["Healthcare demand can be less cyclical, but profitability and business quality vary across companies.", "Demographics, research outcomes and operating scale influence the performance of the holdings.", "The broader healthcare portfolio does not isolate biotechnology or pharmaceutical exposure."] },
-  { tickers: ["XLRE"], sector: "Real Estate", icon: "home", tone: "sat-risk-defensive", role: "Listed real estate", why: "The sector provides exposure to real-estate investment trusts and other listed property businesses.", limit: "Sensitive to interest rates, credit, capitalisation rates and vacancy.", points: ["Investors obtain property-related exposure through shares traded on an exchange.", "Financing costs, property income and valuation changes are important drivers of listed real-estate returns.", "Listed property shares have liquidity and market-price characteristics that differ from directly held property."] },
-  { tickers: ["XLU", "IUUS"], sector: "Utilities", icon: "faucet", tone: "sat-risk-defensive", role: "Defensive / duration", why: "The sector covers utilities that provide electricity and other essential infrastructure services.", limit: "Sensitive to interest rates and regulation; it is not the same as a specific grid exposure.", points: ["Essential-service demand can be relatively stable, although utility shares remain exposed to market losses.", "Electrification and data-centre development can influence electricity demand and investment requirements.", "A utility ETF alone may not cover the equipment and engineering businesses involved in grid expansion."] },
+  {
+    tickers: ["XLK", "IUIT"],
+    sector: "Information Technology",
+    icon: "chip",
+    tone: "sat-risk-high",
+    role: "Growth / quality",
+    why: "The sector covers software, semiconductors and technology infrastructure businesses.",
+    limit: "Large holdings can dominate returns, and valuations are sensitive to changes in expected growth.",
+    points: ["These funds isolate the information technology sector within the S&P 500.", "Its returns can be compared with the broader index to examine the contribution of technology exposure."]
+  },
+  {
+    tickers: ["XLC", "IUCM"],
+    sector: "Communication Services",
+    icon: "phone",
+    tone: "sat-risk-high",
+    role: "Platforms / media",
+    why: "The sector brings together digital platforms, media, streaming services and telecommunications.",
+    limit: "Combines very different businesses and may be concentrated in a few names.",
+    points: ["It captures communication-services businesses that sit outside the information technology sector.", "Company revenues depend on activities such as advertising, content subscriptions and distribution.", "The inclusion of telecoms does not make the whole portfolio defensive, because its other businesses have different risks."]
+  },
+  {
+    tickers: ["XLY", "IUCD"],
+    sector: "Consumer Discretionary",
+    icon: "diamond",
+    tone: "sat-risk-high",
+    role: "Cyclical consumption",
+    why: "The sector includes e-commerce, automobiles and other businesses dependent on discretionary consumer spending.",
+    limit: "Carries economic-cycle, consumer-confidence and concentration risks.",
+    points: ["The portfolio can include premium-consumption businesses and large retail platforms.", "Slower economic activity and higher financing costs can weigh on consumer demand."]
+  },
+  {
+    tickers: ["XLB", "IUMS"],
+    sector: "Materials",
+    icon: "factory",
+    tone: "sat-risk-medium",
+    role: "Cycle / commodities",
+    why: "The sector covers chemicals, metals and other materials used in industrial production.",
+    limit: "Closely linked to the global cycle, the US dollar and commodity demand.",
+    points: ["Company earnings are influenced by industrial production and demand for materials.", "Its exposure differs from energy producers and industrial businesses, even though their cycles can overlap.", "These funds own company shares, so returns also reflect operating costs and equity-market conditions."]
+  },
+  {
+    tickers: ["XLE", "IUES"],
+    sector: "Energy",
+    icon: "oil",
+    tone: "sat-risk-medium",
+    role: "Traditional energy",
+    why: "The sector includes oil and gas businesses whose earnings depend on energy markets and operating performance.",
+    limit: "Sensitive to oil prices, geopolitics and CAPEX discipline.",
+    points: ["Rising energy prices can support some producers, but their shares do not provide guaranteed protection against an energy shock.", "Shareholder returns can include distributions and the effects of company share repurchases.", "The portfolio primarily represents traditional energy businesses rather than a dedicated energy-transition strategy."]
+  },
+  {
+    tickers: ["XLF", "IUFS"],
+    sector: "Financials",
+    icon: "money",
+    tone: "sat-risk-medium",
+    role: "Rates / credit",
+    why: "The sector includes banks, insurers, payment businesses, brokers and capital-market firms.",
+    limit: "Depends on the yield curve, credit conditions and the default cycle.",
+    points: ["A steeper yield curve can support some financial businesses, although its effects differ across holdings."]
+  },
+  {
+    tickers: ["XLI", "IUIS"],
+    sector: "Industrials",
+    icon: "factory",
+    tone: "sat-risk-medium",
+    role: "Cycle / CAPEX",
+    why: "The sector spans industrial production, transport, defence, machinery and infrastructure-related businesses.",
+    limit: "A broad ETF dilutes specific theses such as defence or reindustrialisation.",
+    points: ["Company revenues are linked to investment in equipment, construction and other physical assets.", "Some holdings participate in domestic manufacturing investment and infrastructure projects.", "A selected equity basket can narrow the exposure to a specific industry, while increasing company-selection risk."]
+  },
+  {
+    tickers: ["XLP", "IUCS"],
+    sector: "Consumer Staples",
+    icon: "home",
+    tone: "sat-risk-defensive",
+    role: "Defensive / essential consumption",
+    why: "The sector includes food, beverages, household products and retailers focused on essential consumption.",
+    limit: "May lag during a growth-led bull market.",
+    points: ["Margins depend on input costs and on how customers respond to price changes."]
+  },
+  {
+    tickers: ["XLV", "IUHC"],
+    sector: "Health Care",
+    icon: "pulse",
+    tone: "sat-risk-defensive",
+    role: "Defensive quality",
+    why: "The sector includes pharmaceuticals, healthcare services, medical equipment and managed-care businesses.",
+    limit: "Combines defensive characteristics with regulatory risk and innovation-pipeline risk.",
+    points: ["Healthcare demand can be less cyclical, but profitability and business quality vary across companies.", "Demographics, research outcomes and operating scale influence the performance of the holdings.", "The broader healthcare portfolio does not isolate biotechnology or pharmaceutical exposure."]
+  },
+  {
+    tickers: ["XLRE"],
+    sector: "Real Estate",
+    icon: "home",
+    tone: "sat-risk-defensive",
+    role: "Listed real estate",
+    why: "The sector provides exposure to real-estate investment trusts and other listed property businesses.",
+    limit: "Sensitive to interest rates, credit, capitalisation rates and vacancy.",
+    points: ["Investors obtain property-related exposure through shares traded on an exchange.", "Financing costs, property income and valuation changes are important drivers of listed real-estate returns.", "Listed property shares have liquidity and market-price characteristics that differ from directly held property."]
+  },
+  {
+    tickers: ["XLU", "IUUS"],
+    sector: "Utilities",
+    icon: "faucet",
+    tone: "sat-risk-defensive",
+    role: "Defensive / duration",
+    why: "The sector covers utilities that provide electricity and other essential infrastructure services.",
+    limit: "Sensitive to interest rates and regulation; it is not the same as a specific grid exposure.",
+    points: ["Essential-service demand can be relatively stable, although utility shares remain exposed to market losses.", "Electrification and data-centre development can influence electricity demand and investment requirements.", "A utility ETF alone may not cover the equipment and engineering businesses involved in grid expansion."]
+  }
 ];
 
 function SectorGicsModule({ dataLabTickers, initialSector = "XLK" }) {
@@ -1628,7 +1943,7 @@ function SectorGicsModule({ dataLabTickers, initialSector = "XLK" }) {
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "What it captures"), React.createElement("strong", null, activeMeta.why)),
         React.createElement("div", { className: "detail-box" }, React.createElement("span", null, "Limitation"), React.createElement("strong", null, activeMeta.limit))
       ),
-      React.createElement("ul", { className: "satellite-list" }, activeMeta.points.map((point) => React.createElement("li", { key: point }, point)))
+      React.createElement("p", null, activeMeta.points.join(" "))
     )
   );
 }
@@ -1640,7 +1955,7 @@ const COMMODITY_GROUPS = [
     tone: "commodity-precious",
     structure: "Physical holdings and mining equities",
     risk: "Returns depend on metal prices and vehicle structure; mining shares also reflect operating costs and company performance.",
-    points: ["Physical vehicles track bullion, while miner ETFs own operating companies.", "Gold, silver, platinum and palladium respond to different monetary and industrial drivers.", "Mining shares add exposure to production costs, reserves, operating jurisdictions and company execution."],
+    points: ["Physical vehicles track bullion, while miner ETFs own operating companies.", "Gold, silver, platinum and palladium respond to different monetary and industrial drivers."],
     instruments: [
       ["GLD", "SPDR Gold Shares", "Physical gold trust", "Gold"],
       ["IAU", "iShares Gold Trust", "Physical gold trust", "Gold"],
@@ -1652,8 +1967,8 @@ const COMMODITY_GROUPS = [
       ["GDX", "VanEck Gold Miners ETF", "US-listed equity ETF", "Global gold miners"],
       ["GDXJ", "VanEck Junior Gold Miners ETF", "US-listed equity ETF", "Junior gold miners"],
       ["SIL", "Global X Silver Miners ETF", "US-listed equity ETF", "Global silver miners"],
-      ["SILJ", "Amplify Junior Silver Miners ETF", "US-listed equity ETF", "Junior silver miners"],
-    ],
+      ["SILJ", "Amplify Junior Silver Miners ETF", "US-listed equity ETF", "Junior silver miners"]
+    ]
   },
   {
     title: "Industrial metals",
@@ -1661,11 +1976,11 @@ const COMMODITY_GROUPS = [
     tone: "commodity-metals",
     structure: "Copper futures and mining equities",
     risk: "Industrial demand and inventories influence copper prices, while contract rolling and producer performance affect the respective vehicles.",
-    points: ["Copper is widely used as an industrial-cycle indicator.", "CPER follows copper futures, while COPX owns copper-mining companies.", "Copper futures reflect contract prices and rolling effects, while mining shares also depend on company costs and operating performance."],
+    points: ["Copper is widely used as an industrial-cycle indicator.", "CPER follows copper futures, while COPX owns copper-mining companies."],
     instruments: [
       ["CPER", "United States Copper Index Fund", "US-listed commodity pool", "Copper futures"],
-      ["COPX", "Global X Copper Miners ETF", "US-listed equity ETF", "Global copper miners"],
-    ],
+      ["COPX", "Global X Copper Miners ETF", "US-listed equity ETF", "Global copper miners"]
+    ]
   },
   {
     title: "Strategic materials",
@@ -1678,8 +1993,8 @@ const COMMODITY_GROUPS = [
       ["URA", "Global X Uranium ETF", "US-listed equity ETF", "Uranium value chain"],
       ["URNM", "Sprott Uranium Miners ETF", "US-listed equity ETF", "Uranium miners"],
       ["LIT", "Global X Lithium & Battery Tech ETF", "US-listed equity ETF", "Lithium and battery chain"],
-      ["REMX", "VanEck Rare Earth and Strategic Metals ETF", "US-listed equity ETF", "Rare earths and strategic metals"],
-    ],
+      ["REMX", "VanEck Rare Earth and Strategic Metals ETF", "US-listed equity ETF", "Rare earths and strategic metals"]
+    ]
   },
   {
     title: "Energy",
@@ -1692,8 +2007,8 @@ const COMMODITY_GROUPS = [
       ["USO", "United States Oil Fund", "US-listed commodity pool", "WTI crude-oil futures"],
       ["BNO", "United States Brent Oil Fund", "US-listed commodity pool", "Brent crude-oil futures"],
       ["UNG", "United States Natural Gas Fund", "US-listed commodity pool", "Natural-gas futures"],
-      ["VDE", "Vanguard Energy ETF", "US-listed equity ETF", "US energy producers"],
-    ],
+      ["VDE", "Vanguard Energy ETF", "US-listed equity ETF", "US energy producers"]
+    ]
   },
   {
     title: "Agriculture & livestock",
@@ -1701,15 +2016,15 @@ const COMMODITY_GROUPS = [
     tone: "commodity-agriculture",
     structure: "Futures exposure and agribusiness equities",
     risk: "Weather, harvests, disease and trade policy influence supply; contract rolling and equity-market conditions create additional vehicle-specific risks.",
-    points: ["Single-crop funds isolate specific agricultural futures.", "CATL is an ETC linked to live-cattle futures; MOO owns agribusiness companies.", "Futures returns depend on contract prices and rolling effects; producer shares also reflect company earnings and equity-market conditions."],
+    points: ["Single-crop funds isolate specific agricultural futures.", "CATL is an ETC linked to live-cattle futures; MOO owns agribusiness companies."],
     instruments: [
       ["DBA", "Invesco DB Agriculture Fund", "US-listed commodity pool", "Diversified agriculture futures"],
       ["CORN", "Teucrium Corn Fund", "US-listed commodity pool", "Corn futures"],
       ["WEAT", "Teucrium Wheat Fund", "US-listed commodity pool", "Wheat futures"],
       ["SOYB", "Teucrium Soybean Fund", "US-listed commodity pool", "Soybean futures"],
       ["CATL", "WisdomTree Live Cattle", "European-listed ETC", "Live-cattle futures"],
-      ["MOO", "VanEck Agribusiness ETF", "US-listed equity ETF", "Global agribusiness companies"],
-    ],
+      ["MOO", "VanEck Agribusiness ETF", "US-listed equity ETF", "Global agribusiness companies"]
+    ]
   },
   {
     title: "Timber & water",
@@ -1720,8 +2035,8 @@ const COMMODITY_GROUPS = [
     points: ["These funds own companies linked to resource infrastructure and production.", "They do not track a physical timber or water spot price.", "Business mix and valuation can dominate the resource narrative."],
     instruments: [
       ["WOOD", "iShares Global Timber & Forestry ETF", "US-listed equity ETF", "Global timber and forestry companies"],
-      ["PHO", "Invesco Water Resources ETF", "US-listed equity ETF", "US water infrastructure and technology"],
-    ],
+      ["PHO", "Invesco Water Resources ETF", "US-listed equity ETF", "US water infrastructure and technology"]
+    ]
   },
   {
     title: "Broad baskets",
@@ -1732,9 +2047,9 @@ const COMMODITY_GROUPS = [
     points: ["A single vehicle combines several commodity groups.", "Dynamic-roll rules can differ materially between products.", "Broad exposure can reduce single-commodity concentration but does not remove cyclicality."],
     instruments: [
       ["PDBC", "Invesco Optimum Yield Diversified Commodity Strategy No K-1 ETF", "US-listed ETF", "Broad commodity futures"],
-      ["COMT", "iShares GSCI Commodity Dynamic Roll Strategy ETF", "US-listed ETF", "Broad commodity futures"],
-    ],
-  },
+      ["COMT", "iShares GSCI Commodity Dynamic Roll Strategy ETF", "US-listed ETF", "Broad commodity futures"]
+    ]
+  }
 ];
 
 const COMMODITY_INSTRUMENTS = COMMODITY_GROUPS.flatMap((group) =>
