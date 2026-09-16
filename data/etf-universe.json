@@ -49,7 +49,12 @@
       "quoteSource": "yahoo_chart",
       "quoteSymbol": "VOO",
       "benchmark": "SPY",
-      "compareToSp500": true
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Large cap",
+        "market": "US",
+        "style": "Blend"
+      }
     },
     {
       "ticker": "QQQ",
@@ -154,7 +159,10 @@
       "quoteSymbol": "GLD",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "XLK",
@@ -636,7 +644,12 @@
       "quoteSource": "yahoo_chart",
       "quoteSymbol": "CSPX.L",
       "benchmark": "SPY",
-      "compareToSp500": true
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Large cap",
+        "market": "US",
+        "style": "Blend"
+      }
     },
     {
       "ticker": "VUAA",
@@ -649,7 +662,12 @@
       "quoteSource": "yahoo_chart",
       "quoteSymbol": "VUAA.L",
       "benchmark": "SPY",
-      "compareToSp500": true
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Large cap",
+        "market": "US",
+        "style": "Blend"
+      }
     },
     {
       "ticker": "QQQM",
@@ -702,7 +720,10 @@
       "quoteSymbol": "IAU",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "FXF",
@@ -1262,7 +1283,10 @@
       "quoteSymbol": "COPX",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "PICK",
@@ -1601,7 +1625,10 @@
       "quoteSymbol": "GLDM",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "SIVR",
@@ -1615,7 +1642,10 @@
       "quoteSymbol": "SIVR",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "SLV",
@@ -1629,7 +1659,10 @@
       "quoteSymbol": "SLV",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "PPLT",
@@ -1643,7 +1676,10 @@
       "quoteSymbol": "PPLT",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "PALL",
@@ -1657,7 +1693,10 @@
       "quoteSymbol": "PALL",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "USO",
@@ -1671,7 +1710,10 @@
       "quoteSymbol": "USO",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "BNO",
@@ -1685,7 +1727,10 @@
       "quoteSymbol": "BNO",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "UNG",
@@ -1699,7 +1744,10 @@
       "quoteSymbol": "UNG",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "CPER",
@@ -1713,7 +1761,10 @@
       "quoteSymbol": "CPER",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "DBA",
@@ -1727,7 +1778,10 @@
       "quoteSymbol": "DBA",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "CORN",
@@ -1741,7 +1795,10 @@
       "quoteSymbol": "CORN",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "WEAT",
@@ -1755,7 +1812,10 @@
       "quoteSymbol": "WEAT",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "SOYB",
@@ -1769,7 +1829,10 @@
       "quoteSymbol": "SOYB",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "CATL",
@@ -1783,7 +1846,10 @@
       "quoteSymbol": "CATL.L",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "PDBC",
@@ -1797,7 +1863,10 @@
       "quoteSymbol": "PDBC",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "COMT",
@@ -1811,7 +1880,10 @@
       "quoteSymbol": "COMT",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "MOO",
@@ -1825,7 +1897,10 @@
       "quoteSymbol": "MOO",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "GDX",
@@ -1839,7 +1914,10 @@
       "quoteSymbol": "GDX",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "GDXJ",
@@ -1853,7 +1931,10 @@
       "quoteSymbol": "GDXJ",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "SIL",
@@ -1867,7 +1948,10 @@
       "quoteSymbol": "SIL",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "SILJ",
@@ -1881,7 +1965,10 @@
       "quoteSymbol": "SILJ",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "VDE",
@@ -1895,7 +1982,10 @@
       "quoteSymbol": "VDE",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "URA",
@@ -1909,7 +1999,10 @@
       "quoteSymbol": "URA",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "URNM",
@@ -1923,7 +2016,10 @@
       "quoteSymbol": "URNM",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "LIT",
@@ -1937,7 +2033,10 @@
       "quoteSymbol": "LIT",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "REMX",
@@ -1951,7 +2050,10 @@
       "quoteSymbol": "REMX",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "WOOD",
@@ -1965,7 +2067,10 @@
       "quoteSymbol": "WOOD",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
     },
     {
       "ticker": "PHO",
@@ -1979,7 +2084,178 @@
       "quoteSymbol": "PHO",
       "benchmark": "SPY",
       "compareToSp500": false,
-      "comparisonBenchmarks": ["CPI", "SPY"]
+      "comparisonBenchmarks": [
+        "CPI",
+        "SPY"
+      ]
+    },
+    {
+      "ticker": "IJH",
+      "name": "iShares Core S&P Mid-Cap ETF",
+      "assetClass": "equity",
+      "region": "US",
+      "category": "Caps / Style",
+      "wrapper": "US-listed ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "IJH",
+      "benchmark": "SPY",
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Mid cap",
+        "market": "US",
+        "style": "Blend"
+      },
+      "trackedIndex": "S&P MidCap 400",
+      "sourceUrl": "https://www.ishares.com/us/products/239763/ishares-core-sp-midcap-etf",
+      "exchange": "NYSE Arca"
+    },
+    {
+      "ticker": "SPY4",
+      "name": "State Street SPDR S&P 400 U.S. Mid Cap UCITS ETF (Acc)",
+      "assetClass": "equity",
+      "region": "US",
+      "category": "Caps / Style",
+      "wrapper": "UCITS ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "SPY4.L",
+      "benchmark": "SPY",
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Mid cap",
+        "market": "US",
+        "style": "Blend"
+      },
+      "trackedIndex": "S&P MidCap 400",
+      "sourceUrl": "https://www.ssga.com/uk/en_gb/institutional/etfs/state-street-spdr-sp-400-us-mid-cap-ucits-etf-acc-spy4-gy",
+      "exchange": "London Stock Exchange"
+    },
+    {
+      "ticker": "IJR",
+      "name": "iShares Core S&P Small-Cap ETF",
+      "assetClass": "equity",
+      "region": "US",
+      "category": "Caps / Style",
+      "wrapper": "US-listed ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "IJR",
+      "benchmark": "SPY",
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Small cap",
+        "market": "US",
+        "style": "Blend"
+      },
+      "trackedIndex": "S&P SmallCap 600",
+      "sourceUrl": "https://www.ishares.com/us/products/239774/ishares-core-sp-smallcap-etf",
+      "exchange": "NYSE Arca"
+    },
+    {
+      "ticker": "IDP6",
+      "name": "iShares S&P SmallCap 600 UCITS ETF USD (Dist)",
+      "assetClass": "equity",
+      "region": "US",
+      "category": "Caps / Style",
+      "wrapper": "UCITS ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "IDP6.L",
+      "benchmark": "SPY",
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Small cap",
+        "market": "US",
+        "style": "Blend"
+      },
+      "trackedIndex": "S&P SmallCap 600",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251920/ishares-s-p-smallcap-600-ucits-etf",
+      "exchange": "London Stock Exchange"
+    },
+    {
+      "ticker": "IWC",
+      "name": "iShares Micro-Cap ETF",
+      "assetClass": "equity",
+      "region": "US",
+      "category": "Caps / Style",
+      "wrapper": "US-listed ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "IWC",
+      "benchmark": "SPY",
+      "compareToSp500": true,
+      "capsStyle": {
+        "size": "Micro cap",
+        "market": "US",
+        "style": "Blend"
+      },
+      "trackedIndex": "Russell Microcap",
+      "sourceUrl": "https://www.ishares.com/us/products/239716/ishares-microcap-etf",
+      "exchange": "NYSE Arca"
+    },
+    {
+      "ticker": "SCZ",
+      "name": "iShares MSCI EAFE Small-Cap ETF",
+      "assetClass": "equity",
+      "region": "Developed ex-US",
+      "category": "Caps / Style",
+      "wrapper": "US-listed ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "SCZ",
+      "benchmark": "SPY",
+      "compareToSp500": false,
+      "capsStyle": {
+        "size": "Small cap",
+        "market": "Developed ex-US",
+        "style": "Blend"
+      },
+      "trackedIndex": "MSCI EAFE Small Cap",
+      "sourceUrl": "https://www.ishares.com/us/products/239627/ishares-msci-eafe-smallcap-etf",
+      "exchange": "Nasdaq"
+    },
+    {
+      "ticker": "VSS",
+      "name": "Vanguard FTSE All-World ex-US Small-Cap ETF",
+      "assetClass": "equity",
+      "region": "Global ex-US",
+      "category": "Caps / Style",
+      "wrapper": "US-listed ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "VSS",
+      "benchmark": "SPY",
+      "compareToSp500": false,
+      "capsStyle": {
+        "size": "Small cap",
+        "market": "Global ex-US",
+        "style": "Blend"
+      },
+      "trackedIndex": "FTSE Global Small Cap ex US",
+      "sourceUrl": "https://advisors.vanguard.com/investments/products/vss/vanguard-ftse-all-world-ex-us-small-cap-etf",
+      "exchange": "NYSE Arca"
+    },
+    {
+      "ticker": "WSML",
+      "name": "iShares MSCI World Small Cap UCITS ETF USD (Acc)",
+      "assetClass": "equity",
+      "region": "Developed global",
+      "category": "Caps / Style",
+      "wrapper": "UCITS ETF",
+      "currency": "USD",
+      "quoteSource": "yahoo_chart",
+      "quoteSymbol": "WSML.L",
+      "benchmark": "SPY",
+      "compareToSp500": false,
+      "capsStyle": {
+        "size": "Small cap",
+        "market": "Developed global",
+        "style": "Blend"
+      },
+      "trackedIndex": "MSCI World Small Cap",
+      "sourceUrl": "https://www.ishares.com/uk/individual/en/products/296576/ishares-msci-world-small-cap-ucits-etf-usd-(acc",
+      "exchange": "London Stock Exchange"
     }
   ]
 }

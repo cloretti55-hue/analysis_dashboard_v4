@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-16T17:45:10+00:00",
+  "generatedAt": "2026-09-16T19:47:17+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
@@ -153,12 +153,12 @@
       ],
       "producer": null,
       "workflow": null,
-      "sha256": "c9dc82823a93c0a183c234b9bf319791dddd1503b99d479dc1e6b8c791ca79e9",
-      "recordCount": 148,
+      "sha256": "bc9c6d1970346c6831d714bb483d3769da9e8c230a8b2cc2a48eee15cdd81f5f",
+      "recordCount": 156,
       "assetClassCounts": {
         "commodity": 18,
         "currency": 1,
-        "equity": 97,
+        "equity": 105,
         "fixed_income": 21,
         "inverse_equity": 8,
         "volatility": 3
@@ -177,11 +177,11 @@
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "88285d6c64b9431cb3930b19f5fc61658cde8c42a3e1b271739971f6aaaffa8a",
-      "recordCount": 148,
+      "sha256": "b9ba579189289c4d989e5c57cb9613770d8844542ac16eb5d96b6cabc1fbcba8",
+      "recordCount": 156,
       "chartCoverage": 1.0,
       "statusCounts": {
-        "ok": 148
+        "ok": 156
       },
       "staleCount": 1,
       "staleBenchmarkCount": 52,
