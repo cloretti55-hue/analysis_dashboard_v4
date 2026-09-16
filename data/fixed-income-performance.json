@@ -2,7 +2,7 @@
   "version": 1,
   "asOf": "2026-09-16",
   "oldestComponentAsOf": "2026-09-16",
-  "generatedAt": "2026-09-16T15:34:14+00:00",
+  "generatedAt": "2026-09-16T17:45:10+00:00",
   "source": "Fixed income instruments from the ETF performance pipeline; benchmark is accrued Fed Funds from FRED DFF.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. Charts use accrued Fed Funds from FRED DFF as a cash benchmark. A prior valid instrument may be retained and marked stale when refresh fails.",
   "instruments": [
@@ -29,7 +29,7 @@
       "maxDrawdown1yPct": -0.03,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -938,7 +938,7 @@
           }
         ]
       },
-      "correlation1yVsCash": -0.03
+      "correlation1yVsCash": 0.2
     },
     {
       "ticker": "IBTA",
@@ -954,16 +954,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 5.955,
-      "returnYtdPct": 0.73,
-      "return1yPct": 1.9,
-      "return3yAnnPct": 4.23,
-      "return5yAnnPct": 1.92,
+      "lastClose": 5.952,
+      "returnYtdPct": 0.68,
+      "return1yPct": 1.85,
+      "return3yAnnPct": 4.22,
+      "return5yAnnPct": 1.91,
       "vol1yAnnPct": 1.17,
       "maxDrawdown1yPct": -0.74,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -1867,12 +1867,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 113.23,
+            "etf": 113.18,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.1
+      "correlation1yVsCash": 0.05
     },
     {
       "ticker": "CBU7",
@@ -1888,16 +1888,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 141.18,
-      "returnYtdPct": -1.37,
-      "return1yPct": -0.7,
-      "return3yAnnPct": 3.88,
-      "return5yAnnPct": 0.13,
+      "lastClose": 141.11,
+      "returnYtdPct": -1.42,
+      "return1yPct": -0.75,
+      "return3yAnnPct": 3.86,
+      "return5yAnnPct": 0.12,
       "vol1yAnnPct": 2.85,
       "maxDrawdown1yPct": -2.83,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -2801,12 +2801,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 112.08,
+            "etf": 112.03,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.06
+      "correlation1yVsCash": -0.07
     },
     {
       "ticker": "IB7A",
@@ -2822,16 +2822,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 5.0995,
-      "returnYtdPct": -2.62,
-      "return1yPct": -2.37,
-      "return3yAnnPct": 1.08,
-      "return5yAnnPct": 1.08,
+      "lastClose": 5.1015,
+      "returnYtdPct": -2.58,
+      "return1yPct": -2.33,
+      "return3yAnnPct": 1.11,
+      "return5yAnnPct": 1.11,
       "vol1yAnnPct": 4.37,
       "maxDrawdown1yPct": -4.71,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-14",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -3735,12 +3735,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 101.59,
+            "etf": 101.63,
             "cash": 105.61
           }
         ]
       },
-      "correlation1yVsCash": 0.07
+      "correlation1yVsCash": 0.01
     },
     {
       "ticker": "DTLA",
@@ -3765,7 +3765,7 @@
       "maxDrawdown1yPct": -8.24,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -4674,7 +4674,7 @@
           }
         ]
       },
-      "correlation1yVsCash": 0.18
+      "correlation1yVsCash": 0.12
     },
     {
       "ticker": "TIP5",
@@ -4690,16 +4690,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 4.88,
-      "returnYtdPct": 1.01,
-      "return1yPct": 1.14,
-      "return3yAnnPct": 4.08,
-      "return5yAnnPct": 2.47,
+      "lastClose": 4.8765,
+      "returnYtdPct": 0.93,
+      "return1yPct": 1.07,
+      "return3yAnnPct": 4.06,
+      "return5yAnnPct": 2.45,
       "vol1yAnnPct": 3.79,
       "maxDrawdown1yPct": -3.02,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -5603,12 +5603,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 112.74,
+            "etf": 112.66,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": -0.05
+      "correlation1yVsCash": 0.05
     },
     {
       "ticker": "IDTP",
@@ -5624,16 +5624,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 254.05,
-      "returnYtdPct": -0.33,
-      "return1yPct": -0.9,
-      "return3yAnnPct": 3.75,
-      "return5yAnnPct": -0.05,
+      "lastClose": 254.15,
+      "returnYtdPct": -0.29,
+      "return1yPct": -0.86,
+      "return3yAnnPct": 3.76,
+      "return5yAnnPct": -0.04,
       "vol1yAnnPct": 3.65,
-      "maxDrawdown1yPct": -2.23,
+      "maxDrawdown1yPct": -2.19,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -6537,12 +6537,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 111.66,
+            "etf": 111.7,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.13
+      "correlation1yVsCash": -0.04
     },
     {
       "ticker": "TI5A",
@@ -6567,7 +6567,7 @@
       "maxDrawdown1yPct": -0.91,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -7476,7 +7476,7 @@
           }
         ]
       },
-      "correlation1yVsCash": 0.06
+      "correlation1yVsCash": 0.13
     },
     {
       "ticker": "LQDA",
@@ -7492,16 +7492,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 6.1678,
-      "returnYtdPct": -1.88,
-      "return1yPct": -2.36,
-      "return3yAnnPct": 4.71,
-      "return5yAnnPct": -1.14,
-      "vol1yAnnPct": 5.54,
+      "lastClose": 6.176,
+      "returnYtdPct": -1.75,
+      "return1yPct": -2.23,
+      "return3yAnnPct": 4.75,
+      "return5yAnnPct": -1.11,
+      "vol1yAnnPct": 5.55,
       "maxDrawdown1yPct": -4.15,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -8405,12 +8405,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 114.78,
+            "etf": 114.93,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.16
+      "correlation1yVsCash": 0.02
     },
     {
       "ticker": "IHYA",
@@ -8426,16 +8426,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 7.47,
-      "returnYtdPct": 1.27,
-      "return1yPct": 2.69,
-      "return3yAnnPct": 7.83,
+      "lastClose": 7.472,
+      "returnYtdPct": 1.3,
+      "return1yPct": 2.72,
+      "return3yAnnPct": 7.84,
       "return5yAnnPct": 3.6,
       "vol1yAnnPct": 3.68,
       "maxDrawdown1yPct": -2.82,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -9339,12 +9339,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 125.35,
+            "etf": 125.38,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.01
+      "correlation1yVsCash": 0.03
     },
     {
       "ticker": "AGGU",
@@ -9360,16 +9360,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 5.768,
-      "returnYtdPct": -0.4,
-      "return1yPct": 0.05,
-      "return3yAnnPct": 4.16,
-      "return5yAnnPct": 0.13,
+      "lastClose": 5.76,
+      "returnYtdPct": -0.54,
+      "return1yPct": -0.09,
+      "return3yAnnPct": 4.11,
+      "return5yAnnPct": 0.1,
       "vol1yAnnPct": 3.2,
       "maxDrawdown1yPct": -2.24,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -10273,12 +10273,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 112.99,
+            "etf": 112.83,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": -0.01
+      "correlation1yVsCash": 0.11
     },
     {
       "ticker": "SGOV",
@@ -10294,8 +10294,8 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 100.5477,
-      "returnYtdPct": 2.54,
+      "lastClose": 100.545,
+      "returnYtdPct": 2.53,
       "return1yPct": 3.76,
       "return3yAnnPct": 4.56,
       "return5yAnnPct": 3.75,
@@ -10303,7 +10303,7 @@
       "maxDrawdown1yPct": -0.01,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -11207,12 +11207,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 114.3,
+            "etf": 114.29,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": -0.12
+      "correlation1yVsCash": -0.32
     },
     {
       "ticker": "SHY",
@@ -11228,16 +11228,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 81.4107,
-      "returnYtdPct": 0.59,
-      "return1yPct": 1.67,
+      "lastClose": 81.42,
+      "returnYtdPct": 0.6,
+      "return1yPct": 1.68,
       "return3yAnnPct": 4.05,
       "return5yAnnPct": 1.77,
       "vol1yAnnPct": 1.32,
       "maxDrawdown1yPct": -0.89,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -12041,7 +12041,7 @@
           },
           {
             "date": "2026-05-15",
-            "etf": 112.18,
+            "etf": 112.17,
             "cash": 112.71
           },
           {
@@ -12141,12 +12141,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 112.62,
+            "etf": 112.63,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.14
+      "correlation1yVsCash": 0.07
     },
     {
       "ticker": "IEI",
@@ -12162,16 +12162,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 114.651,
-      "returnYtdPct": -1.52,
-      "return1yPct": -0.95,
-      "return3yAnnPct": 3.7,
-      "return5yAnnPct": -0.02,
-      "vol1yAnnPct": 2.96,
+      "lastClose": 114.6985,
+      "returnYtdPct": -1.48,
+      "return1yPct": -0.91,
+      "return3yAnnPct": 3.71,
+      "return5yAnnPct": -0.01,
+      "vol1yAnnPct": 2.97,
       "maxDrawdown1yPct": -3.2,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -13075,12 +13075,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 111.5,
+            "etf": 111.55,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.15
+      "correlation1yVsCash": 0.01
     },
     {
       "ticker": "IEF",
@@ -13096,16 +13096,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 91.1236,
-      "returnYtdPct": -2.62,
-      "return1yPct": -2.54,
-      "return3yAnnPct": 2.99,
-      "return5yAnnPct": -1.88,
+      "lastClose": 91.175,
+      "returnYtdPct": -2.56,
+      "return1yPct": -2.49,
+      "return3yAnnPct": 3.01,
+      "return5yAnnPct": -1.87,
       "vol1yAnnPct": 4.63,
       "maxDrawdown1yPct": -5.14,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -14009,12 +14009,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 109.24,
+            "etf": 109.31,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.14
+      "correlation1yVsCash": -0.03
     },
     {
       "ticker": "TLT",
@@ -14030,16 +14030,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 81.125,
-      "returnYtdPct": -3.92,
-      "return1yPct": -6.1,
-      "return3yAnnPct": -0.49,
-      "return5yAnnPct": -8.29,
-      "vol1yAnnPct": 9.14,
+      "lastClose": 81.215,
+      "returnYtdPct": -3.81,
+      "return1yPct": -5.99,
+      "return3yAnnPct": -0.46,
+      "return5yAnnPct": -8.27,
+      "vol1yAnnPct": 9.15,
       "maxDrawdown1yPct": -8.75,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -14073,7 +14073,7 @@
           },
           {
             "date": "2023-10-17",
-            "etf": 91.48,
+            "etf": 91.47,
             "cash": 100.41
           },
           {
@@ -14943,12 +14943,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 98.53,
+            "etf": 98.64,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.09
+      "correlation1yVsCash": -0.08
     },
     {
       "ticker": "STIP",
@@ -14964,16 +14964,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 100.335,
-      "returnYtdPct": 1.53,
-      "return1yPct": 1.66,
+      "lastClose": 100.355,
+      "returnYtdPct": 1.55,
+      "return1yPct": 1.69,
       "return3yAnnPct": 4.84,
       "return5yAnnPct": 2.98,
       "vol1yAnnPct": 1.48,
       "maxDrawdown1yPct": -0.74,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -15877,12 +15877,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 115.21,
+            "etf": 115.23,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.23
+      "correlation1yVsCash": 0.13
     },
     {
       "ticker": "TIP",
@@ -15898,16 +15898,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 105.935,
-      "returnYtdPct": -0.28,
-      "return1yPct": -0.99,
-      "return3yAnnPct": 3.65,
-      "return5yAnnPct": 0.02,
+      "lastClose": 106.02,
+      "returnYtdPct": -0.2,
+      "return1yPct": -0.91,
+      "return3yAnnPct": 3.68,
+      "return5yAnnPct": 0.03,
       "vol1yAnnPct": 3.33,
       "maxDrawdown1yPct": -2.28,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -16811,12 +16811,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 111.34,
+            "etf": 111.43,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.17
+      "correlation1yVsCash": 0.06
     },
     {
       "ticker": "LQD",
@@ -16832,16 +16832,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 104.815,
-      "returnYtdPct": -1.86,
-      "return1yPct": -2.25,
-      "return3yAnnPct": 4.68,
-      "return5yAnnPct": -1.11,
-      "vol1yAnnPct": 5.27,
+      "lastClose": 104.9,
+      "returnYtdPct": -1.78,
+      "return1yPct": -2.17,
+      "return3yAnnPct": 4.7,
+      "return5yAnnPct": -1.09,
+      "vol1yAnnPct": 5.28,
       "maxDrawdown1yPct": -4.08,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -17745,12 +17745,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 114.68,
+            "etf": 114.77,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.07
+      "correlation1yVsCash": -0.1
     },
     {
       "ticker": "HYG",
@@ -17766,16 +17766,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 78.625,
-      "returnYtdPct": 1.44,
-      "return1yPct": 2.81,
-      "return3yAnnPct": 7.95,
-      "return5yAnnPct": 3.43,
+      "lastClose": 78.655,
+      "returnYtdPct": 1.47,
+      "return1yPct": 2.85,
+      "return3yAnnPct": 7.97,
+      "return5yAnnPct": 3.44,
       "vol1yAnnPct": 3.81,
       "maxDrawdown1yPct": -2.34,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -18679,12 +18679,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 125.79,
+            "etf": 125.83,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.07
+      "correlation1yVsCash": -0.09
     },
     {
       "ticker": "AGG",
@@ -18700,16 +18700,16 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-09-16",
-      "lastClose": 96.135,
-      "returnYtdPct": -1.11,
-      "return1yPct": -0.7,
-      "return3yAnnPct": 4.07,
-      "return5yAnnPct": -0.47,
-      "vol1yAnnPct": 3.76,
+      "lastClose": 96.195,
+      "returnYtdPct": -1.05,
+      "return1yPct": -0.64,
+      "return3yAnnPct": 4.09,
+      "return5yAnnPct": -0.46,
+      "vol1yAnnPct": 3.77,
       "maxDrawdown1yPct": -3.23,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-15",
+      "benchmarkAsOf": "2026-09-16",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -19533,7 +19533,7 @@
           },
           {
             "date": "2026-06-10",
-            "etf": 114.07,
+            "etf": 114.08,
             "cash": 113.0
           },
           {
@@ -19548,7 +19548,7 @@
           },
           {
             "date": "2026-06-29",
-            "etf": 115.3,
+            "etf": 115.31,
             "cash": 113.12
           },
           {
@@ -19613,12 +19613,12 @@
           },
           {
             "date": "2026-09-16",
-            "etf": 112.71,
+            "etf": 112.78,
             "cash": 114.01
           }
         ]
       },
-      "correlation1yVsCash": 0.12
+      "correlation1yVsCash": -0.06
     }
   ]
 }
