@@ -120,7 +120,7 @@
       ],
       "producer": "scripts/update-sp500-pe-history.py",
       "workflow": ".github/workflows/update-sp500-pe-history.yml",
-      "sha256": "d9618f6fa35e42eb74b054abc4df3d66706b6871cf7c339109f845ad04d3a36b",
+      "sha256": "009e477c9001b8924642f78ac937b498c2c2882319ecc978fc8d7fd7b5bc1cd2",
       "recordCount": 1868,
       "yearEndCount": 156,
       "issues": []
