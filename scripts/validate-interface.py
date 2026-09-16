@@ -78,11 +78,11 @@ def check_instrument_registry(page: Page, label: str) -> None:
     if not state["hasCatalogFactory"]:
         raise AssertionError(f"Registro de instrumentos indisponível em {label}")
     expected_filters = [
-        "Fixed Income (21)", "Core Equities (19)", "Sectors (21)",
+        "Fixed Income (21)", "Core Equities (19)", "Caps/Style (11)", "Sectors (21)",
         "US Satellites (17)", "European Themes (4)", "China / China+1 (14)",
         "Commodities (31)", "Hedge (21)",
     ]
-    if state["filters"] != expected_filters or sum(counts) != 148:
+    if state["filters"] != expected_filters or sum(counts) != 159:
         raise AssertionError(f"Cobertura do catálogo alterada em {label}: {state['filters']}")
     if state["visibleInstrumentCount"] < 1:
         raise AssertionError(f"Nenhum instrumento visível no Data Lab em {label}")
@@ -127,11 +127,40 @@ def check_viewport(browser, base_url: str, label: str, viewport: dict[str, int])
                 check_instrument_registry(page, label)
             assert_no_horizontal_overflow(page, f"{module_title} ({label})")
 
+        check_caps_style(page, base_url, label)
+
         if runtime_errors:
             details = "\n".join(f"- {error}" for error in runtime_errors)
             raise AssertionError(f"Erros no navegador em {label}:\n{details}")
     finally:
         context.close()
+
+
+def check_caps_style(page: Page, base_url: str, label: str) -> None:
+    """Exercise every caps listing, both directions, against the actual data."""
+    tickers = ("VOO", "CSPX", "VUAA", "IJH", "SPY4", "IJR", "IDP6", "IWC", "SCZ", "VSS", "WSML")
+    for ticker in tickers:
+        page.goto(f"{base_url}#etfs/caps/{ticker}", wait_until="domcontentloaded")
+        page.locator(".core-detail h2").filter(has_text=re.compile(rf"^{ticker}$")).wait_for()
+        page.locator(".etf-full-names .detail-role").wait_for()
+        page.locator(".etf-trading-details").wait_for()
+        page.get_by_role("link", name=f"Open {ticker} in Data Lab", exact=True).click()
+        page.locator('.data-lab-filter[aria-pressed="true"]').filter(has_text="Caps/Style").wait_for()
+        page.locator(f'svg[aria-label="{ticker} chart versus S&P 500"]').wait_for()
+        path = page.locator(".data-lab-line.is-etf").get_attribute("d") or ""
+        if path.count("L") < 2 or "NaN" in path:
+            raise AssertionError(f"Gráfico inválido para {ticker} ({label})")
+        assert_no_horizontal_overflow(page, f"Caps/Style {ticker} ({label})")
+        page.get_by_role("link", name=f"Open {ticker} in ETFs", exact=True).click()
+        page.wait_for_url(f"**/#etfs/caps/{ticker}")
+
+    page.goto(f"{base_url}#etfs/caps/IWC", wait_until="domcontentloaded")
+    page.get_by_role("button", name="UCITS", exact=True).click()
+    page.locator(".core-detail h2").filter(has_text="CSPX").wait_for()
+    if page.get_by_role("button", name="IWC", exact=True).is_enabled():
+        raise AssertionError("IWC deve ficar indisponível no filtro UCITS")
+    page.get_by_role("button", name="US-listed", exact=True).click()
+    page.locator(".core-detail h2").filter(has_text="VOO").wait_for()
 
 
 def main() -> None:
