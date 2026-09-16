@@ -9,11 +9,12 @@ const DATA_LAB_METRICS = [
   ["beta1yVsSp500", "1-year beta"],
 ];
 
-const DATA_LAB_GROUPS = ["Fixed Income", "Core Equities", "Sectors", "US Satellites", "European Themes", "China / China+1", "Commodities", "Hedge"];
+const DATA_LAB_GROUPS = ["Fixed Income", "Core Equities", "Caps/Style", "Sectors", "US Satellites", "European Themes", "China / China+1", "Commodities", "Hedge"];
 
 const DATA_LAB_SUBGROUP_ORDER = {
   "Fixed Income": ["USD liquidity", "Treasuries by duration", "TIPS / inflation", "USD credit", "Core aggregate bonds"],
   "Core Equities": ["Broad US", "Growth / Nasdaq", "Developed global core", "Developed ex-US", "European core", "Emerging markets"],
+  "Caps/Style": ["Large cap", "Mid cap", "Small cap", "Micro cap"],
   Sectors: ["Growth / communication", "Cyclicals", "Defensives / yield", "Other sectors"],
   Commodities: ["Precious metals", "Industrial metals", "Strategic materials", "Energy", "Agriculture & livestock", "Timber & water", "Broad baskets"],
   "US Satellites": ["AI / semiconductors", "Security / defence", "Infrastructure / energy", "Onshoring / reindustrialisation", "Technology optionality", "Constrained economy"],
@@ -23,6 +24,10 @@ const DATA_LAB_SUBGROUP_ORDER = {
 };
 
 const SUBGROUP_TONES = {
+  "Large cap": "#54b6ff",
+  "Mid cap": "#45c98f",
+  "Small cap": "#9ea7ff",
+  "Micro cap": "#c5a35a",
   "USD liquidity": "#42d1b7",
   "Treasuries by duration": "#7fb8ff",
   "TIPS / inflation": "#77d38b",
@@ -72,6 +77,7 @@ const categoryOf = (item) => (item?.category || "").toLowerCase();
 
 const rawGroupFor = (item) => {
   const category = categoryOf(item);
+  if (category === "caps / style") return "Caps/Style";
   if (category.includes("gics sector")) return "Sectors";
   if (category.startsWith("commodity / ") || category.startsWith("commodity producers / ")) return "Commodities";
   if (category.includes("covered call") || category.includes("minimum volatility") || category.includes("vix") || category.includes("inverse") || category.includes("concentration hedge") || category.includes("gold") || category.includes("swiss franc")) return "Hedge";
@@ -88,6 +94,8 @@ const rawSubgroupFor = (item) => {
   const category = categoryOf(item);
   const ticker = item?.ticker || "";
   const group = rawGroupFor(item);
+
+  if (group === "Caps/Style") return item?.capsStyle?.size || "Other styles";
 
   if (group === "Fixed Income") {
     if (category.includes("treasury bills") || category.includes("liquidity")) return "USD liquidity";
@@ -162,7 +170,10 @@ const rawSubgroupFor = (item) => {
   return "Other";
 };
 
-const subgroupFor = (item) => item?.registry?.subgroup || rawSubgroupFor(item);
+const belongsToGroup = (item, group) => groupFor(item) === group || (group === "Caps/Style" && Boolean(item?.capsStyle));
+const subgroupFor = (item, group = groupFor(item)) => group === "Caps/Style"
+  ? item?.capsStyle?.size || "Other styles"
+  : item?.registry?.subgroup || rawSubgroupFor(item);
 const subgroupTone = (subgroup) => SUBGROUP_TONES[subgroup] || "#7fb8ff";
 
 const benchmarkCodeFor = (item) => {
@@ -295,6 +306,7 @@ return {
   createCatalog,
   enrichInstrument,
   groupFor,
+  belongsToGroup,
   subgroupFor,
   subgroupTone,
   metricsFor,
