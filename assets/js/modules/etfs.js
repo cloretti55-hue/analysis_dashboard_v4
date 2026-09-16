@@ -1706,7 +1706,7 @@ function EtfFullNames({ instruments }) {
   const tickers = [...new Set(String(instruments || "").match(/\b[A-Z][A-Z0-9]*\b/g) || [])].filter((ticker) => ETF_FULL_NAMES[ticker]);
   if (!tickers.length) return null;
   return React.createElement("div", { className: "etf-full-names" },
-    tickers.map((ticker) => React.createElement("div", { className: "detail-role", key: ticker }, ETF_FULL_NAMES[ticker]))
+    tickers.map((ticker) => React.createElement("div", { className: "detail-role", key: ticker }, `${tickers.length > 1 ? `${ticker} — ` : ""}${ETF_FULL_NAMES[ticker]}`))
   );
 }
 
