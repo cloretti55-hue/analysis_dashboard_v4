@@ -475,6 +475,39 @@ def write_fixed_income_fallback(output_items: list[dict], expected_count: int) -
     print(f"Wrote {FIXED_INCOME_FALLBACK_PATH}")
 
 
+def chart_problem(record: dict, item: dict) -> str | None:
+    chart = record.get("performanceChart")
+    points = chart.get("points") if isinstance(chart, dict) else None
+    if not isinstance(points, list) or len(points) < 2:
+        return "Performance chart requires at least two valid observations."
+    required = ["etf"]
+    if set(item.get("comparisonBenchmarks", [])) == {"CPI", "SPY"}:
+        required.extend(["cpi", "sp500"])
+    for point in points:
+        if not isinstance(point, dict):
+            return "Invalid performance chart observation."
+        for key in required:
+            value = point.get(key)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+                return f"Performance chart has missing or invalid {key} observations."
+    return None
+
+
+def retain_valid_record(result: dict, previous: dict | None, item: dict, reason: str) -> dict:
+    compatible = previous and all(
+        previous.get(key) == item.get(key)
+        for key in ("ticker", "quoteSymbol", "currency", "assetClass")
+    )
+    if compatible and previous.get("status") == "ok" and not chart_problem(previous, item):
+        # Preserve metrics, chart and observation dates together; never relabel
+        # an old chart with a new quote date or combine inconsistent snapshots.
+        retained = {**previous, "stale": True, "refreshError": reason}
+        print(f"WARNING: {item['ticker']}: retaining valid data as of {previous.get('asOf')}: {reason}")
+        return retained
+    print(f"WARNING: {item['ticker']}: no compatible valid prior chart: {reason}")
+    return {**result, "status": "error", "error": reason}
+
+
 def main() -> None:
     universe = json.loads(UNIVERSE_PATH.read_text(encoding="utf-8"))
     previous_by_ticker = load_previous_by_ticker()
@@ -528,20 +561,7 @@ def main() -> None:
             item_metrics = metrics_for_history(history)
         except Exception as exc:
             previous = previous_by_ticker.get(item["ticker"])
-            if previous:
-                result = {
-                    **previous,
-                    "status": "ok",
-                    "stale": True,
-                    "refreshError": str(exc),
-                    "quoteSource": item["quoteSource"],
-                    "quoteSymbol": item.get("quoteSymbol"),
-                }
-                if result.get("asOf"):
-                    as_of_dates.append(result["asOf"])
-            else:
-                result["status"] = "error"
-                result["error"] = str(exc)
+            result = retain_valid_record(result, previous, item, str(exc))
             output_by_ticker[item["ticker"]] = result
             continue
 
@@ -635,6 +655,10 @@ def main() -> None:
             benchmark_key=benchmark_key,
             additional_benchmarks=additional_benchmarks,
         )
+        problem = chart_problem(result, item)
+        if problem:
+            output_by_ticker[item["ticker"]] = retain_valid_record(result, previous, item, problem)
+            continue
         if item["assetClass"] == "fixed_income":
             result["correlation1yVsCash"] = (
                 correlation_1y(history, benchmark_history) if benchmark_history else None
@@ -658,6 +682,7 @@ def main() -> None:
         output_by_ticker[item["ticker"]] = result
 
     output_items = [output_by_ticker[item["ticker"]] for item in universe_items]
+    as_of_dates = [item["asOf"] for item in output_items if item.get("status") == "ok" and item.get("asOf")]
 
     payload = {
         "version": 1,
