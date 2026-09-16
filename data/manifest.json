@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-15T23:36:18+00:00",
+  "generatedAt": "2026-09-16T04:08:18+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
       "manual": 1,
-      "ok": 7,
-      "partial": 1,
-      "stale": 2
+      "ok": 5,
+      "partial": 2,
+      "stale": 3
     },
     "blockingErrorCount": 0
   },
@@ -34,7 +34,7 @@
       "id": "fed-policy",
       "path": "data/fed-policy.json",
       "kind": "generated",
-      "status": "ok",
+      "status": "stale",
       "asOf": "2026-09-10",
       "maxAgeDays": 5,
       "consumer": [
@@ -43,7 +43,13 @@
       "producer": "scripts/update-fed-policy.py",
       "workflow": ".github/workflows/update-fed-policy.yml",
       "sha256": "57310e71f2fbc68a41b0bd543b8ad7e643e747576a4a933b401fb53303ce4bb2",
-      "issues": []
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "stale_dataset",
+          "message": "Dataset asOf=2026-09-10 exceeds maxAgeDays=5"
+        }
+      ]
     },
     {
       "id": "equity-valuation",
@@ -163,7 +169,7 @@
       "id": "etf-performance",
       "path": "data/etf-performance.json",
       "kind": "generated",
-      "status": "ok",
+      "status": "partial",
       "asOf": "2026-09-15",
       "maxAgeDays": 5,
       "consumer": [
@@ -171,15 +177,20 @@
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "0152e57608c2d22aa8795184716de6b62f04a17af87bc8cd15bd2da4cadc1c3a",
+      "sha256": "56692f2bfd492aed1ce26a2c461c2d5d94427d3db3bea96478b505820c86ec72",
       "recordCount": 148,
       "chartCoverage": 1.0,
       "statusCounts": {
         "ok": 148
       },
-      "staleCount": 0,
+      "staleCount": 2,
       "staleBenchmarkCount": 52,
       "issues": [
+        {
+          "severity": "warning",
+          "code": "stale_instruments",
+          "message": "2 instrument(s) use prior valid data"
+        },
         {
           "severity": "warning",
           "code": "stale_benchmarks",
@@ -199,7 +210,7 @@
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "87b0fcc1f70a50bc1d7083e6bd604006cc1bb968fa0d306cc6d5db9b6fa103c4",
+      "sha256": "e31bbcdf2a36e1c85da6a1d0e6cca0114f3748766add6db86599dfcb028f319c",
       "recordCount": 21,
       "chartCoverage": 1.0,
       "statusCounts": {
