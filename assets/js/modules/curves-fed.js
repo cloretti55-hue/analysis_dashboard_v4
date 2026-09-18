@@ -80,19 +80,27 @@ function curveSourceText(meta) {
 }
 
 const DEFAULT_FED_POLICY = {
-  source: "Atlanta Fed",
-  targetRange: {
-    label: "3,50%–3,75%",
-    asOf: "2026-06-22",
-  },
-  marketProbability: {
-    label: "through 16/09/26",
-    hike: 76.7,
-    steady: 20.8,
-    cut: 2.5,
-    asOf: "2026-06-22",
-  },
+  targetRange: { label: "Unavailable", asOf: null },
+  marketProbability: { status: "unavailable" },
 };
+
+function fedDecisionNote(policy) {
+  return policy.targetRange.asOf
+    ? `Decision announced ${formatDatePtBr(policy.targetRange.asOf)}`
+    : "The official target range could not be loaded.";
+}
+
+function fedSourceNote(policy) {
+  const checked = policy.updatedAt ? ` · Checked ${formatDatePtBr(policy.updatedAt.slice(0, 10))}` : "";
+  const stale = policy.updatedAt && Date.now() - Date.parse(policy.updatedAt) > 5 * 86400000;
+  return React.createElement(React.Fragment, null,
+    policy.targetRange.sourceUrl
+      ? React.createElement("a", { href: policy.targetRange.sourceUrl, target: "_blank", rel: "noopener noreferrer" }, "Source: Federal Reserve · FOMC statement")
+      : "Source: Federal Reserve",
+    checked,
+    stale ? " · Update overdue; last verified range" : ""
+  );
+}
 
 function pctOne(value) {
   return `${Number(value).toFixed(1).replace(".", ",")}%`;
@@ -509,12 +517,12 @@ function MobileCurveModule({ theme, model }) {
         React.createElement(
           "p",
           null,
-          `Range set on ${formatDatePtBr(fedPolicy.targetRange.asOf)}`
+          fedDecisionNote(fedPolicy)
         ),
         React.createElement(
           "p",
           { className: "fed-source-note" },
-          `Source: Federal Reserve FOMC statement · ${DATASET_STATUS_LABELS[fedPolicy._datasetMeta?.status] || fedPolicy._datasetMeta?.status || "Current"}`
+          fedSourceNote(fedPolicy)
         )
       )
     )
@@ -656,12 +664,12 @@ return React.createElement(
             React.createElement(
               "p",
               null,
-              `Range set on ${formatDatePtBr(fedPolicy.targetRange.asOf)}`
+              fedDecisionNote(fedPolicy)
             ),
             React.createElement(
               "p",
               { className: "fed-source-note" },
-              `Source: Federal Reserve FOMC statement · ${DATASET_STATUS_LABELS[fedPolicy._datasetMeta?.status] || fedPolicy._datasetMeta?.status || "Current"}`
+              fedSourceNote(fedPolicy)
             )
           )
         ),
