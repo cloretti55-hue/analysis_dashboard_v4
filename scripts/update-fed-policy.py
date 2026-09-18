@@ -17,7 +17,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / "data" / "fed-policy.json"
 FED_MONETARY_FEED_URL = "https://www.federalreserve.gov/feeds/press_monetary.xml"
 MPT_XLSX_URL = "https://www.atlantafed.org/-/media/Project/Atlanta/FRBA/Documents/cenfis/market-probability-tracker/mpt_histdata.xlsx"
-TARGET_REFERENCE_START = date(2026, 9, 16)
 REQUEST_ATTEMPTS = 3
 REQUEST_TIMEOUT_SECONDS = 90
 
@@ -82,16 +81,26 @@ def latest_fomc_target_range() -> tuple[date, float, float, str]:
     source = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", source, flags=re.I)
     text = re.sub(r"<[^>]+>", " ", source)
     text = re.sub(r"\s+", " ", html.unescape(text))
+    lower, upper = parse_target_range(text)
+    return published_at, lower, upper, statement_url
+
+
+def parse_target_range(text: str) -> tuple[float, float]:
+    text = html.unescape(text).replace("–", "-").replace("−", "-")
+    text = re.sub(r"\s+", " ", text)
+    number = r"(?:\d+-\d+/\d+|\d+/\d+|\d+(?:\.\d+)?)"
     match = re.search(
-        r"target range for the federal funds rate at\s+"
-        r"(\d+(?:-\d+/\d+)?|\d+/\d+)\s+to\s+"
-        r"(\d+(?:-\d+/\d+)?|\d+/\d+)\s+percent",
-        text,
-        flags=re.I,
+        rf"target range for the federal funds rate\s+"
+        rf"(?:at|to|by\s+{number}\s+percentage\s+points?\s+to)\s+"
+        rf"({number})\s+to\s+({number})\s+percent",
+        text, flags=re.I,
     )
     if not match:
         raise ValueError("faixa-alvo não encontrada no comunicado mais recente do FOMC")
-    return published_at, parse_rate(match.group(1)), parse_rate(match.group(2)), statement_url
+    lower, upper = map(parse_rate, match.groups())
+    if not 0 <= lower < upper <= 30 or upper - lower > 1:
+        raise ValueError("faixa-alvo inválida no comunicado do FOMC")
+    return lower, upper
 
 
 def cell_ref_to_column(ref: str) -> int:
@@ -171,7 +180,7 @@ def fetch_mpt_rows() -> list[dict[str, object]]:
     return [dict(zip(headers, row)) for row in rows[1:] if row and row[0] is not None]
 
 
-def latest_mpt_probability_rows(reference_start: date) -> dict[str, object]:
+def latest_mpt_probability_rows(reference_start: date | None = None) -> dict[str, object]:
     rows = fetch_mpt_rows()
     candidates = []
     for row in rows:
@@ -180,17 +189,24 @@ def latest_mpt_probability_rows(reference_start: date) -> dict[str, object]:
             row_date = excel_serial_to_date(row["date"])
         except Exception:
             continue
-        if row_reference_start == reference_start and row.get("field") in {"Prob: hike", "Prob: cut"}:
+        if (row_reference_start == reference_start if reference_start else row_reference_start > date.today()) and row_date <= date.today() and row.get("field") in {"Prob: hike", "Prob: cut"}:
             candidates.append({**row, "date": row_date, "reference_start": row_reference_start})
 
     if not candidates:
         raise ValueError(f"No MPT rows found for {reference_start.isoformat()}")
 
+    reference_start = reference_start or min(row["reference_start"] for row in candidates)
+    candidates = [row for row in candidates if row["reference_start"] == reference_start]
     latest_date = max(row["date"] for row in candidates)
     latest_rows = [row for row in candidates if row["date"] == latest_date]
     result = {"asOf": latest_date, "referenceStart": reference_start, "targetRange": latest_rows[0].get("target_range")}
     for row in latest_rows:
         result[str(row["field"])] = float(str(row["value"]).strip())
+    if not all(key in result for key in ("Prob: hike", "Prob: cut")):
+        raise ValueError("Probabilidades incompletas na última observação do MPT")
+    hike, cut = result["Prob: hike"], result["Prob: cut"]
+    if not (0 <= hike <= 100 and 0 <= cut <= 100 and hike + cut <= 100.1):
+        raise ValueError("Probabilidades inválidas no MPT")
     return result
 
 
@@ -200,14 +216,28 @@ def format_range(lower: float, upper: float) -> str:
 
 def main() -> None:
     target_date, target_lower, target_upper, statement_url = latest_fomc_target_range()
-    mpt = latest_mpt_probability_rows(TARGET_REFERENCE_START)
-    hike = round(float(mpt.get("Prob: hike", 0.0)), 1)
-    cut = round(float(mpt.get("Prob: cut", 0.0)), 1)
-    steady = round(max(0.0, 100.0 - hike - cut), 1)
+    checked_at = datetime.now(timezone.utc).replace(microsecond=0)
+    try:
+        mpt = latest_mpt_probability_rows()
+        hike, cut = round(mpt["Prob: hike"], 1), round(mpt["Prob: cut"], 1)
+        probability = {
+            "status": "ok" if (date.today() - mpt["asOf"]).days <= 5 else "stale",
+            "referenceStart": mpt["referenceStart"].isoformat(),
+            "label": "through " + mpt["referenceStart"].strftime("%d/%m/%Y"),
+            "asOf": mpt["asOf"].isoformat(),
+            "hike": hike, "cut": cut, "steady": round(max(0, 100 - hike - cut), 1),
+            "targetRangeAtObservation": mpt.get("targetRange"),
+            "sourceDataset": "Atlanta Fed mpt_histdata.xlsx",
+        }
+    except Exception as exc:
+        print(f"WARNING: probabilidades indisponíveis; taxa oficial atualizada: {exc}")
+        probability = {"status": "unavailable", "asOf": None, "referenceStart": None,
+                       "hike": None, "cut": None, "steady": None, "error": str(exc)}
 
     payload = {
-        "asOf": mpt["asOf"].isoformat(),
-        "updatedAt": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "asOf": checked_at.date().isoformat(),
+        "updatedAt": checked_at.isoformat(),
+        "asOfBasis": "Date the latest official FOMC statement was checked; decision date is targetRange.asOf",
         "source": "Federal Reserve FOMC statement / Atlanta Fed Market Probability Tracker",
         "targetRange": {
             "lower": target_lower,
@@ -216,16 +246,7 @@ def main() -> None:
             "asOf": target_date.isoformat(),
             "sourceUrl": statement_url,
         },
-        "marketProbability": {
-            "referenceStart": TARGET_REFERENCE_START.isoformat(),
-            "label": "até 16/09/26",
-            "asOf": mpt["asOf"].isoformat(),
-            "hike": hike,
-            "steady": steady,
-            "cut": cut,
-            "targetRangeAtObservation": mpt.get("targetRange"),
-            "sourceDataset": "Atlanta Fed mpt_histdata.xlsx",
-        },
+        "marketProbability": probability,
     }
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
