@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "55 11 * * 1-5"
+    - cron: "15 21 * * 1-5"
 
 permissions:
   contents: write
@@ -29,14 +30,20 @@ jobs:
           python-version: "3.12"
 
       - name: Update Fed policy JSON
+        id: update
         run: python scripts/update-fed-policy.py
 
       - name: Validate datasets and refresh manifest
+        if: always()
         run: python scripts/validate-data.py --write-manifest --fail-on fed-policy
 
       - name: Publicar diagnóstico em português
         if: always()
-        run: python scripts/write-action-summary.py
+        run: |
+          python scripts/write-action-summary.py
+          if [ "${{ steps.update.outcome }}" != "success" ]; then
+            echo "Atualizacao do Fed falhou. O arquivo anterior foi preservado; consulte o log de Update Fed policy JSON." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Commit updated data
         run: python scripts/publish-data.py --message "Update Fed policy data" data/fed-policy.json
