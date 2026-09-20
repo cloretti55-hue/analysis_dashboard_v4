@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-18T23:30:21+00:00",
+  "generatedAt": "2026-09-20T14:45:28+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
@@ -232,7 +232,7 @@
       ],
       "producer": "scripts/update-etf-geography.py",
       "workflow": ".github/workflows/update-etf-geography.yml",
-      "sha256": "376e14e935931021d6855373b961bbd8c242e91fa7d5a3c5354d64a1a14efb10",
+      "sha256": "95af4cab62ba863c7e45c9988b4a48628d402413c5babde1ee008880d081d115",
       "recordCount": 13,
       "statusCounts": {
         "ok": 8,

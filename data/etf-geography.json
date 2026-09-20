@@ -1,7 +1,7 @@
 {
   "version": 2,
   "asOf": "2026-06-30",
-  "generatedAt": "2026-09-16T04:08:36+00:00",
+  "generatedAt": "2026-09-20T14:45:28+00:00",
   "methodology": "Pesos por país atualizados mensalmente a partir das lâminas oficiais da Vanguard, iShares US e SPDR e das páginas oficiais estruturadas da iShares UCITS. Em falha temporária, o último dado válido é preservado e marcado como stale.",
   "instruments": {
     "EIMI": {
@@ -35,7 +35,7 @@
       "source": "iShares UCITS",
       "sourceUrl": "https://www.ishares.com/uk/individual/en/products/264659/ishares-core-msci-em-imi-ucits-etf",
       "status": "stale",
-      "refreshError": "data não reconhecida: 14/Sept/2026"
+      "refreshError": "data não reconhecida: 17/Sept/2026"
     },
     "EMXC": {
       "weights": [
@@ -101,7 +101,7 @@
       "source": "iShares UCITS",
       "sourceUrl": "https://www.ishares.com/uk/individual/en/products/315592/ishares-msci-em-ex-china-ucits-etf",
       "status": "stale",
-      "refreshError": "data não reconhecida: 14/Sept/2026"
+      "refreshError": "data não reconhecida: 17/Sept/2026"
     },
     "FEZ": {
       "weights": [
@@ -266,7 +266,7 @@
       "source": "iShares UCITS",
       "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251861/ishares-msci-europe-ucits-etf-inc-fund",
       "status": "stale",
-      "refreshError": "data não reconhecida: 14/Sept/2026"
+      "refreshError": "data não reconhecida: 17/Sept/2026"
     },
     "IWDA": {
       "weights": [
@@ -299,7 +299,7 @@
       "source": "iShares UCITS",
       "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251882/ishares-core-msci-world-ucits-etf-acc-fund",
       "status": "stale",
-      "refreshError": "data não reconhecida: 14/Sept/2026"
+      "refreshError": "data não reconhecida: 17/Sept/2026"
     },
     "SWDA": {
       "weights": [
@@ -332,7 +332,7 @@
       "source": "iShares UCITS",
       "sourceUrl": "https://www.ishares.com/uk/individual/en/products/251882/ishares-core-msci-world-ucits-etf-acc-fund",
       "status": "stale",
-      "refreshError": "data não reconhecida: 14/Sept/2026"
+      "refreshError": "data não reconhecida: 17/Sept/2026"
     },
     "VEA": {
       "weights": [
