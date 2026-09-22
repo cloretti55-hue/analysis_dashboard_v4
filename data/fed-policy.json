@@ -1,6 +1,6 @@
 {
   "asOf": "2026-09-22",
-  "updatedAt": "2026-09-22T00:09:00+00:00",
+  "updatedAt": "2026-09-22T15:45:41+00:00",
   "asOfBasis": "Date the latest official FOMC statement was checked; decision date is targetRange.asOf",
   "source": "Federal Reserve FOMC statement / Atlanta Fed Market Probability Tracker",
   "targetRange": {
@@ -11,14 +11,12 @@
     "sourceUrl": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm"
   },
   "marketProbability": {
-    "status": "ok",
-    "referenceStart": "2026-12-16",
-    "label": "through 16/12/2026",
-    "asOf": "2026-09-18",
-    "hike": 94.5,
-    "cut": 1.5,
-    "steady": 4.0,
-    "targetRangeAtObservation": "375bps - 400bps",
-    "sourceDataset": "Atlanta Fed mpt_histdata.xlsx"
+    "status": "unavailable",
+    "asOf": null,
+    "referenceStart": null,
+    "hike": null,
+    "cut": null,
+    "steady": null,
+    "error": "File is not a zip file"
   }
 }
