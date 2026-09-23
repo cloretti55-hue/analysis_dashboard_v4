@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-22T23:43:39+00:00",
+  "generatedAt": "2026-09-23T15:36:26+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
@@ -164,14 +164,14 @@
       "path": "data/etf-performance.json",
       "kind": "generated",
       "status": "partial",
-      "asOf": "2026-09-22",
+      "asOf": "2026-09-23",
       "maxAgeDays": 5,
       "consumer": [
         "Data Lab"
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "4c1610ca3ca7d54069d18beb56efd7d71f48b2f8067f6c2c3f09353d80f7050f",
+      "sha256": "bf21ddb8da39c2e280ec8524037db5ae87b14d2649555d9f41b8c3daa6a54511",
       "recordCount": 156,
       "chartCoverage": 1.0,
       "statusCounts": {
@@ -197,14 +197,14 @@
       "path": "data/fixed-income-performance.json",
       "kind": "generated_fallback",
       "status": "ok",
-      "asOf": "2026-09-22",
+      "asOf": "2026-09-23",
       "maxAgeDays": 5,
       "consumer": [
         "Data Lab"
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "f214971ab7f50c1a568edc408a46f49e482d191c7ad366178bafed7e01a89e2d",
+      "sha256": "68fcead94fa5f07409d640de1a3b01773ec27542527f5256c60cb9609370db3f",
       "recordCount": 21,
       "chartCoverage": 1.0,
       "statusCounts": {
