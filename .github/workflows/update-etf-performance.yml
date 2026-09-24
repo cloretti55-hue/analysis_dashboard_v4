@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: "30 11 * * 1-5"
     - cron: "30 13 * * 1-5"
+    # After the US regular close in both daylight and standard time.
+    - cron: "30 22 * * 1-5"
 
 permissions:
   contents: write
@@ -55,6 +57,10 @@ jobs:
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
               output.write(f"should_run={'true' if should_run else 'false'}\n")
+
+      - name: Test return calculations
+        if: steps.recovery.outputs.should_run == 'true'
+        run: python -m unittest discover -s tests -p test_etf_return_periods.py
 
       - name: Update ETF performance JSON
         if: steps.recovery.outputs.should_run == 'true'
