@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 UNIVERSE_PATH = ROOT / "data" / "etf-universe.json"
 OUTPUT_PATH = ROOT / "data" / "etf-performance.json"
 FIXED_INCOME_FALLBACK_PATH = ROOT / "data" / "fixed-income-performance.json"
-YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=5y&interval=1d&events=history"
+YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1={start}&period2={end}&interval=1d&events=history"
 FRED_CSV_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}"
 TRADING_DAYS = 252
 REQUEST_ATTEMPTS = 3
@@ -27,7 +27,10 @@ def pct(value: float | None) -> float | None:
 
 
 def fetch_yahoo_chart_history(symbol: str) -> list[dict]:
-    url = YAHOO_CHART_URL.format(symbol=symbol.upper())
+    now = datetime.now(timezone.utc)
+    # Include a buffer before the five-year anniversary for weekends/holidays.
+    url = YAHOO_CHART_URL.format(symbol=symbol.upper(),
+        start=int((now - timedelta(days=5 * 366 + 14)).timestamp()), end=int(now.timestamp()))
     last_error: Exception | None = None
     for attempt in range(1, REQUEST_ATTEMPTS + 1):
         request = urllib.request.Request(
@@ -56,10 +59,17 @@ def fetch_yahoo_chart_history(symbol: str) -> list[dict]:
     adjclose = (indicators.get("adjclose") or [{}])[0].get("adjclose") or []
     close = (indicators.get("quote") or [{}])[0].get("close") or []
     values = adjclose if adjclose else close
+    regular = series.get("meta", {}).get("currentTradingPeriod", {}).get("regular", {})
+    session_start, session_end = regular.get("start"), regular.get("end")
 
     history = []
     for timestamp, price in zip(timestamps, values):
-        if price is None:
+        if price is None or not math.isfinite(float(price)) or float(price) <= 0:
+            continue
+        # A daily candle may still be live. Allow 15 minutes after session close.
+        if session_start and session_end and timestamp >= session_start and now.timestamp() < session_end + 900:
+            continue
+        if not session_end and datetime.fromtimestamp(timestamp, timezone.utc).date() >= now.date():
             continue
         history.append(
             {
@@ -179,12 +189,32 @@ def cumulative_return(history: list[dict], start: date, end_close: float) -> flo
 
 
 def annualized_return(history: list[dict], years: int, end_date: date, end_close: float) -> float | None:
-    start_row = nearest_on_or_after(history, end_date - timedelta(days=365 * years))
-    if not start_row or start_row["close"] <= 0:
+    start_row = period_start(history, years_before(end_date, years))
+    if not start_row or end_close <= 0:
         return None
     elapsed_days = max((end_date - start_row["date"]).days, 1)
     total = end_close / start_row["close"] - 1
     return (1 + total) ** (365 / elapsed_days) - 1
+
+
+def years_before(day: date, years: int) -> date:
+    try:
+        return day.replace(year=day.year - years)
+    except ValueError:  # Feb 29 maps to Feb 28 in a non-leap year.
+        return day.replace(year=day.year - years, day=28)
+
+
+def period_start(history: list[dict], target: date) -> dict | None:
+    row = nearest_on_or_before(history, target)
+    # No extrapolation from inception or from a distant/stale observation.
+    if not row or row["close"] <= 0 or (target - row["date"]).days > 7:
+        return None
+    return row
+
+
+def period_return(history: list[dict], target: date, end_close: float) -> float | None:
+    row = period_start(history, target)
+    return end_close / row["close"] - 1 if row else None
 
 
 def trailing_daily_returns(history: list[dict], end_date: date, days: int = 365) -> list[float]:
@@ -287,13 +317,15 @@ def metrics_for_history(history: list[dict]) -> dict:
     last = history[-1]
     end_date = last["date"]
     end_close = last["close"]
-    ytd_start = date(end_date.year, 1, 1)
+    ytd_start = date(end_date.year, 1, 1) - timedelta(days=1)
 
     return {
       "asOf": end_date.isoformat(),
       "lastClose": round(end_close, 4),
-      "returnYtdPct": pct(cumulative_return(history, ytd_start, end_close)),
-      "return1yPct": pct(cumulative_return(history, end_date - timedelta(days=365), end_close)),
+      "historyStartDate": history[0]["date"].isoformat(),
+      "historyObservationCount": len(history),
+      "returnYtdPct": pct(period_return(history, ytd_start, end_close)),
+      "return1yPct": pct(period_return(history, years_before(end_date, 1), end_close)),
       "return3yAnnPct": pct(annualized_return(history, 3, end_date, end_close)),
       "return5yAnnPct": pct(annualized_return(history, 5, end_date, end_close)),
       "vol1yAnnPct": pct(annualized_volatility(history, end_date)),
@@ -691,6 +723,9 @@ def main() -> None:
         "source": "Yahoo Finance chart adjusted close where available; manual_required for unmapped instruments.",
         "methodology": (
             "Return metrics use adjusted close from Yahoo Finance chart data when available. 3Y and 5Y returns are annualized. "
+            "YTD starts at the last available close of the prior year. Trailing returns require a valid observation "
+            "on or within seven calendar days before the anniversary; insufficient history returns null. "
+            "Current-session candles are excluded until 15 minutes after the regular close. "
             "Volatility is annualized from trailing daily returns. Benchmark failures do not discard current instrument prices; "
             "the prior benchmark series may be retained and explicitly marked stale. "
             "Public/free data may differ from licensed index-provider total return data."
