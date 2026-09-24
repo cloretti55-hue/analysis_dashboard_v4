@@ -428,3 +428,30 @@ body.theme-light .data-lab-result-card {
 .data-lab-end-label.is-end {
   text-anchor: end;
 }
+
+/* Use the existing subgroup hue for both hover and selection. */
+body .data-lab-layout :is(.data-lab-filter, .data-lab-chip):not([aria-pressed="true"]):hover {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 60%, var(--line));
+  background: color-mix(in srgb, var(--subgroup-color, var(--focus)) 12%, transparent);
+}
+body .data-lab-layout :is(.data-lab-filter, .data-lab-chip)[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 85%, white);
+  background: color-mix(in srgb, var(--subgroup-color, var(--focus)) 30%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--subgroup-color, var(--focus)) 65%, transparent);
+  color: #fff;
+}
+body .data-lab-layout .data-lab-chip[aria-pressed="true"] strong {
+  color: #fff;
+  font-weight: 650;
+}
+body .data-lab-layout .data-lab-chip[aria-pressed="true"] span {
+  color: rgba(255, 255, 255, 0.88);
+}
+body.theme-light .data-lab-layout :is(.data-lab-filter, .data-lab-chip)[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--subgroup-color, var(--focus)) 78%, #18324f);
+  background: color-mix(in srgb, var(--subgroup-color, var(--focus)) 28%, white);
+  color: #10233c;
+}
+body.theme-light .data-lab-layout .data-lab-chip[aria-pressed="true"] :is(strong, span) {
+  color: #10233c;
+}
