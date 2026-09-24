@@ -36,6 +36,48 @@ class UpdateFedPolicyTests(unittest.TestCase):
         self.assertEqual((lower, upper), (3.5, 3.75))
         self.assertEqual(source_url, "https://example.test/statement")
 
+    def test_rate_decisions(self):
+        for text, expected in [
+            ("raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent", (3.75, 4.0)),
+            ("lower the target range for the federal funds rate by 1/2 percentage point to 3 to 3-1/4 percent", (3.0, 3.25)),
+            ("maintain the target range for the federal funds rate at 0 to 1/4 percent", (0.0, .25)),
+            ("target range for the federal funds rate to 3.50 to 3.75 percent", (3.5, 3.75)),
+        ]:
+            with self.subTest(text=text):
+                self.assertEqual(FED_POLICY.parse_target_range(text), expected)
+        with self.assertRaises(ValueError):
+            FED_POLICY.parse_target_range("target range for the federal funds rate at 4 to 3 percent")
+
+    def test_next_horizon_skips_expired_and_rejects_incomplete(self):
+        from datetime import date, timedelta
+        today = date.today()
+        past, future = today - timedelta(days=1), today + timedelta(days=30)
+        rows = [{"reference_start": horizon.isoformat(), "date": today.isoformat(),
+                 "field": field, "value": value}
+                for horizon in (past, future)
+                for field, value in [("Prob: hike", "10"), ("Prob: cut", "20")]]
+        with patch.object(FED_POLICY, "fetch_mpt_rows", return_value=rows):
+            result = FED_POLICY.latest_mpt_probability_rows()
+            self.assertEqual(result["referenceStart"], future)
+        with patch.object(FED_POLICY, "fetch_mpt_rows", return_value=rows[:-1]):
+            with self.assertRaises(ValueError):
+                FED_POLICY.latest_mpt_probability_rows()
+
+    def test_official_rate_published_when_probability_source_fails(self):
+        import tempfile
+        import json
+        from datetime import date
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "fed.json"
+            with patch.object(FED_POLICY, "OUTPUT_PATH", output), patch.object(
+                FED_POLICY, "latest_fomc_target_range", return_value=(date(2026, 9, 16), 3.75, 4.0, "https://www.federalreserve.gov/test")
+            ), patch.object(FED_POLICY, "latest_mpt_probability_rows", side_effect=ValueError("offline")):
+                FED_POLICY.main()
+            data = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(data["targetRange"]["upper"], 4.0)
+            self.assertEqual(data["marketProbability"]["status"], "unavailable")
+            self.assertIsNone(data["marketProbability"]["hike"])
+
     def test_fetch_retries_transient_timeouts(self) -> None:
         attempts = [TimeoutError("timeout 1"), TimeoutError("timeout 2"), Response()]
 
