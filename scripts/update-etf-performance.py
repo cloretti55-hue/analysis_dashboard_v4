@@ -63,6 +63,14 @@ def pct(value: float | None) -> float | None:
     return round(value * 100, 2)
 
 
+def has_traded_quote(symbol: str, volumes: list, index: int) -> bool:
+    """B3 zero-volume rows are not observed trades; Yahoo can insert stale prices."""
+    if not symbol.upper().endswith(".SA"):
+        return True
+    volume = volumes[index] if index < len(volumes) else None
+    return isinstance(volume, (int, float)) and math.isfinite(volume) and volume > 0
+
+
 def fetch_yahoo_chart_history(symbol: str) -> list[dict]:
     now = datetime.now(timezone.utc)
     # Include a buffer before the five-year anniversary for weekends/holidays.
@@ -100,11 +108,14 @@ def fetch_yahoo_chart_history(symbol: str) -> list[dict]:
     adjclose = (indicators.get("adjclose") or [{}])[0].get("adjclose") or []
     close = (indicators.get("quote") or [{}])[0].get("close") or []
     values = adjclose if adjclose else close
+    volumes = (indicators.get("quote") or [{}])[0].get("volume") or []
     regular = series.get("meta", {}).get("currentTradingPeriod", {}).get("regular", {})
     session_start, session_end = regular.get("start"), regular.get("end")
 
     history = []
-    for timestamp, price in zip(timestamps, values):
+    for index, (timestamp, price) in enumerate(zip(timestamps, values)):
+        if not has_traded_quote(symbol, volumes, index):
+            continue
         if price is None or not math.isfinite(float(price)) or float(price) <= 0:
             continue
         # A daily candle may still be live. Allow 15 minutes after session close.
@@ -325,32 +336,40 @@ def beta_1y(history: list[dict], benchmark_history: list[dict] | None) -> float 
     return round(covariance / variance_x, 2)
 
 
-def correlation_1y(history: list[dict], benchmark_history: list[dict] | None) -> float | None:
-    if not benchmark_history:
-        return None
+def correlation_details(history: list[dict], benchmark_history: list[dict] | None) -> dict:
+    result = {"value": None, "startDate": None, "endDate": None, "observations": 0,
+              "methodology": "Pearson correlation of returns over identical observed start/end dates; trailing 365 days or available history; gaps over 7 days excluded."}
+    if not history or not benchmark_history:
+        return result
     history = sorted(history, key=lambda row: row["date"])
-    benchmark_history = sorted(benchmark_history, key=lambda row: row["date"])
-    if len(history) < 40 or len(benchmark_history) < 40:
-        return None
+    reference = {row["date"]: row["close"] for row in benchmark_history}
+    end = min(history[-1]["date"], max(reference))
+    start = end - timedelta(days=365)
+    pairs = []
+    for prev, cur in zip(history, history[1:]):
+        a, b = prev["date"], cur["date"]
+        if not (start <= a < b <= end) or (b - a).days > 7:
+            continue
+        if a not in reference or b not in reference:
+            continue
+        prices = [prev["close"], cur["close"], reference[a], reference[b]]
+        if not all(math.isfinite(v) and v > 0 for v in prices):
+            continue
+        pairs.append((a, b, cur["close"] / prev["close"] - 1, reference[b] / reference[a] - 1))
+    if not pairs:
+        return result
+    result.update(startDate=pairs[0][0].isoformat(), endDate=pairs[-1][1].isoformat(), observations=len(pairs))
+    if len(pairs) < 30:
+        return result
+    x, y = [p[2] for p in pairs], [p[3] for p in pairs]
+    if statistics.pstdev(x) < 1e-12 or statistics.pstdev(y) < 1e-12:
+        return result
+    result["value"] = round(max(-1.0, min(1.0, statistics.correlation(x, y))), 2)
+    return result
 
-    end_date = min(history[-1]["date"], benchmark_history[-1]["date"])
-    start_date = end_date - timedelta(days=365)
-    left = daily_returns_by_date(history, start_date)
-    right = daily_returns_by_date(benchmark_history, start_date)
-    common_dates = sorted(set(left) & set(right))
-    if len(common_dates) < 30:
-        return None
 
-    x = [right[day] for day in common_dates]
-    y = [left[day] for day in common_dates]
-    mean_x = statistics.mean(x)
-    mean_y = statistics.mean(y)
-    std_x = math.sqrt(sum((value - mean_x) ** 2 for value in x))
-    std_y = math.sqrt(sum((value - mean_y) ** 2 for value in y))
-    if std_x == 0 or std_y == 0:
-        return None
-    covariance = sum((a - mean_y) * (b - mean_x) for a, b in zip(y, x))
-    return round(covariance / (std_x * std_y), 2)
+def correlation_1y(history: list[dict], benchmark_history: list[dict] | None) -> float | None:
+    return correlation_details(history, benchmark_history)["value"]
 
 
 def metrics_for_history(history: list[dict]) -> dict:
@@ -760,6 +779,7 @@ def main(argv=()) -> None:
         if problem:
             output_by_ticker[item["ticker"]] = retain_valid_record(result, previous, item, problem)
             continue
+        result["correlationPeriod"] = correlation_details(history, benchmark_history)
         if item["assetClass"] == "fixed_income":
             result["correlation1yVsCash"] = (
                 correlation_1y(history, benchmark_history) if benchmark_history else None
