@@ -10,8 +10,15 @@ const DATA_LAB_METRICS = [
 ];
 
 const DATA_LAB_GROUPS = ["Fixed Income", "Core Equities", "Caps/Style", "Sectors", "US Satellites", "European Themes", "China / China+1", "Commodities", "Hedge"];
+const BRAZIL_GROUPS = ["Brazilian Equities", "Global Equities", "Fixed Income Brazil", "Alternatives", "Crypto"];
+const marketFor = (item) => item?.market === "Brazil" ? "Brazil" : "Global";
 
 const DATA_LAB_SUBGROUP_ORDER = {
+  "Brazilian Equities": ["Core", "Small caps", "Dividends / style", "Financials"],
+  "Global Equities": ["S&P 500", "Nasdaq-100"],
+  "Fixed Income Brazil": ["Floating rate", "Target duration", "Fixed rate", "Short inflation-linked", "Broad inflation-linked", "Long inflation-linked", "Private credit"],
+  "Alternatives": ["Gold"],
+  "Crypto": ["Crypto basket", "Bitcoin"],
   "Fixed Income": ["USD liquidity", "Treasuries by duration", "TIPS / inflation", "USD credit", "Core aggregate bonds"],
   "Core Equities": ["Broad US", "Growth / Nasdaq", "Developed global core", "Developed ex-US", "European core", "Emerging markets"],
   "Caps/Style": ["Large cap", "Mid cap", "Small cap", "Micro cap"],
@@ -76,6 +83,7 @@ const SUBGROUP_TONES = {
 const categoryOf = (item) => (item?.category || "").toLowerCase();
 
 const rawGroupFor = (item) => {
+  if (marketFor(item) === "Brazil") return item.displayGroup;
   const category = categoryOf(item);
   if (category === "caps / style") return "Caps/Style";
   if (category.includes("gics sector")) return "Sectors";
@@ -91,6 +99,7 @@ const rawGroupFor = (item) => {
 const groupFor = (item) => item?.registry?.group || rawGroupFor(item);
 
 const rawSubgroupFor = (item) => {
+  if (marketFor(item) === "Brazil") return item.displaySubgroup;
   const category = categoryOf(item);
   const ticker = item?.ticker || "";
   const group = rawGroupFor(item);
@@ -177,6 +186,7 @@ const subgroupFor = (item, group = groupFor(item)) => group === "Caps/Style"
 const subgroupTone = (subgroup) => SUBGROUP_TONES[subgroup] || "#7fb8ff";
 
 const benchmarkCodeFor = (item) => {
+  if (marketFor(item) === "Brazil") return item.benchmark;
   if (item?.assetClass === "volatility") return null;
   if (item?.assetClass === "fixed_income") return "FED_FUNDS";
   if (groupFor(item) === "Commodities") return "CPI_SPY";
@@ -184,6 +194,7 @@ const benchmarkCodeFor = (item) => {
 };
 
 const benchmarkLabelFor = (item) => {
+  if (marketFor(item) === "Brazil") return item.benchmarkDisplay || "";
   if (item?.registry?.benchmark?.display !== undefined) return item.registry.benchmark.display;
   const benchmarkCode = benchmarkCodeFor(item);
   if (!benchmarkCode) return "";
@@ -194,6 +205,7 @@ const benchmarkLabelFor = (item) => {
 };
 
 const referenceLabelFor = (item) => {
+  if (marketFor(item) === "Brazil") return item.assetClass === "fixed_income" ? "CDI accumulated return" : "BRL market comparison";
   if (item?.registry?.referenceLabel !== undefined) return item.registry.referenceLabel;
   if (item?.assetClass === "volatility") return "";
   if (item?.assetClass === "fixed_income") return "Fed Funds";
@@ -203,6 +215,12 @@ const referenceLabelFor = (item) => {
 };
 
 const metricsFor = (item) => {
+  if (marketFor(item) === "Brazil") {
+    const metrics = DATA_LAB_METRICS.filter(([key]) => key !== "beta1yVsSp500");
+    return [...metrics, item.assetClass === "fixed_income"
+      ? ["correlation1yVsCash", "Correlation vs CDI"]
+      : ["correlation1yVsSp500", `Correlation vs ${item.benchmarkDisplay}`]];
+  }
   const assetClass = item?.assetClass || "";
   const category = categoryOf(item);
   const isMacro = ["commodity", "currency", "inverse_equity"].includes(assetClass);
@@ -223,6 +241,7 @@ const metricIsSuppressed = (item, key) =>
   (item?.ticker === "JEPQ" && key === "return5yAnnPct");
 
 const chartBenchmarkFor = (item, points = []) => {
+  if (marketFor(item) === "Brazil") return { key: item.assetClass === "fixed_income" ? "cash" : "sp500", label: item.benchmarkDisplay };
   if (benchmarkCodeFor(item) === "CPI_SPY") return { key: "sp500", label: "S&P 500" };
   const benchmarkCode = benchmarkCodeFor(item);
   if (!benchmarkCode) return { key: null, label: "" };
@@ -301,6 +320,8 @@ const createCatalog = (payload) => {
 };
 
 return {
+  BRAZIL_GROUPS,
+  marketFor,
   DATA_LAB_GROUPS,
   DATA_LAB_SUBGROUP_ORDER,
   createCatalog,
