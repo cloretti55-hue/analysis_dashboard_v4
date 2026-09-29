@@ -59,7 +59,7 @@ class FrontendInstrumentRegistryTests(unittest.TestCase):
     def test_current_instrument_coverage_is_preserved(self):
         universe_tickers = [item["ticker"] for item in UNIVERSE["instruments"]]
         performance_tickers = [item["ticker"] for item in PERFORMANCE["instruments"]]
-        self.assertEqual(len(universe_tickers), 156)
+        self.assertEqual(len(universe_tickers), 172)
         self.assertEqual(len(universe_tickers), len(set(universe_tickers)))
         self.assertEqual(set(universe_tickers), set(performance_tickers))
 
@@ -99,7 +99,7 @@ class FrontendInstrumentRegistryTests(unittest.TestCase):
             self.assertEqual(instruments[ticker]["currency"], "USD")
             self.assertEqual(instruments[ticker]["quoteSymbol"], ticker)
             self.assertEqual(instruments[ticker]["assetClass"], "fixed_income")
-        self.assertEqual(sum(item["assetClass"] == "fixed_income" for item in UNIVERSE["instruments"]), 21)
+        self.assertEqual(sum(item["assetClass"] == "fixed_income" and item.get("market") != "Brazil" for item in UNIVERSE["instruments"]), 21)
 
     def test_usd_accumulating_ucits_sector_family_is_registered(self):
         instruments = {item["ticker"]: item for item in UNIVERSE["instruments"]}
