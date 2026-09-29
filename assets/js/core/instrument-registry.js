@@ -194,6 +194,7 @@ const benchmarkCodeFor = (item) => {
 };
 
 const benchmarkLabelFor = (item) => {
+  if (["BOVA11", "IVVB11"].includes(item?.ticker)) return "";
   if (marketFor(item) === "Brazil") return item.benchmarkDisplay || "";
   if (item?.registry?.benchmark?.display !== undefined) return item.registry.benchmark.display;
   const benchmarkCode = benchmarkCodeFor(item);
@@ -205,6 +206,7 @@ const benchmarkLabelFor = (item) => {
 };
 
 const referenceLabelFor = (item) => {
+  if (["BOVA11", "IVVB11"].includes(item?.ticker)) return "";
   if (marketFor(item) === "Brazil") return item.assetClass === "fixed_income" ? "CDI accumulated return" : "BRL market comparison";
   if (item?.registry?.referenceLabel !== undefined) return item.registry.referenceLabel;
   if (item?.assetClass === "volatility") return "";
@@ -215,6 +217,7 @@ const referenceLabelFor = (item) => {
 };
 
 const metricsFor = (item) => {
+  if (["BOVA11", "IVVB11"].includes(item?.ticker)) return DATA_LAB_METRICS.filter(([key]) => key !== "beta1yVsSp500");
   if (marketFor(item) === "Brazil") {
     const metrics = DATA_LAB_METRICS.filter(([key]) => key !== "beta1yVsSp500");
     return [...metrics, item.assetClass === "fixed_income"
@@ -254,6 +257,7 @@ const chartBenchmarkFor = (item, points = []) => {
 };
 
 const chartBenchmarksFor = (item, points = []) => {
+  if (["BOVA11", "IVVB11"].includes(item?.ticker)) return [];
   if (benchmarkCodeFor(item) === "CPI_SPY") {
     return [
       { key: "sp500", label: "S&P 500", className: "is-spy" },
