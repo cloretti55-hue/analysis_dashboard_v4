@@ -197,7 +197,7 @@ const SHORT_DISCLAIMER =
   "Informational and educational content. It does not constitute investment or tax advice. Data may be delayed, approximate or subject to revision.";
 
 const DATALAB_DISCLAIMER_EXTRA =
-  "Approximate total return based on adjusted close; S&P 500 proxied by SPY and Nasdaq-100 by QQQ; data may be delayed or revised.";
+  "Approximate total return based on adjusted close. Comparison references and trading currencies are identified per instrument; data may be delayed or revised.";
 
 function Disclaimer({ full = false, dataLab = false, methodNote = null }) {
   return React.createElement(
