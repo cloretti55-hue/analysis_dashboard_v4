@@ -170,7 +170,7 @@ function DataLabLineChart({ active }) {
             : null
         )
       : React.createElement("p", { className: "data-note" }, "Historical series is not yet available for this instrument."),
-    React.createElement("p", { className: "data-note" }, `Window: up to 3 years, or available history (${points[0]?.date || "n/a"} to ${endPoint?.date || "n/a"}). Base 100. Approximate total return based on adjusted close; data may be delayed or revised. ${active.market === "Brazil" ? "Only sessions with reported trading volume are used. Gaps over 30 days are not connected. CDI is rebased to each fund's start date; different windows and vertical scales affect its appearance." : ""}`)
+    React.createElement("p", { className: "data-note" }, `Window: up to 3 years, or available history (${points[0]?.date || "n/a"} to ${endPoint?.date || "n/a"}). Base 100. Approximate total return based on adjusted close; data may be delayed or revised. ${active.market === "Brazil" ? "Repeated stale price levels with extreme discontinuities are excluded; missing volume alone does not exclude a price. Gaps over 30 days are not connected. CDI is rebased to each fund's start date; different windows and vertical scales affect its appearance." : ""}`)
   );
 }
 
@@ -299,7 +299,7 @@ function DataLabModule() {
               "aria-pressed": selectedGroup === group,
               onClick: () => setSelectedGroup(group),
             },
-            `${group === "Caps/Style" ? "Cap/Style" : group} ${groupCounts[group] ? `(${groupCounts[group]})` : ""}`
+            `${group === "Caps/Style" ? "Cap/Style" : group === "Brazilian Equities" ? "Local Equities" : group} ${groupCounts[group] ? `(${groupCounts[group]})` : ""}`
           )
         )
       ),

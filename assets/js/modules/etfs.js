@@ -2337,7 +2337,7 @@ function CommodityModule({ dataLabTickers, initialEtf = "GLD" }) {
 }
 
 const ETF_SUBMODULES = [
-  ["br-equity", "Brazilian Equities"],
+  ["br-equity", "Local Equities"],
   ["br-global", "Global Equities"],
   ["br-fixed", "Fixed Income"],
   ["br-alternatives", "Alternatives"],
