@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-29T21:13:13+00:00",
+  "generatedAt": "2026-09-29T21:40:59+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
-      "ok": 6,
-      "stale": 2,
       "manual": 1,
-      "partial": 2
+      "ok": 6,
+      "partial": 2,
+      "stale": 2
     },
     "blockingErrorCount": 0
   },
@@ -25,7 +25,7 @@
       ],
       "producer": "scripts/update-us-yield-curves.py",
       "workflow": ".github/workflows/update-us-yield-curves.yml",
-      "sha256": "11586bb8067a4b2ff7563fa72f0940cdb151dfb860bf68b6ef29c597f00b39f7",
+      "sha256": "16dbc93c4a97fce84d91318efd225759de1b9beb2d726393d27764ae657d2bc4",
       "maturities": 5,
       "curveCount": 3,
       "issues": []
@@ -42,7 +42,7 @@
       ],
       "producer": "scripts/update-fed-policy.py",
       "workflow": ".github/workflows/update-fed-policy.yml",
-      "sha256": "bcf585397e59ca8d2ff305a28874d375bbd1eb874d81ed4894791a46c1015804",
+      "sha256": "29b6b65c9dd46aa0f50070c05d4e4582803cf743496a07cd13d6e9fad8c76402",
       "issues": []
     },
     {
@@ -124,14 +124,14 @@
       "path": "data/mag7-valuation.json",
       "kind": "generated",
       "status": "ok",
-      "asOf": "2026-09-28",
+      "asOf": "2026-09-29",
       "maxAgeDays": 5,
       "consumer": [
         "Equity Valuation"
       ],
       "producer": "scripts/update-mag7-valuation.py",
       "workflow": ".github/workflows/update-mag7-valuation.yml",
-      "sha256": "76762c7541c3d54a408b2f17fffe5b3af6bc1e4b47420aad8e42db4890fa78fa",
+      "sha256": "1490623bdfeb08f76f63149351d4fe3158cbbb3b8968a85d0592b1eadca2221a",
       "recordCount": 7,
       "issues": []
     },
@@ -198,14 +198,14 @@
       "path": "data/fixed-income-performance.json",
       "kind": "generated_fallback",
       "status": "ok",
-      "asOf": "2026-09-28",
+      "asOf": "2026-09-29",
       "maxAgeDays": 5,
       "consumer": [
         "Data Lab"
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "ab5ba8b488fb7652f7d849ec69298b4ee7dd3a2707b3209b81391c7b0b7cee67",
+      "sha256": "11378821c9ca64c218cc3084654387f668ee8ed93678edb3a381dc5f998bf458",
       "recordCount": 21,
       "chartCoverage": 1.0,
       "statusCounts": {
@@ -233,7 +233,7 @@
       ],
       "producer": "scripts/update-etf-geography.py",
       "workflow": ".github/workflows/update-etf-geography.yml",
-      "sha256": "9de93f24fd097ff1d1d2e4795500ba2c77d8c21c68ac0c744a28bfa5353c7cb4",
+      "sha256": "cebf18740043a8731b09531b4e880f90ae0a30309e267a1137fa4a880df6f111",
       "recordCount": 13,
       "statusCounts": {
         "ok": 8,
