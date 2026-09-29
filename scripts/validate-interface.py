@@ -78,7 +78,7 @@ def check_instrument_registry(page: Page, label: str) -> None:
     if not state["hasCatalogFactory"]:
         raise AssertionError(f"Registro de instrumentos indisponível em {label}")
     expected_filters = [
-        "Fixed Income (21)", "Core Equities (19)", "Caps/Style (11)", "Sectors (21)",
+        "Fixed Income (21)", "Core Equities (19)", "Cap/Style (11)", "Sectors (21)",
         "US Satellites (17)", "European Themes (4)", "China / China+1 (14)",
         "Commodities (31)", "Hedge (21)",
     ]
@@ -145,12 +145,12 @@ def check_caps_style(page: Page, base_url: str, label: str) -> None:
         page.locator(".etf-full-names .detail-role").wait_for()
         page.locator(".etf-trading-details").wait_for()
         page.get_by_role("link", name=f"Open {ticker} in Data Lab", exact=True).click()
-        page.locator('.data-lab-filter[aria-pressed="true"]').filter(has_text="Caps/Style").wait_for()
+        page.locator('.data-lab-filter[aria-pressed="true"]').filter(has_text="Cap/Style").wait_for()
         page.locator(f'svg[aria-label="{ticker} chart versus S&P 500"]').wait_for()
         path = page.locator(".data-lab-line.is-etf").get_attribute("d") or ""
         if path.count("L") < 2 or "NaN" in path:
             raise AssertionError(f"Gráfico inválido para {ticker} ({label})")
-        assert_no_horizontal_overflow(page, f"Caps/Style {ticker} ({label})")
+        assert_no_horizontal_overflow(page, f"Cap/Style {ticker} ({label})")
         page.get_by_role("link", name=f"Open {ticker} in ETFs", exact=True).click()
         page.wait_for_url(f"**/#etfs/caps/{ticker}")
 
