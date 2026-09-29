@@ -60,7 +60,7 @@ jobs:
 
       - name: Test return calculations
         if: steps.recovery.outputs.should_run == 'true'
-        run: python -m unittest discover -s tests -p test_etf_return_periods.py
+        run: python -m unittest discover -s tests -p 'test_etf*.py'
 
       - name: Update ETF performance JSON
         if: steps.recovery.outputs.should_run == 'true'
