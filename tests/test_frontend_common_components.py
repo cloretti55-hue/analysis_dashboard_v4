@@ -34,7 +34,7 @@ class FrontendCommonComponentTests(unittest.TestCase):
         self.assertIn('React.createElement(HalDataLogo, { as: "h2" })', COMMON_JS)
 
     def test_dark_theme_is_default_and_hash_navigation_is_observed(self):
-        self.assertIn('const [theme, setTheme] = useState("dark")', APP_JS)
+        self.assertIn('const [theme, setTheme] = useState("light")', APP_JS)
         self.assertIn('window.addEventListener("hashchange", syncModuleFromHistory)', APP_JS)
         self.assertIn('window.removeEventListener("hashchange", syncModuleFromHistory)', APP_JS)
         self.assertIn('useState(() => activeModule === "home" ? null : activeModule)', APP_JS)
