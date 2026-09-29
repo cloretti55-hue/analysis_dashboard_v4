@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-29T01:11:09+00:00",
+  "generatedAt": "2026-09-29T02:16:49+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
@@ -171,19 +171,19 @@
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "d55adfbf0f3fcc1e28bbe271b9d3aa1c3c50a0ab94fa72dca55670a4326a23d8",
+      "sha256": "bc6f65a338fc466a135a3d3c89d58770778ecad6c0d0cbe9fc3ea43ddce1cf37",
       "recordCount": 156,
       "chartCoverage": 1.0,
       "statusCounts": {
         "ok": 156
       },
-      "staleCount": 1,
+      "staleCount": 2,
       "staleBenchmarkCount": 52,
       "issues": [
         {
           "severity": "warning",
           "code": "stale_instruments",
-          "message": "1 instrument(s) use prior valid data"
+          "message": "2 instrument(s) use prior valid data"
         },
         {
           "severity": "warning",
@@ -204,7 +204,7 @@
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "af5c7ce0504b8942ab68d1307505cc7c2466cc0c913fc38c420b5df197f89c69",
+      "sha256": "ab5ba8b488fb7652f7d849ec69298b4ee7dd3a2707b3209b81391c7b0b7cee67",
       "recordCount": 21,
       "chartCoverage": 1.0,
       "statusCounts": {
