@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-09-29T18:50:52+00:00",
+  "generatedAt": "2026-09-29T10:51:11+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
-      "manual": 1,
       "ok": 6,
-      "partial": 2,
-      "stale": 2
+      "stale": 2,
+      "manual": 1,
+      "partial": 2
     },
     "blockingErrorCount": 0
   },
@@ -25,7 +25,7 @@
       ],
       "producer": "scripts/update-us-yield-curves.py",
       "workflow": ".github/workflows/update-us-yield-curves.yml",
-      "sha256": "16dbc93c4a97fce84d91318efd225759de1b9beb2d726393d27764ae657d2bc4",
+      "sha256": "11586bb8067a4b2ff7563fa72f0940cdb151dfb860bf68b6ef29c597f00b39f7",
       "maturities": 5,
       "curveCount": 3,
       "issues": []
@@ -42,7 +42,7 @@
       ],
       "producer": "scripts/update-fed-policy.py",
       "workflow": ".github/workflows/update-fed-policy.yml",
-      "sha256": "29b6b65c9dd46aa0f50070c05d4e4582803cf743496a07cd13d6e9fad8c76402",
+      "sha256": "bcf585397e59ca8d2ff305a28874d375bbd1eb874d81ed4894791a46c1015804",
       "issues": []
     },
     {
@@ -124,14 +124,14 @@
       "path": "data/mag7-valuation.json",
       "kind": "generated",
       "status": "ok",
-      "asOf": "2026-09-29",
+      "asOf": "2026-09-28",
       "maxAgeDays": 5,
       "consumer": [
         "Equity Valuation"
       ],
       "producer": "scripts/update-mag7-valuation.py",
       "workflow": ".github/workflows/update-mag7-valuation.yml",
-      "sha256": "1490623bdfeb08f76f63149351d4fe3158cbbb3b8968a85d0592b1eadca2221a",
+      "sha256": "76762c7541c3d54a408b2f17fffe5b3af6bc1e4b47420aad8e42db4890fa78fa",
       "recordCount": 7,
       "issues": []
     },
@@ -165,26 +165,26 @@
       "path": "data/etf-performance.json",
       "kind": "generated",
       "status": "partial",
-      "asOf": "2026-09-29",
+      "asOf": "2026-09-28",
       "maxAgeDays": 5,
       "consumer": [
         "Data Lab"
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "0ef32a7b59f873be109bb4a43368e8e95b899dafbeda9ae6b8217a5b8a96cf71",
+      "sha256": "66a1915ff151b20b9b9844061c83000f14be1f9fad84217c4be310d368fd47da",
       "recordCount": 172,
       "chartCoverage": 1.0,
       "statusCounts": {
         "ok": 172
       },
-      "staleCount": 1,
+      "staleCount": 2,
       "staleBenchmarkCount": 52,
       "issues": [
         {
           "severity": "warning",
           "code": "stale_instruments",
-          "message": "1 instrument(s) use prior valid data"
+          "message": "2 instrument(s) use prior valid data"
         },
         {
           "severity": "warning",
@@ -198,14 +198,14 @@
       "path": "data/fixed-income-performance.json",
       "kind": "generated_fallback",
       "status": "ok",
-      "asOf": "2026-09-29",
+      "asOf": "2026-09-28",
       "maxAgeDays": 5,
       "consumer": [
         "Data Lab"
       ],
       "producer": "scripts/update-etf-performance.py",
       "workflow": ".github/workflows/update-etf-performance.yml",
-      "sha256": "11378821c9ca64c218cc3084654387f668ee8ed93678edb3a381dc5f998bf458",
+      "sha256": "ab5ba8b488fb7652f7d849ec69298b4ee7dd3a2707b3209b81391c7b0b7cee67",
       "recordCount": 21,
       "chartCoverage": 1.0,
       "statusCounts": {
