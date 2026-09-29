@@ -130,7 +130,7 @@ React.createElement(MobileModuleContent, { activeModule: selectedModule, theme, 
 
 function App() {
   const [activeModule, setActiveModuleState] = useState(() => moduleFromHash());
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const curvesFed = useCurvesFedModel();
   const isMobile = useIsMobile();
 
