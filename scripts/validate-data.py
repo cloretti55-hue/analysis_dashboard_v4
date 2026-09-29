@@ -278,7 +278,7 @@ def validate_performance(
 
     expected_items = universe.get("instruments", []) if isinstance(universe, dict) else []
     if fixed_only:
-        expected_items = [item for item in expected_items if item.get("assetClass") == "fixed_income"]
+        expected_items = [item for item in expected_items if item.get("assetClass") == "fixed_income" and item.get("market") != "Brazil"]
     expected = {item.get("ticker") for item in expected_items if item.get("ticker")}
     expected_by_ticker = {item.get("ticker"): item for item in expected_items if item.get("ticker")}
     observed = {item.get("ticker") for item in instruments if isinstance(item, dict) and item.get("ticker")}

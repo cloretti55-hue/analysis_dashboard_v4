@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import argparse
 import math
 import statistics
 import time
@@ -18,6 +19,42 @@ FRED_CSV_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}"
 TRADING_DAYS = 252
 REQUEST_ATTEMPTS = 3
 REQUEST_RETRY_SECONDS = 5
+
+
+def cdi_accumulated_history(rows: list[dict]) -> list[dict]:
+    """SGS 12 is percent per business day: compound once per dated observation."""
+    observations = {}
+    for row in rows:
+        day = datetime.strptime(row["data"], "%d/%m/%Y").date()
+        rate = float(str(row["valor"]).replace(",", "."))
+        if not math.isfinite(rate) or rate <= -100:
+            raise ValueError("Invalid CDI daily rate")
+        if day in observations and observations[day] != rate:
+            raise ValueError("Conflicting CDI dates")
+        observations[day] = rate
+    level, history = 100.0, []
+    for day, rate in sorted(observations.items()):
+        level *= 1 + rate / 100
+        history.append({"date": day, "close": level})
+    if len(history) < 2:
+        raise ValueError("Insufficient CDI history")
+    return history
+
+
+def fetch_cdi_history() -> list[dict]:
+    today = datetime.now(timezone.utc).date()
+    start = today - timedelta(days=5 * 366 + 14)
+    url = ("https://api.bcb.gov.br/dados/serie/bcdata.sgs.12/dados?formato=json"
+           f"&dataInicial={start:%d/%m/%Y}&dataFinal={today:%d/%m/%Y}")
+    for attempt in range(REQUEST_ATTEMPTS):
+        try:
+            request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 GeneralChannels"})
+            with urllib.request.urlopen(request, timeout=45) as response:
+                return cdi_accumulated_history(json.load(response))
+        except Exception:
+            if attempt == REQUEST_ATTEMPTS - 1:
+                raise
+            time.sleep(REQUEST_RETRY_SECONDS * (attempt + 1))
 
 
 def pct(value: float | None) -> float | None:
@@ -54,6 +91,10 @@ def fetch_yahoo_chart_history(symbol: str) -> list[dict]:
         raise ValueError(f"No Yahoo chart result for {symbol}: {error}")
 
     series = result[0]
+    if symbol.upper().endswith(".SA"):
+        meta = series.get("meta", {})
+        if meta.get("symbol", "").upper() != symbol.upper() or meta.get("currency") != "BRL":
+            raise ValueError(f"Unexpected Yahoo identity/currency for {symbol}")
     timestamps = series.get("timestamp") or []
     indicators = series.get("indicators", {})
     adjclose = (indicators.get("adjclose") or [{}])[0].get("adjclose") or []
@@ -440,6 +481,8 @@ def best_previous_benchmark_history(
 ) -> list[dict]:
     candidates = []
     for item in previous_by_ticker.values():
+        if item.get("market") == "Brazil":
+            continue  # Never reuse BRL/CDI as a USD/SPY/Fed Funds fallback.
         if asset_class and item.get("assetClass") != asset_class:
             continue
         history = previous_benchmark_history(item, benchmark_key)
@@ -472,7 +515,7 @@ def write_fixed_income_fallback(output_items: list[dict], expected_count: int) -
     fixed_income_items = [
         item
         for item in output_items
-        if item.get("assetClass") == "fixed_income"
+        if item.get("assetClass") == "fixed_income" and item.get("market") != "Brazil"
         and item.get("status") == "ok"
         and item.get("performanceChart", {}).get("points")
     ]
@@ -540,7 +583,10 @@ def retain_valid_record(result: dict, previous: dict | None, item: dict, reason:
     return {**result, "status": "error", "error": reason}
 
 
-def main() -> None:
+def main(argv=()) -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--market", choices=("Brazil", "Global"), help="Refresh only this listing market; preserve other saved records")
+    args = parser.parse_args(argv)
     universe = json.loads(UNIVERSE_PATH.read_text(encoding="utf-8"))
     previous_by_ticker = load_previous_by_ticker()
     previous_fed_funds_history = best_previous_benchmark_history(
@@ -557,7 +603,10 @@ def main() -> None:
     fed_funds_error: str | None = None
     cpi_history = None
     cpi_error: str | None = None
+    cdi_history, cdi_error = None, None
     output_by_ticker: dict[str, dict] = {}
+    if args.market and OUTPUT_PATH.exists():
+        output_by_ticker = {row["ticker"]: row for row in json.loads(OUTPUT_PATH.read_text(encoding="utf-8")).get("instruments", [])}
     as_of_dates = []
 
     universe_items = universe["instruments"]
@@ -567,6 +616,10 @@ def main() -> None:
     )
 
     for item in processing_items:
+        if args.market and item.get("market", "Global") != args.market:
+            if item["ticker"] not in output_by_ticker:
+                raise ValueError(f"Missing saved instrument outside selected market: {item['ticker']}")
+            continue
         result = {
             "ticker": item["ticker"],
             "name": item["name"],
@@ -581,6 +634,9 @@ def main() -> None:
             "comparisonBenchmarks": item.get("comparisonBenchmarks", []),
             "status": "pending",
         }
+        for field in ("market", "displayGroup", "displaySubgroup", "benchmarkDisplay", "trackedIndex"):
+            if field in item:
+                result[field] = item[field]
 
         if item["quoteSource"] != "yahoo_chart" or not item.get("quoteSymbol"):
             result["status"] = "manual_required"
@@ -608,7 +664,18 @@ def main() -> None:
         previous = previous_by_ticker.get(item["ticker"])
         is_commodity = set(item.get("comparisonBenchmarks", [])) == {"CPI", "SPY"}
 
-        if item["assetClass"] == "fixed_income":
+        if item.get("market") == "Brazil" and item["assetClass"] == "fixed_income":
+            benchmark_key = "cash"
+            if cdi_history is None and cdi_error is None:
+                try:
+                    cdi_history = fetch_cdi_history()
+                except Exception as exc:
+                    cdi_error = str(exc)
+            benchmark_history = cdi_history
+            benchmark_error = cdi_error
+            result["benchmarkSource"] = "Banco Central do Brasil SGS 12; daily CDI compounded before taxes and costs"
+            result["benchmarkSourceUrl"] = "https://www3.bcb.gov.br/sgspub/consultarvalores/consultarValoresSeries.do?method=consultarSeries&series=12"
+        elif item["assetClass"] == "fixed_income":
             benchmark_key = "cash"
             result["benchmark"] = universe["benchmarkDefaults"]["fedFunds"]["display"]
             if fed_funds_history is None and fed_funds_error is None:
@@ -626,7 +693,9 @@ def main() -> None:
                 )
             else:
                 benchmark_error = fed_funds_error or "Fed Funds benchmark unavailable"
-        elif item["quoteSymbol"].upper() != benchmark_symbol.upper():
+        elif item["quoteSymbol"].upper() == benchmark_symbol.upper():
+            benchmark_history = history
+        else:
             try:
                 if benchmark_symbol not in benchmark_history_cache:
                     benchmark_history_cache[benchmark_symbol] = fetch_yahoo_chart_history(benchmark_symbol)
@@ -639,11 +708,11 @@ def main() -> None:
             benchmark_history = previous_benchmark_history(previous, benchmark_key)
             if (
                 not benchmark_history
-                and item["assetClass"] == "fixed_income"
+                and item["assetClass"] == "fixed_income" and item.get("market") != "Brazil"
                 and previous_fed_funds_history
             ):
                 benchmark_history = previous_fed_funds_history
-            if not benchmark_history and benchmark_key == "sp500" and previous_sp500_history:
+            if not benchmark_history and benchmark_key == "sp500" and previous_sp500_history and item.get("market") != "Brazil":
                 benchmark_history = previous_sp500_history
             result["benchmarkStatus"] = "stale" if benchmark_history else "error"
             result["benchmarkError"] = benchmark_error
@@ -697,10 +766,10 @@ def main() -> None:
             )
         else:
             result["beta1yVsSp500"] = (
-                beta_1y(history, benchmark_history) if benchmark_history else 1.0
+                beta_1y(history, benchmark_history) if benchmark_history else None
             )
             result["correlation1yVsSp500"] = (
-                correlation_1y(history, benchmark_history) if benchmark_history else 1.0
+                correlation_1y(history, benchmark_history) if benchmark_history else None
             )
 
         if item.get("compareToSp500") and benchmark_history:
@@ -730,18 +799,19 @@ def main() -> None:
             "the prior benchmark series may be retained and explicitly marked stale. "
             "Public/free data may differ from licensed index-provider total return data."
         ),
-        "benchmarkPolicy": "Equity instruments are compared against S&P 500 proxy SPY when relevant; fixed income charts use accrued Fed Funds from FRED DFF as a cash benchmark; commodity instruments are shown against U.S. CPI from FRED CPIAUCSL and S&P 500 proxy SPY.",
+        "benchmarkPolicy": "Global listings retain their configured SPY, QQQ, Fed Funds or CPI comparisons. Brazil listings use BRL comparisons: Brazilian equities, gold and crypto versus BOVA11; international equities versus IVVB11; Brazilian fixed income versus compounded daily CDI from Banco Central do Brasil SGS 12. Comparison references are not necessarily tracked indices. Returns are in each listing's trading currency, not converted to a common currency.",
         "instruments": output_items,
     }
 
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {OUTPUT_PATH}")
     expected_fixed_income_count = sum(
-        item.get("assetClass") == "fixed_income"
+        item.get("assetClass") == "fixed_income" and item.get("market") != "Brazil"
         for item in universe_items
     )
-    write_fixed_income_fallback(output_items, expected_fixed_income_count)
+    if args.market != "Brazil":
+        write_fixed_income_fallback(output_items, expected_fixed_income_count)
 
 
 if __name__ == "__main__":
-    main()
+    main(None)
