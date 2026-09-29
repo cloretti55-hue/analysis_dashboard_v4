@@ -2344,7 +2344,7 @@ const ETF_SUBMODULES = [
   ["br-crypto", "Crypto"],
   ["fixed", "Fixed Income"],
   ["core", "Core Equities"],
-  ["caps", "Caps/Style"],
+  ["caps", "Cap/Style"],
   ["sectors", "Sectors"],
   ["satellites", "US Satellites"],
   ["europe", "European Themes"],
@@ -2513,7 +2513,7 @@ function EtfsModule() {
     React.createElement("nav", { className: "panel etf-subtabs market-tabs", "aria-label": "Listing market" },
       ["Global", "Brazil"].map((market) => React.createElement("button", { key: market, type: "button", "aria-pressed": (brazilMarket ? "Brazil" : "Global") === market,
         onClick: () => { const tab = market === "Brazil" ? "br-equity" : "fixed"; setActiveEtfTab(tab); setRouteDestination({ tab, target: null }); window.history.replaceState(null, "", `#etfs/${tab}`); }
-      }, market))),
+      }, market === "Brazil" ? "BRAZILIAN ETFS" : "GLOBAL ETFS"))),
     React.createElement(
       "nav",
       { className: "panel etf-subtabs", "aria-label": "ETF submodules" },

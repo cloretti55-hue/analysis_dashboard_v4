@@ -90,14 +90,16 @@ function DataLabLineChart({ active }) {
   const pad = { top: 22, right: 24, bottom: 34, left: 44 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
-  const x = (index) => pad.left + (points.length <= 1 ? 0 : (index / (points.length - 1)) * plotW);
+  const firstDate = Date.parse(points[0]?.date);
+  const dateSpan = Math.max(1, Date.parse(points[points.length - 1]?.date) - firstDate);
+  const x = (index) => pad.left + ((Date.parse(points[index]?.date) - firstDate) / dateSpan) * plotW;
   const y = (value) => pad.top + ((maxValue - value) / Math.max(1, maxValue - minValue)) * plotH;
   const pathFor = (key) =>
     points
       .map((point, index) => {
         const value = point[key];
         if (typeof value !== "number" || !Number.isFinite(value)) return "";
-        return `${index === 0 ? "M" : "L"} ${x(index).toFixed(1)} ${y(value).toFixed(1)}`;
+        return `${index === 0 || (key === "etf" && Date.parse(point.date) - Date.parse(points[index - 1].date) > 30 * 86400000) ? "M" : "L"} ${x(index).toFixed(1)} ${y(value).toFixed(1)}`;
       })
       .filter(Boolean)
       .join(" ");
@@ -168,7 +170,7 @@ function DataLabLineChart({ active }) {
             : null
         )
       : React.createElement("p", { className: "data-note" }, "Historical series is not yet available for this instrument."),
-    React.createElement("p", { className: "data-note" }, "Approximate total return based on adjusted close; data may be delayed or revised.")
+    React.createElement("p", { className: "data-note" }, `Window: up to 3 years, or available history (${points[0]?.date || "n/a"} to ${endPoint?.date || "n/a"}). Base 100. Approximate total return based on adjusted close; data may be delayed or revised. ${active.market === "Brazil" ? "Only sessions with reported trading volume are used. Gaps over 30 days are not connected. CDI is rebased to each fund's start date; different windows and vertical scales affect its appearance." : ""}`)
   );
 }
 
@@ -278,7 +280,7 @@ function DataLabModule() {
       ["Global", "Brazil"].map((market) => React.createElement("button", {
         key: market, type: "button", "aria-pressed": selectedMarket === market,
         onClick: () => { setSelectedMarket(market); setSelectedGroup(market === "Brazil" ? "Brazilian Equities" : "Fixed Income"); }
-      }, market))),
+      }, market === "Brazil" ? "BRAZILIAN ETFS" : "GLOBAL ETFS"))),
     React.createElement(
       "section",
       { className: "panel data-lab-list" },
@@ -297,7 +299,7 @@ function DataLabModule() {
               "aria-pressed": selectedGroup === group,
               onClick: () => setSelectedGroup(group),
             },
-            `${group} ${groupCounts[group] ? `(${groupCounts[group]})` : ""}`
+            `${group === "Caps/Style" ? "Cap/Style" : group} ${groupCounts[group] ? `(${groupCounts[group]})` : ""}`
           )
         )
       ),
@@ -354,7 +356,7 @@ function DataLabModule() {
               React.createElement("p", null, active.name || active.category)
             ),
             selectedMarket === "Brazil" ? React.createElement("p", { className: "data-note" },
-              "Returns are measured in BRL. ", active.assetClass === "fixed_income"
+              "Returns are measured in BRL. ", !activeBenchmarkLabel ? "" : active.assetClass === "fixed_income"
                 ? "CDI is accumulated from Banco Central do Brasil daily rates, before taxes and costs. It is a comparison reference, not the fund's tracked index."
                 : `${active.benchmarkDisplay} is a market comparison, not necessarily the fund's tracked index.`) : null,
             React.createElement(
@@ -366,7 +368,7 @@ function DataLabModule() {
               activeReferenceLabel ? React.createElement("span", null, "Reference", React.createElement("b", null, activeReferenceLabel)) : null,
               active.performanceChart?.startDate ? React.createElement("span", null, "History", React.createElement("b", null, formatDatePtBr(active.performanceChart.startDate))) : null,
               React.createElement("span", null, "Data", React.createElement("b", null, active.dataAsOf ? formatDatePtBr(active.dataAsOf) : "n/a")),
-              selectedMarket === "Brazil" ? React.createElement("span", null, "Comparison data", React.createElement("b", null, active.benchmarkAsOf ? formatDatePtBr(active.benchmarkAsOf) : "n/a")) : null,
+              selectedMarket === "Brazil" && activeBenchmarkLabel ? React.createElement("span", null, "Comparison data", React.createElement("b", null, active.benchmarkAsOf ? formatDatePtBr(active.benchmarkAsOf) : "n/a")) : null,
               React.createElement("span", null, "Status", React.createElement("b", null, DATASET_STATUS_LABELS[active.dataStatus || active.status] || active.dataStatus || active.status || "n/a"))
             ),
             React.createElement(
@@ -378,8 +380,9 @@ function DataLabModule() {
                   return React.createElement(
                     "div",
                     { className: "data-lab-metric", key },
-                    React.createElement("span", null, renderMetricLabel(label)),
-                    React.createElement("strong", null, fmtDataLabMetric(key, metricValue))
+                    React.createElement("span", null, renderMetricLabel(key.startsWith("correlation") ? label.replace("Correlation", "Daily return correlation") + " · 1Y" : label)),
+                    React.createElement("strong", null, fmtDataLabMetric(key, metricValue)),
+                    key.startsWith("correlation") ? React.createElement("small", { className: "data-note" }, active.correlationPeriod?.observations ? `${active.correlationPeriod.startDate} to ${active.correlationPeriod.endDate} · ${active.correlationPeriod.observations} observations · ${Date.parse(active.correlationPeriod.endDate) - Date.parse(active.correlationPeriod.startDate) < 358 * 86400000 ? "Available history (<1Y)" : "Trailing year"}` : "Period and sample unavailable for this saved snapshot.") : null
                   );
                 }
               )
