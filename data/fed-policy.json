@@ -1,6 +1,6 @@
 {
-  "asOf": "2026-09-28",
-  "updatedAt": "2026-09-28T18:46:40+00:00",
+  "asOf": "2026-09-29",
+  "updatedAt": "2026-09-29T01:01:01+00:00",
   "asOfBasis": "Date the latest official FOMC statement was checked; decision date is targetRange.asOf",
   "source": "Federal Reserve FOMC statement / Atlanta Fed Market Probability Tracker",
   "targetRange": {
