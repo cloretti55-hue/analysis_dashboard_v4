@@ -2337,6 +2337,11 @@ function CommodityModule({ dataLabTickers, initialEtf = "GLD" }) {
 }
 
 const ETF_SUBMODULES = [
+  ["br-equity", "Brazilian Equities"],
+  ["br-global", "Global Equities"],
+  ["br-fixed", "Fixed Income"],
+  ["br-alternatives", "Alternatives"],
+  ["br-crypto", "Crypto"],
   ["fixed", "Fixed Income"],
   ["core", "Core Equities"],
   ["caps", "Caps/Style"],
@@ -2394,6 +2399,8 @@ SECTOR_GICS_ETFS.forEach((item) => item.tickers.forEach((ticker) => registerEtfD
 const etfDestinationForTicker = (ticker) => ETF_DESTINATIONS.get(String(ticker || "").trim().toUpperCase()) || null;
 
 const etfHrefForTicker = (ticker, group) => {
+  const brazilIndex = window.GCInstrumentRegistry.BRAZIL_GROUPS.indexOf(group);
+  if (brazilIndex >= 0) return `#etfs/${ETF_SUBMODULES[brazilIndex][0]}/${encodeURIComponent(ticker)}`;
   if (group === "Caps/Style" && CAPS_FUNCTIONS.some((row) => row.tickers.includes(ticker))) return `#etfs/caps/${encodeURIComponent(ticker)}`;
   const destination = etfDestinationForTicker(ticker);
   return destination ? `#etfs/${destination.tab}/${encodeURIComponent(destination.target)}` : null;
@@ -2410,10 +2417,55 @@ const requestedEtfDestination = () => {
   }
 };
 
+const BRAZIL_FAMILIES = {
+  "Core": ["Broad Brazilian equity exposure through the Ibovespa.", "Index weights can concentrate exposure in large companies and sectors."],
+  "Small caps": ["Smaller Brazilian listed companies, following the B3 Small Cap index.", "A distinct size exposure with greater sensitivity to domestic business conditions."],
+  "Dividends / style": ["Brazilian companies selected through the B3 Dividend index.", "Dividend-oriented selection remains an equity strategy, not a fixed-income substitute."],
+  "Financials": ["Brazilian financial-sector exposure through the IFNC index.", "A sector allocation rather than a diversified Brazilian equity core."],
+  "S&P 500": ["Large US companies through a B3-listed vehicle.", "Returns in reais combine underlying equity performance and currency exposure."],
+  "Nasdaq-100": ["Large non-financial Nasdaq companies with a substantial growth and technology allocation.", "The portfolio is more concentrated than a broad US equity benchmark."],
+  "Floating rate": ["Brazilian Treasury Selic securities with low interest-rate sensitivity.", "CDI provides a comparison reference; fund returns include costs and market-price effects."],
+  "Target duration": ["A mix of Selic-linked and inflation-linked Treasury securities targeting 760-day duration.", "The target controls portfolio sensitivity; it is not the fund's maturity date."],
+  "Fixed rate": ["Brazilian fixed-rate government bonds through IRF-M P2.", "Prices respond to changes in nominal yields before the underlying bonds mature."],
+  "Short inflation-linked": ["IPCA-linked Treasury bonds with maturities up to five years.", "Shorter maturities moderate exposure to changes in real interest rates."],
+  "Broad inflation-linked": ["IPCA-linked Treasury exposure across the maturity curve.", "The broad basket combines inflation adjustment with sensitivity to real yields."],
+  "Long inflation-linked": ["IPCA-linked Treasury bonds with maturities above five years.", "Longer duration increases price sensitivity to real-rate movements."],
+  "Private credit": ["DI-linked corporate debentures and eligible Treasury Selic securities.", "Credit spreads and issuer risk distinguish this exposure from government bonds."],
+  "Gold": ["Gold exposure through a B3-listed vehicle.", "Returns in reais reflect the metal and currency exposure, rather than mining-company earnings."],
+  "Crypto basket": ["A rules-based basket of cryptoassets through the Nasdaq CME Crypto Index.", "Holdings and weights evolve with index reviews; diversification does not remove crypto volatility."],
+  "Bitcoin": ["Dedicated Bitcoin exposure through a B3-listed fund.", "The exchange session is shorter than the continuous trading week of the underlying asset."]
+};
+
+function BrazilEtfsModule({ items, initialEtf, dataLabTickers }) {
+  const [selected, setSelected] = useState(initialEtf || items[0]?.ticker);
+  const active = items.find((item) => item.ticker === selected) || items[0];
+  if (!active) return React.createElement("p", { className: "data-note" }, "Loading Brazil ETFs...");
+  const groups = [...new Set(items.map((item) => item.displaySubgroup))];
+  return React.createElement("div", { className: "tech-layout" }, React.createElement("section", { className: "core-layout" },
+    React.createElement("article", { className: "panel" },
+      React.createElement("div", { className: "core-function-grid" }, groups.map((group) =>
+        React.createElement("div", { className: "core-function", key: group },
+          React.createElement("div", null, React.createElement("h3", null, group),
+            (BRAZIL_FAMILIES[group] || []).map((text) => React.createElement("p", { key: text }, text))),
+          React.createElement("div", { className: "etf-token-grid" }, items.filter((item) => item.displaySubgroup === group).map((item) =>
+            React.createElement("button", { type: "button", key: item.ticker, className: "etf-token etf-emerging", "aria-pressed": active.ticker === item.ticker,
+              onClick: () => { setSelected(item.ticker); scrollToMobileDetail(".core-detail"); } }, item.ticker))))))),
+    React.createElement("aside", { className: "panel core-detail" },
+      React.createElement("div", { className: "instrument-detail-heading" }, React.createElement("h2", null, active.ticker),
+        React.createElement(DataLabTickerLink, { ticker: active.ticker, availableTickers: dataLabTickers, group: active.displayGroup })),
+      React.createElement("div", { className: "detail-role" }, active.name),
+      React.createElement("div", { className: "etf-trading-details data-note" }, `Exchange: B3 · Trading currency: BRL (Brazilian real) · Listing: ${active.quoteSymbol}`),
+      React.createElement("p", null, active.description), React.createElement("p", null, active.detail),
+      React.createElement("p", { className: "data-note" }, `Tracked index: ${active.trackedIndex}`),
+      React.createElement("a", { className: "data-note", href: active.sourceUrl, target: "_blank", rel: "noopener noreferrer" }, "Fund information ↗"))));
+}
+
 function EtfsModule() {
   const [routeDestination, setRouteDestination] = useState(() => requestedEtfDestination());
   const [activeEtfTab, setActiveEtfTab] = useState(() => routeDestination?.tab || "fixed");
   const [dataLabTickers, setDataLabTickers] = useState(() => new Set());
+  const [catalogItems, setCatalogItems] = useState([]);
+  const brazilMarket = activeEtfTab.startsWith("br-");
 
   useEffect(() => {
     const syncEtfRoute = () => {
@@ -2431,6 +2483,7 @@ function EtfsModule() {
     DataClient.load("etf-universe").then((result) => {
       if (cancelled || !result.ok) return;
       setDataLabTickers(new Set((result.data?.instruments || []).map((item) => item.ticker)));
+      setCatalogItems(result.data?.instruments || []);
     });
     return () => {
       cancelled = true;
@@ -2439,6 +2492,10 @@ function EtfsModule() {
 
   const renderActive = () => {
     const requestedTarget = routeDestination?.tab === activeEtfTab ? routeDestination.target : null;
+    if (brazilMarket) {
+      const group = window.GCInstrumentRegistry.BRAZIL_GROUPS[ETF_SUBMODULES.findIndex(([key]) => key === activeEtfTab)];
+      return React.createElement(BrazilEtfsModule, { key: `${activeEtfTab}-${requestedTarget || "default"}`, items: catalogItems.filter((item) => item.market === "Brazil" && item.displayGroup === group), initialEtf: requestedTarget, dataLabTickers });
+    }
     if (activeEtfTab === "caps") return React.createElement(CoreModule, { key: `caps-${requestedTarget || "default"}`, functions: CAPS_FUNCTIONS, contextGroup: "Caps/Style", dataLabTickers, initialEtf: CAPS_FUNCTIONS.some((row) => row.tickers.includes(requestedTarget)) ? requestedTarget : "VOO" });
     if (activeEtfTab === "core") return React.createElement(CoreModule, { key: `core-${requestedTarget || "default"}`, dataLabTickers, initialEtf: requestedTarget || "VOO" });
     if (activeEtfTab === "fixed") return React.createElement(FixedIncomeModule, { key: `fixed-${requestedTarget || "default"}`, dataLabTickers, initialEtf: requestedTarget || "IB01" });
@@ -2453,10 +2510,14 @@ function EtfsModule() {
   return React.createElement(
     "main",
     { className: "etf-shell work-surface" },
+    React.createElement("nav", { className: "panel etf-subtabs market-tabs", "aria-label": "Listing market" },
+      ["Global", "Brazil"].map((market) => React.createElement("button", { key: market, type: "button", "aria-pressed": (brazilMarket ? "Brazil" : "Global") === market,
+        onClick: () => { const tab = market === "Brazil" ? "br-equity" : "fixed"; setActiveEtfTab(tab); setRouteDestination({ tab, target: null }); window.history.replaceState(null, "", `#etfs/${tab}`); }
+      }, market))),
     React.createElement(
       "nav",
       { className: "panel etf-subtabs", "aria-label": "ETF submodules" },
-      ETF_SUBMODULES.map(([key, label]) =>
+      ETF_SUBMODULES.filter(([key]) => key.startsWith("br-") === brazilMarket).map(([key, label]) =>
         React.createElement(
           "button",
           {

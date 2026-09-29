@@ -27,21 +27,21 @@ const renderMetricLabel = (label) =>
     : label;
 
 const fmtMetric = (value, suffix = "%") =>
-  typeof value === "number" && Number.isFinite(value) ? `${value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 2 })}${suffix}` : "n/d";
+  typeof value === "number" && Number.isFinite(value) ? `${value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 2 })}${suffix}` : "n/a";
 
 const fmtDataLabMetric = (key, value) =>
   key === "beta1yVsSp500"
     ? typeof value === "number" && Number.isFinite(value)
       ? value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-      : "n/d"
-    : key === "correlation1yVsSp500"
+      : "n/a"
+    : key.startsWith("correlation")
     ? typeof value === "number" && Number.isFinite(value)
       ? value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-      : "n/d"
+      : "n/a"
     : key.toLowerCase().includes("pe")
       ? typeof value === "number" && Number.isFinite(value)
         ? `${value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 2 })}x`
-        : "n/d"
+        : "n/a"
     : fmtMetric(value);
 
 const valueAtPath = (object, path) =>
@@ -177,6 +177,7 @@ function DataLabModule() {
   const [error, setError] = useState("");
   const [selectedTicker, setSelectedTicker] = useState(() => requestedDataLabTicker() || "IB01");
   const [selectedGroup, setSelectedGroup] = useState("Fixed Income");
+  const [selectedMarket, setSelectedMarket] = useState("Global");
 
   useEffect(() => {
     let cancelled = false;
@@ -222,6 +223,7 @@ function DataLabModule() {
         const firstOk = requestedInstrument || payload.instruments.find((item) => item.status === "ok" && dataLabGroupFor(item) === "Fixed Income" && item.performanceChart?.points?.length > 1) || payload.instruments.find((item) => item.status === "ok" && item.performanceChart?.points?.length > 1) || payload.instruments?.[0];
         if (firstOk) {
           setSelectedTicker(firstOk.ticker);
+          setSelectedMarket(InstrumentRegistry.marketFor(firstOk));
           if (requestedInstrument) {
             if (window.location.hash.endsWith("/caps") && belongsToGroup(requestedInstrument, "Caps/Style")) setSelectedGroup("Caps/Style");
             else setSelectedGroup(dataLabGroupFor(requestedInstrument));
@@ -233,9 +235,10 @@ function DataLabModule() {
     };
   }, []);
 
-  const instruments = data?.instruments || [];
+  const instruments = (data?.instruments || []).filter((item) => InstrumentRegistry.marketFor(item) === selectedMarket);
+  const visibleGroups = selectedMarket === "Brazil" ? InstrumentRegistry.BRAZIL_GROUPS : DATA_LAB_GROUPS;
   const filteredInstruments = instruments.filter((item) => belongsToGroup(item, selectedGroup));
-  const groupCounts = DATA_LAB_GROUPS.reduce((acc, group) => {
+  const groupCounts = visibleGroups.reduce((acc, group) => {
     acc[group] = instruments.filter((item) => belongsToGroup(item, group)).length;
     return acc;
   }, {});
@@ -262,7 +265,7 @@ function DataLabModule() {
       const firstWithChart = filteredInstruments.find((item) => item.performanceChart?.points?.length > 1) || filteredInstruments[0];
       setSelectedTicker(firstWithChart.ticker);
     }
-  }, [selectedGroup, data]);
+  }, [selectedGroup, selectedMarket, data]);
 
   const active = instruments.find((item) => item.ticker === selectedTicker) || instruments[0];
   const activeBenchmarkLabel = dataLabBenchmarkLabel(active);
@@ -271,6 +274,11 @@ function DataLabModule() {
   return React.createElement(
     "main",
     { className: "data-lab-layout work-surface" },
+    React.createElement("nav", { className: "panel etf-subtabs market-tabs", "aria-label": "Listing market", style: { gridColumn: "1 / -1" } },
+      ["Global", "Brazil"].map((market) => React.createElement("button", {
+        key: market, type: "button", "aria-pressed": selectedMarket === market,
+        onClick: () => { setSelectedMarket(market); setSelectedGroup(market === "Brazil" ? "Brazilian Equities" : "Fixed Income"); }
+      }, market))),
     React.createElement(
       "section",
       { className: "panel data-lab-list" },
@@ -279,7 +287,7 @@ function DataLabModule() {
       React.createElement(
         "div",
         { className: "data-lab-filters" },
-        DATA_LAB_GROUPS.map((group) =>
+        visibleGroups.map((group) =>
           React.createElement(
             "button",
             {
@@ -345,6 +353,10 @@ function DataLabModule() {
               ),
               React.createElement("p", null, active.name || active.category)
             ),
+            selectedMarket === "Brazil" ? React.createElement("p", { className: "data-note" },
+              "Returns are measured in BRL. ", active.assetClass === "fixed_income"
+                ? "CDI is accumulated from Banco Central do Brasil daily rates, before taxes and costs. It is a comparison reference, not the fund's tracked index."
+                : `${active.benchmarkDisplay} is a market comparison, not necessarily the fund's tracked index.`) : null,
             React.createElement(
               "div",
               { className: "data-lab-badges" },
@@ -354,6 +366,7 @@ function DataLabModule() {
               activeReferenceLabel ? React.createElement("span", null, "Reference", React.createElement("b", null, activeReferenceLabel)) : null,
               active.performanceChart?.startDate ? React.createElement("span", null, "History", React.createElement("b", null, formatDatePtBr(active.performanceChart.startDate))) : null,
               React.createElement("span", null, "Data", React.createElement("b", null, active.dataAsOf ? formatDatePtBr(active.dataAsOf) : "n/a")),
+              selectedMarket === "Brazil" ? React.createElement("span", null, "Comparison data", React.createElement("b", null, active.benchmarkAsOf ? formatDatePtBr(active.benchmarkAsOf) : "n/a")) : null,
               React.createElement("span", null, "Status", React.createElement("b", null, DATASET_STATUS_LABELS[active.dataStatus || active.status] || active.dataStatus || active.status || "n/a"))
             ),
             React.createElement(
