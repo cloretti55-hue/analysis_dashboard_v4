@@ -2,7 +2,7 @@
   "version": 1,
   "asOf": "2026-09-30",
   "oldestComponentAsOf": "2026-09-29",
-  "generatedAt": "2026-09-30T17:00:19+00:00",
+  "generatedAt": "2026-09-30T18:35:48+00:00",
   "source": "Fixed income instruments from the ETF performance pipeline; benchmark is accrued Fed Funds from FRED DFF.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. Charts use accrued Fed Funds from FRED DFF as a cash benchmark. A prior valid instrument may be retained and marked stale when refresh fails.",
   "instruments": [
@@ -31,7 +31,7 @@
       "maxDrawdown1yPct": -0.03,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -974,7 +974,7 @@
       "maxDrawdown1yPct": -0.92,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -1917,7 +1917,7 @@
       "maxDrawdown1yPct": -3.95,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -2860,7 +2860,7 @@
       "maxDrawdown1yPct": -6.53,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-28",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -3803,7 +3803,7 @@
       "maxDrawdown1yPct": -11.97,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -4746,7 +4746,7 @@
       "maxDrawdown1yPct": -3.02,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -5689,7 +5689,7 @@
       "maxDrawdown1yPct": -3.98,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -6632,7 +6632,7 @@
       "maxDrawdown1yPct": -1.38,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -7575,7 +7575,7 @@
       "maxDrawdown1yPct": -6.1,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -8518,7 +8518,7 @@
       "maxDrawdown1yPct": -2.82,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -9461,7 +9461,7 @@
       "maxDrawdown1yPct": -3.07,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -12111,7 +12111,7 @@
           },
           {
             "date": "2026-04-13",
-            "etf": 112.41,
+            "etf": 112.4,
             "cash": 112.07
           },
           {
@@ -12849,7 +12849,7 @@
           },
           {
             "date": "2025-08-05",
-            "etf": 112.24,
+            "etf": 112.23,
             "cash": 109.11
           },
           {
@@ -14470,7 +14470,7 @@
           },
           {
             "date": "2024-09-13",
-            "etf": 119.75,
+            "etf": 119.76,
             "cash": 104.96
           },
           {
@@ -18627,7 +18627,7 @@
           },
           {
             "date": "2025-12-26",
-            "etf": 126.29,
+            "etf": 126.3,
             "cash": 110.88
           },
           {
@@ -19695,7 +19695,7 @@
           },
           {
             "date": "2026-05-29",
-            "etf": 117.31,
+            "etf": 117.32,
             "cash": 112.65
           },
           {

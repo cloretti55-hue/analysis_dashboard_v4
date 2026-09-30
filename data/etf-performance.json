@@ -1,7 +1,7 @@
 {
   "version": 1,
   "asOf": "2026-09-30",
-  "generatedAt": "2026-09-30T17:00:18+00:00",
+  "generatedAt": "2026-09-30T18:35:48+00:00",
   "source": "Yahoo Finance chart adjusted close where available; manual_required for unmapped instruments.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. 3Y and 5Y returns are annualized. YTD starts at the last available close of the prior year. Trailing returns require a valid observation on or within seven calendar days before the anniversary; insufficient history returns null. Current-session candles are excluded until 15 minutes after the regular close. Volatility is annualized from trailing daily returns. Benchmark failures do not discard current instrument prices; the prior benchmark series may be retained and explicitly marked stale. Public/free data may differ from licensed index-provider total return data.",
   "benchmarkPolicy": "Global listings retain their configured SPY, QQQ, Fed Funds or CPI comparisons. Brazil listings use BRL comparisons: Brazilian equities, gold and crypto versus BOVA11; international equities versus IVVB11; Brazilian fixed income versus compounded daily CDI from Banco Central do Brasil SGS 12. Comparison references are not necessarily tracked indices. Returns are in each listing's trading currency, not converted to a common currency.",
@@ -1347,7 +1347,7 @@
           },
           {
             "date": "2024-12-18",
-            "etf": 139.23,
+            "etf": 139.24,
             "sp500": 139.06
           },
           {
@@ -7842,7 +7842,7 @@
           },
           {
             "date": "2024-06-13",
-            "etf": 128.57,
+            "etf": 128.58,
             "sp500": 127.86
           },
           {
@@ -11850,7 +11850,7 @@
           },
           {
             "date": "2024-07-22",
-            "etf": 130.39,
+            "etf": 130.4,
             "sp500": 131.15
           },
           {
@@ -34302,7 +34302,7 @@
           },
           {
             "date": "2026-08-28",
-            "etf": 176.84,
+            "etf": 176.83,
             "sp500": 186.23
           },
           {
@@ -35883,7 +35883,7 @@
           },
           {
             "date": "2025-08-21",
-            "etf": 154.18,
+            "etf": 154.19,
             "sp500": 152.15
           },
           {
@@ -36862,7 +36862,7 @@
           {
             "date": "2025-10-01",
             "etf": 127.07,
-            "sp500": 160.47
+            "sp500": 160.48
           },
           {
             "date": "2025-10-07",
@@ -37289,7 +37289,7 @@
           },
           {
             "date": "2024-01-12",
-            "etf": 105.65,
+            "etf": 105.66,
             "sp500": 112.01
           },
           {
@@ -38182,7 +38182,7 @@
           },
           {
             "date": "2023-11-10",
-            "etf": 101.42,
+            "etf": 101.41,
             "sp500": 103.11
           },
           {
@@ -38282,7 +38282,7 @@
           },
           {
             "date": "2024-03-14",
-            "etf": 110.78,
+            "etf": 110.77,
             "sp500": 121.0
           },
           {
@@ -42854,7 +42854,7 @@
       "maxDrawdown1yPct": -0.03,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -44406,7 +44406,7 @@
           {
             "date": "2025-10-01",
             "etf": 159.25,
-            "sp500": 160.47
+            "sp500": 160.48
           },
           {
             "date": "2025-10-07",
@@ -47675,7 +47675,7 @@
           },
           {
             "date": "2023-12-22",
-            "etf": 107.47,
+            "etf": 107.48,
             "sp500": 111.29
           },
           {
@@ -48206,7 +48206,7 @@
           {
             "date": "2025-10-01",
             "etf": 149.56,
-            "sp500": 160.47
+            "sp500": 160.48
           },
           {
             "date": "2025-10-07",
@@ -50618,7 +50618,7 @@
       "maxDrawdown1yPct": -0.92,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -51561,7 +51561,7 @@
       "maxDrawdown1yPct": -3.95,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -52504,7 +52504,7 @@
       "maxDrawdown1yPct": -6.53,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-28",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -53447,7 +53447,7 @@
       "maxDrawdown1yPct": -11.97,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -54390,7 +54390,7 @@
       "maxDrawdown1yPct": -3.02,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -55333,7 +55333,7 @@
       "maxDrawdown1yPct": -3.98,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -56276,7 +56276,7 @@
       "maxDrawdown1yPct": -1.38,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -57219,7 +57219,7 @@
       "maxDrawdown1yPct": -6.1,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -58162,7 +58162,7 @@
       "maxDrawdown1yPct": -2.82,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -59105,7 +59105,7 @@
       "maxDrawdown1yPct": -3.07,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
-      "benchmarkAsOf": "2026-09-29",
+      "benchmarkAsOf": "2026-09-30",
       "performanceChart": {
         "base": 100,
         "period": "3y_or_available",
@@ -61755,7 +61755,7 @@
           },
           {
             "date": "2026-04-13",
-            "etf": 112.41,
+            "etf": 112.4,
             "cash": 112.07
           },
           {
@@ -62493,7 +62493,7 @@
           },
           {
             "date": "2025-08-05",
-            "etf": 112.24,
+            "etf": 112.23,
             "cash": 109.11
           },
           {
@@ -64114,7 +64114,7 @@
           },
           {
             "date": "2024-09-13",
-            "etf": 119.75,
+            "etf": 119.76,
             "cash": 104.96
           },
           {
@@ -68271,7 +68271,7 @@
           },
           {
             "date": "2025-12-26",
-            "etf": 126.29,
+            "etf": 126.3,
             "cash": 110.88
           },
           {
@@ -69339,7 +69339,7 @@
           },
           {
             "date": "2026-05-29",
-            "etf": 117.31,
+            "etf": 117.32,
             "cash": 112.65
           },
           {
@@ -73566,7 +73566,7 @@
           },
           {
             "date": "2024-09-09",
-            "etf": 128.27,
+            "etf": 128.28,
             "sp500": 129.2
           },
           {
@@ -81464,7 +81464,7 @@
           },
           {
             "date": "2025-09-16",
-            "etf": 213.34,
+            "etf": 213.35,
             "sp500": 158.01
           },
           {
@@ -82430,7 +82430,7 @@
           {
             "date": "2025-10-01",
             "etf": 108.09,
-            "sp500": 160.47
+            "sp500": 160.48
           },
           {
             "date": "2025-10-07",
@@ -83373,7 +83373,7 @@
           {
             "date": "2025-10-01",
             "etf": 106.29,
-            "sp500": 160.47
+            "sp500": 160.48
           },
           {
             "date": "2025-10-07",
@@ -85158,7 +85158,7 @@
           },
           {
             "date": "2025-06-04",
-            "etf": 133.36,
+            "etf": 133.35,
             "sp500": 142.25
           },
           {
@@ -86101,7 +86101,7 @@
           },
           {
             "date": "2025-06-04",
-            "etf": 144.04,
+            "etf": 144.05,
             "sp500": 142.25
           },
           {
@@ -90098,7 +90098,7 @@
           },
           {
             "date": "2025-10-03",
-            "etf": 182.27,
+            "etf": 182.26,
             "cpi": 105.52,
             "sp500": 160.66
           },
@@ -94773,7 +94773,7 @@
           },
           {
             "date": "2025-06-04",
-            "etf": 106.94,
+            "etf": 106.95,
             "sp500": 142.25
           },
           {
@@ -98832,7 +98832,7 @@
           },
           {
             "date": "2026-05-12",
-            "etf": 167.47,
+            "etf": 167.46,
             "qqq": 198.68
           },
           {
@@ -101982,12 +101982,12 @@
           },
           {
             "date": "2024-03-08",
-            "etf": 112.53,
+            "etf": 112.52,
             "sp500": 120.24
           },
           {
             "date": "2024-03-14",
-            "etf": 112.53,
+            "etf": 112.52,
             "sp500": 121.0
           },
           {
@@ -107667,7 +107667,7 @@
           },
           {
             "date": "2024-04-03",
-            "etf": 85.92,
+            "etf": 85.91,
             "sp500": 122.43
           },
           {
@@ -128784,7 +128784,7 @@
       "maxDrawdown1yPct": -15.78,
       "benchmarkStatus": "stale",
       "benchmarkAsOf": "2026-09-29",
-      "cpiAsOf": "2026-09-29",
+      "cpiAsOf": "2026-09-30",
       "benchmarkError": "CPI: The read operation timed out",
       "performanceChart": {
         "base": 100,
@@ -135970,7 +135970,7 @@
           },
           {
             "date": "2024-11-18",
-            "etf": 158.63,
+            "etf": 158.64,
             "cpi": 102.72,
             "sp500": 139.5
           },
@@ -138706,7 +138706,7 @@
           },
           {
             "date": "2026-03-24",
-            "etf": 149.83,
+            "etf": 149.84,
             "cpi": 106.57,
             "sp500": 157.7
           },
@@ -145408,7 +145408,7 @@
           },
           {
             "date": "2026-01-15",
-            "etf": 143.22,
+            "etf": 143.21,
             "cpi": 106.1,
             "sp500": 166.68
           },
