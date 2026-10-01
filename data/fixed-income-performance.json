@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "asOf": "2026-09-30",
+  "asOf": "2026-09-29",
   "oldestComponentAsOf": "2026-09-29",
-  "generatedAt": "2026-09-30T18:35:48+00:00",
+  "generatedAt": "2026-10-01T01:31:10+00:00",
   "source": "Fixed income instruments from the ETF performance pipeline; benchmark is accrued Fed Funds from FRED DFF.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. Charts use accrued Fed Funds from FRED DFF as a cash benchmark. A prior valid instrument may be retained and marked stale when refresh fails.",
   "instruments": [
@@ -19,11 +19,11 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 121.94,
+      "asOf": "2026-09-29",
+      "lastClose": 121.92,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": 2.57,
+      "returnYtdPct": 2.56,
       "return1yPct": 3.64,
       "return3yAnnPct": 4.53,
       "return5yAnnPct": 3.61,
@@ -36,7 +36,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -934,9 +934,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 114.2,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 114.18,
+            "cash": 113.89
           }
         ]
       },
@@ -962,15 +962,15 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 5.937,
+      "asOf": "2026-09-29",
+      "lastClose": 5.931,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": 0.34,
-      "return1yPct": 1.63,
-      "return3yAnnPct": 4.07,
-      "return5yAnnPct": 1.87,
-      "vol1yAnnPct": 1.2,
+      "returnYtdPct": 0.24,
+      "return1yPct": 1.56,
+      "return3yAnnPct": 4.04,
+      "return5yAnnPct": 1.85,
+      "vol1yAnnPct": 1.19,
       "maxDrawdown1yPct": -0.92,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
@@ -979,7 +979,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -1877,9 +1877,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 112.87,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 112.76,
+            "cash": 113.89
           }
         ]
       },
@@ -1905,15 +1905,15 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 139.69,
+      "asOf": "2026-09-29",
+      "lastClose": 139.56,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1272,
-      "returnYtdPct": -2.74,
-      "return1yPct": -1.42,
-      "return3yAnnPct": 3.63,
-      "return5yAnnPct": 0.02,
-      "vol1yAnnPct": 2.92,
+      "returnYtdPct": -2.83,
+      "return1yPct": -1.43,
+      "return3yAnnPct": 3.61,
+      "return5yAnnPct": -0.01,
+      "vol1yAnnPct": 2.91,
       "maxDrawdown1yPct": -3.95,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
@@ -1922,7 +1922,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -2820,9 +2820,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 111.89,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 111.78,
+            "cash": 113.89
           }
         ]
       },
@@ -2848,16 +2848,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 5.001,
+      "asOf": "2026-09-29",
+      "lastClose": 4.996,
       "historyStartDate": "2025-03-31",
       "historyObservationCount": 383,
-      "returnYtdPct": -4.95,
-      "return1yPct": -3.66,
+      "returnYtdPct": -5.04,
+      "return1yPct": -3.74,
       "return3yAnnPct": null,
       "return5yAnnPct": null,
       "vol1yAnnPct": 4.46,
-      "maxDrawdown1yPct": -6.53,
+      "maxDrawdown1yPct": -6.62,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -2865,7 +2865,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2025-03-31",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2025-03-31",
@@ -3763,8 +3763,8 @@
             "cash": 105.61
           },
           {
-            "date": "2026-09-30",
-            "etf": 99.63,
+            "date": "2026-09-29",
+            "etf": 99.53,
             "cash": 105.61
           }
         ]
@@ -3791,16 +3791,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 4.2285,
+      "asOf": "2026-09-29",
+      "lastClose": 4.245,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": -8.99,
-      "return1yPct": -9.14,
-      "return3yAnnPct": -0.07,
-      "return5yAnnPct": -8.27,
-      "vol1yAnnPct": 9.2,
-      "maxDrawdown1yPct": -11.97,
+      "returnYtdPct": -8.63,
+      "return1yPct": -8.46,
+      "return3yAnnPct": 0.06,
+      "return5yAnnPct": -8.34,
+      "vol1yAnnPct": 9.16,
+      "maxDrawdown1yPct": -11.63,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -3808,7 +3808,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -4706,9 +4706,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 101.52,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 101.92,
+            "cash": 113.89
           }
         ]
       },
@@ -4734,15 +4734,15 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 4.8505,
+      "asOf": "2026-09-29",
+      "lastClose": 4.8425,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": 0.13,
-      "return1yPct": 0.69,
-      "return3yAnnPct": 3.94,
-      "return5yAnnPct": 2.36,
-      "vol1yAnnPct": 3.81,
+      "returnYtdPct": -0.03,
+      "return1yPct": 0.44,
+      "return3yAnnPct": 3.89,
+      "return5yAnnPct": 2.33,
+      "vol1yAnnPct": 3.8,
       "maxDrawdown1yPct": -3.02,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
@@ -4751,7 +4751,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -5649,9 +5649,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 112.63,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 112.45,
+            "cash": 113.89
           }
         ]
       },
@@ -5677,16 +5677,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 249.5,
+      "asOf": "2026-09-29",
+      "lastClose": 249.35,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1272,
-      "returnYtdPct": -2.56,
-      "return1yPct": -2.2,
-      "return3yAnnPct": 3.55,
-      "return5yAnnPct": -0.22,
-      "vol1yAnnPct": 3.7,
-      "maxDrawdown1yPct": -3.98,
+      "returnYtdPct": -2.62,
+      "return1yPct": -2.29,
+      "return3yAnnPct": 3.54,
+      "return5yAnnPct": -0.26,
+      "vol1yAnnPct": 3.69,
+      "maxDrawdown1yPct": -4.04,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -5694,7 +5694,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -6592,9 +6592,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 111.85,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 111.78,
+            "cash": 113.89
           }
         ]
       },
@@ -6620,16 +6620,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 115.29,
+      "asOf": "2026-09-29",
+      "lastClose": 115.12,
       "historyStartDate": "2022-06-28",
       "historyObservationCount": 1088,
-      "returnYtdPct": 1.05,
-      "return1yPct": 1.29,
-      "return3yAnnPct": 4.71,
+      "returnYtdPct": 0.9,
+      "return1yPct": 1.11,
+      "return3yAnnPct": 4.66,
       "return5yAnnPct": null,
       "vol1yAnnPct": 2.13,
-      "maxDrawdown1yPct": -1.38,
+      "maxDrawdown1yPct": -1.4,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -6637,7 +6637,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -7535,9 +7535,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 114.97,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 114.8,
+            "cash": 113.89
           }
         ]
       },
@@ -7563,16 +7563,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 6.025,
+      "asOf": "2026-09-29",
+      "lastClose": 6.01,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": -4.83,
-      "return1yPct": -3.98,
-      "return3yAnnPct": 4.5,
-      "return5yAnnPct": -1.28,
-      "vol1yAnnPct": 5.7,
-      "maxDrawdown1yPct": -6.1,
+      "returnYtdPct": -5.07,
+      "return1yPct": -4.25,
+      "return3yAnnPct": 4.41,
+      "return5yAnnPct": -1.43,
+      "vol1yAnnPct": 5.69,
+      "maxDrawdown1yPct": -6.28,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -7580,7 +7580,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -8478,9 +8478,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 115.33,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 115.05,
+            "cash": 113.89
           }
         ]
       },
@@ -8506,14 +8506,14 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 7.365,
+      "asOf": "2026-09-29",
+      "lastClose": 7.349,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": -0.22,
-      "return1yPct": 1.28,
-      "return3yAnnPct": 7.57,
-      "return5yAnnPct": 3.4,
+      "returnYtdPct": -0.43,
+      "return1yPct": 1.04,
+      "return3yAnnPct": 7.5,
+      "return5yAnnPct": 3.33,
       "vol1yAnnPct": 3.81,
       "maxDrawdown1yPct": -2.82,
       "benchmarkStatus": "stale",
@@ -8523,7 +8523,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -9421,9 +9421,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 125.44,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 125.16,
+            "cash": 113.89
           }
         ]
       },
@@ -9449,16 +9449,16 @@
       "compareToSp500": false,
       "comparisonBenchmarks": [],
       "status": "ok",
-      "asOf": "2026-09-30",
-      "lastClose": 5.715,
+      "asOf": "2026-09-29",
+      "lastClose": 5.703,
       "historyStartDate": "2021-09-13",
       "historyObservationCount": 1274,
-      "returnYtdPct": -1.64,
-      "return1yPct": -0.76,
-      "return3yAnnPct": 4.11,
-      "return5yAnnPct": 0.12,
+      "returnYtdPct": -1.84,
+      "return1yPct": -0.92,
+      "return3yAnnPct": 4.04,
+      "return5yAnnPct": 0.05,
       "vol1yAnnPct": 3.27,
-      "maxDrawdown1yPct": -3.07,
+      "maxDrawdown1yPct": -3.19,
       "benchmarkStatus": "stale",
       "benchmarkError": "The read operation timed out",
       "benchmarkAsOf": "2026-09-30",
@@ -9466,7 +9466,7 @@
         "base": 100,
         "period": "3y_or_available",
         "startDate": "2023-10-02",
-        "endDate": "2026-09-30",
+        "endDate": "2026-09-29",
         "points": [
           {
             "date": "2023-10-02",
@@ -10364,9 +10364,9 @@
             "cash": 113.89
           },
           {
-            "date": "2026-09-30",
-            "etf": 113.43,
-            "cash": 113.95
+            "date": "2026-09-29",
+            "etf": 113.19,
+            "cash": 113.89
           }
         ]
       },
@@ -11756,7 +11756,7 @@
           },
           {
             "date": "2025-02-03",
-            "etf": 106.96,
+            "etf": 106.95,
             "cash": 106.77
           },
           {
@@ -12849,7 +12849,7 @@
           },
           {
             "date": "2025-08-05",
-            "etf": 112.23,
+            "etf": 112.24,
             "cash": 109.11
           },
           {
