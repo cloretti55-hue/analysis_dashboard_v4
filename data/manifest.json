@@ -6,9 +6,9 @@
     "datasetCount": 11,
     "statusCounts": {
       "manual": 1,
-      "ok": 6,
+      "ok": 7,
       "partial": 2,
-      "stale": 2
+      "stale": 1
     },
     "blockingErrorCount": 0
   },
@@ -85,22 +85,16 @@
       "id": "sp500-valuation",
       "path": "data/sp500-valuation.json",
       "kind": "generated",
-      "status": "stale",
-      "asOf": "2026-08-07",
+      "status": "ok",
+      "asOf": "2026-10-02",
       "maxAgeDays": 14,
       "consumer": [
         "Equity Valuation"
       ],
       "producer": "scripts/update-sp500-valuation.py",
       "workflow": ".github/workflows/update-sp500-valuation.yml",
-      "sha256": "36f8ce7f78b51dae14c6db2c2553be599c561b0607d5159dded27db8b06726bd",
-      "issues": [
-        {
-          "severity": "warning",
-          "code": "stale_dataset",
-          "message": "Dataset asOf=2026-08-07 exceeds maxAgeDays=14"
-        }
-      ]
+      "sha256": "7e0c4f21c3f7ca85985d7ffb20ba7ef07eb5f03006facb3fa1d21e93db5d66ed",
+      "issues": []
     },
     {
       "id": "sp500-pe-history",
