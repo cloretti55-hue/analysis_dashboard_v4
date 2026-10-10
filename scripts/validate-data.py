@@ -20,6 +20,7 @@ ALLOWED_INSTRUMENT_STATUSES = {"ok", "error", "manual_required", "pending"}
 DATASET_SPECS = [
     {
         "id": "broad-market-valuation", "path": "data/broad-market-valuation.json",
+        "optionalUntilPublished": True,
         "kind": "generated", "consumer": ["Equity Valuation"],
         "producer": "scripts/prepare-broad-market.py",
         "workflow": ".github/workflows/update-broad-market.yml", "maxAgeDays": 7,
@@ -472,7 +473,9 @@ def validate_simple_arrays(
 def build_manifest() -> tuple[dict[str, Any], int]:
     loaded: dict[str, dict[str, Any]] = {}
     load_errors: dict[str, str] = {}
-    for spec in DATASET_SPECS:
+    active_specs = [spec for spec in DATASET_SPECS
+                    if not spec.get("optionalUntilPublished") or (ROOT / spec["path"]).exists()]
+    for spec in active_specs:
         path = ROOT / spec["path"]
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
@@ -487,7 +490,7 @@ def build_manifest() -> tuple[dict[str, Any], int]:
     newest_timestamp: datetime | None = None
     error_count = 0
 
-    for spec in DATASET_SPECS:
+    for spec in active_specs:
         dataset_id = spec["id"]
         path = ROOT / spec["path"]
         issues: list[dict[str, str]] = []
@@ -649,6 +652,10 @@ def main() -> int:
     expected = serialized_manifest(manifest)
     scoped_ids = set(args.fail_on) if args.fail_on else None
     error_count = blocking_error_count(manifest, scoped_ids)
+    missing_requested = (scoped_ids or set()) - {row["id"] for row in manifest["datasets"]}
+    for dataset_id in missing_requested:
+        print(f"ERROR: explicitly requested dataset is absent: {dataset_id}", file=sys.stderr)
+    error_count += len(missing_requested)
 
     if args.write_manifest:
         MANIFEST_PATH.write_text(expected, encoding="utf-8")
