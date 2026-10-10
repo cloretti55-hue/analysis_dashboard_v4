@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,30 @@ SPEC.loader.exec_module(VALIDATE_DATA)
 
 
 class ValidateDataTests(unittest.TestCase):
+    def test_unpublished_broad_market_is_optional_but_bad_json_blocks(self):
+        spec = next(s for s in VALIDATE_DATA.DATASET_SPECS if s['id'] == 'broad-market-valuation')
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.object(VALIDATE_DATA, 'ROOT', root), patch.object(VALIDATE_DATA, 'DATASET_SPECS', [spec]):
+                manifest, errors = VALIDATE_DATA.build_manifest()
+                self.assertEqual(errors, 0)
+                self.assertEqual(manifest['datasets'], [])
+                (root / 'data').mkdir()
+                (root / spec['path']).write_text('{broken', encoding='utf-8')
+                manifest, errors = VALIDATE_DATA.build_manifest()
+                self.assertEqual(errors, 1)
+                self.assertEqual(manifest['datasets'][0]['status'], 'error')
+
+    def test_unavailable_broad_market_is_partial_not_ok(self):
+        if not (ROOT / "data/broad-market-valuation.json").exists():
+            self.skipTest("Broad Market not published yet")
+        manifest, _ = VALIDATE_DATA.build_manifest()
+        entry = next(row for row in manifest['datasets'] if row['id'] == 'broad-market-valuation')
+        payload = json.loads((ROOT / entry['path']).read_text(encoding='utf-8'))
+        if any(group[key]['status'] != 'ok' for group in payload['universes'].values() for key in ('pe', 'earningsYield', 'pb')):
+            self.assertEqual(entry['status'], 'partial')
+            self.assertTrue(any(issue['code'] == 'partial_broad_market' for issue in entry['issues']))
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.universe = json.loads((ROOT / "data" / "etf-universe.json").read_text(encoding="utf-8"))
@@ -146,7 +171,7 @@ class ValidateDataTests(unittest.TestCase):
         VALIDATE_DATA.validate_performance(payload, issues, universe, fixed_only=False)
         self.assertTrue(any(issue["code"] == "missing_commodity_chart_benchmarks" for issue in issues))
 
-    def test_current_fixed_income_price_survives_benchmark_timeout(self) -> None:
+    def test_disjoint_cash_history_preserves_last_complete_snapshot(self) -> None:
         module_path = ROOT / "scripts" / "update-etf-performance.py"
         spec = importlib.util.spec_from_file_location("update_etf_performance_timeout", module_path)
         if spec is None or spec.loader is None:
@@ -219,16 +244,12 @@ class ValidateDataTests(unittest.TestCase):
 
             current = json.loads(updater.OUTPUT_PATH.read_text(encoding="utf-8"))
             instrument = current["instruments"][0]
-            self.assertEqual(instrument["asOf"], "2026-07-30")
+            self.assertEqual(instrument["asOf"], "2026-07-23")
             self.assertEqual(instrument["status"], "ok")
-            self.assertNotIn("stale", instrument)
-            self.assertEqual(instrument["benchmarkStatus"], "stale")
-            self.assertEqual(instrument["performanceChart"]["endDate"], "2026-07-30")
-
-            fixed = json.loads(
-                updater.FIXED_INCOME_FALLBACK_PATH.read_text(encoding="utf-8")
-            )
-            self.assertEqual(fixed["asOf"], "2026-07-30")
+            self.assertTrue(instrument["stale"])
+            self.assertEqual(instrument["performanceChart"], previous["instruments"][0]["performanceChart"])
+            fixed = json.loads(updater.FIXED_INCOME_FALLBACK_PATH.read_text(encoding="utf-8"))
+            self.assertEqual(fixed["instruments"][0]["asOf"], "2026-07-23")
 
     def test_new_fixed_income_reuses_shared_cash_benchmark_after_fred_timeout(self) -> None:
         module_path = ROOT / "scripts" / "update-etf-performance.py"
