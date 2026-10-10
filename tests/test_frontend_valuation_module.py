@@ -34,7 +34,12 @@ class FrontendValuationModuleTests(unittest.TestCase):
 
     def test_method_note_is_exported_for_public_disclaimer(self):
         self.assertIn("FORWARD_PE_METHOD_NOTE,", VALUATION_JS)
-        self.assertIn("methodNote: selectedModule === \"equity\" ? FORWARD_PE_METHOD_NOTE : null", APP_JS)
+        for module in ("selectedModule", "activeModule"):
+            self.assertIn(
+                f'methodNote: {module} === "equity" ? FORWARD_PE_METHOD_NOTE : '
+                f'{module} === "etfs" ? ETF_ASSETS_METHOD_NOTE : null',
+                APP_JS,
+            )
 
 
 if __name__ == "__main__":
