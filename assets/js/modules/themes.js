@@ -88,13 +88,47 @@ const GOVERNMENT_STACK = [
 ];
 
 const THEME_BRIEFINGS = [
+{
+  "key": "yield-curves-fixed-income-liquid-alternatives",
+  "date": "12/10/26",
+  "label": "Yield Curves, Fixed Income & Liquid Alternatives",
+  "title": "Yield Curves, Fixed Income & Liquid Alternatives",
+  "summary": "Four slides covering U.S. yield curves, Brazilian government bond ETFs, liquid alternative strategies and cross-asset return comparisons.",
+  "tags": [
+    "Yield curves",
+    "Fixed income",
+    "Liquid alternatives"
+  ],
+  "images": [
+    {
+      "src": "assets/themes/yield-curves-and-real-yields.png",
+      "title": "U.S. Treasury Curve — Yields and Shapes",
+      "comment": "Nominal yields, real yields, breakeven inflation and common yield curve shapes."
+    },
+    {
+      "src": "assets/themes/brazil-fixed-income-etf-overview.png",
+      "title": "Brazilian Government Bond ETFs",
+      "comment": "An overview of Brazilian government bond ETFs, duration, trading liquidity and taxation. Slide in Portuguese."
+    },
+    {
+      "src": "assets/themes/liquid-alternatives-strategies-overview.png",
+      "title": "Liquid Alternatives: Strategies Overview",
+      "comment": "Managed futures, equity hedge, merger arbitrage, global macro and other diversification approaches."
+    },
+    {
+      "src": "assets/themes/managed-futures-cross-asset-comparison.png",
+      "title": "Managed Futures vs. Equities, Commodities & Gold",
+      "comment": "A comparison of calendar-year returns and portfolio roles, including a Fed Funds cash proxy."
+    }
+  ]
+},
   {
     key: "when-equities-struggle",
     date: "10/09/26",
     label: "When Equities Struggle",
     title: "When Equities Struggle",
-    summary: "Equity crises, hedging and portfolio diversification: eleven slides exploring risk management, alternative strategies and institutional portfolio models.",
-    tags: ["Equities", "Risk management", "Diversification"],
+    summary: "Three slides examining major equity market crises, their causes, policy responses and lessons for investors.",
+    tags: ["Equities", "Market crises", "Financial history"],
     images: [
       {
         src: "assets/themes/four-crises-one-playbook.png",
@@ -108,9 +142,19 @@ const THEME_BRIEFINGS = [
       },
       {
         src: "assets/themes/acute-crises-1987-vs-2020.png",
-        title: "Acute Crises — 1987 vs. 2020",
+        title: "Major Market Crashes — 1987 vs. 2020",
         comment: "A comparison of the equity market crises of 1987 and 2020.",
       },
+    ],
+  },
+  {
+    key: "portfolio-hedging-and-diversification",
+    date: "10/09/26",
+    label: "Portfolio Hedging & Diversification",
+    title: "Portfolio Hedging & Diversification",
+    summary: "Eight slides exploring hedging trade-offs, dynamic risk management, alternative strategies and institutional portfolio construction.",
+    tags: ["Hedging", "Diversification", "Portfolio construction"],
+    images: [
       {
         src: "assets/themes/why-not-own-every-hedge.png",
         title: "Why Not Own Every Hedge?",
