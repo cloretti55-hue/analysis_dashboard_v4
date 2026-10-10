@@ -1,0 +1,159 @@
+.data-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.dataset-status-stack {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.dataset-status-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid rgba(222, 233, 247, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.dataset-status-line strong {
+  color: var(--ink);
+}
+
+.dataset-status-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 7px;
+  border: 1px solid rgba(72, 214, 233, 0.28);
+  border-radius: 999px;
+  color: var(--nominal);
+  font-size: 10px;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.dataset-status-badge[data-status="stale"],
+.dataset-status-badge[data-status="partial"],
+.dataset-status-badge[data-status="manual"] {
+  border-color: rgba(255, 174, 107, 0.35);
+  color: var(--inflation);
+}
+
+.dataset-status-badge[data-status="error"],
+.dataset-status-badge[data-status="unavailable"] {
+  border-color: rgba(255, 107, 138, 0.38);
+  color: var(--negative);
+}
+
+.satellite-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.core-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.core-card {
+  border-left: 2px solid color-mix(in srgb, var(--tone) 72%, transparent);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.core-card h3 {
+  margin: 0 0 8px;
+}
+
+.core-card p,
+.core-card li {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.core-card ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.equity-cards {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.equity-card {
+  border-left: 2px solid color-mix(in srgb, var(--tone) 72%, transparent);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.equity-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.equity-card ul {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.equity-card p {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.equity-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.equity-summary {
+  padding: 16px;
+}
+
+.equity-summary h2 {
+  margin: 0 0 10px;
+  font-family: "Arial Narrow", "Aptos Narrow", "Roboto Condensed", var(--font, Arial, sans-serif);
+  font-weight: 760;
+  text-transform: uppercase;
+}
+
+.equity-summary p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+footer {
+  padding: 10px 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}

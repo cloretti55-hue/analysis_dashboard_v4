@@ -1,0 +1,20 @@
+{
+  "asOf": "2026-10-02",
+  "updatedAt": "2026-10-09",
+  "status": "ok",
+  "source": "FactSet Earnings Insight",
+  "sourceUrl": "https://insight.factset.com/sp-500-earnings-season-preview-q3-2026",
+  "methodology": "Automated extraction from public FactSet Insight earnings posts. Values refer to the dated source article. Unavailable fields are left null.",
+  "sp500": {
+    "forwardPE": 19.0,
+    "forwardEPS": null,
+    "trailingPE": null,
+    "averages": {
+      "5y": 19.8,
+      "10y": 19.1,
+      "15y": null,
+      "20y": null,
+      "25y": null
+    }
+  }
+}

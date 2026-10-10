@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "environment": "labs",
+  "generatedAt": "2026-10-10T01:55:52+00:00",
+  "summary": {
+    "datasetCount": 12,
+    "statusCounts": {
+      "error": 1,
+      "manual": 1,
+      "ok": 7,
+      "partial": 1,
+      "stale": 2
+    },
+    "blockingErrorCount": 1
+  },
+  "datasets": [
+    {
+      "id": "broad-market-valuation",
+      "path": "data/broad-market-valuation.json",
+      "kind": "generated",
+      "status": "error",
+      "asOf": null,
+      "maxAgeDays": 7,
+      "consumer": [
+        "Equity Valuation"
+      ],
+      "producer": "scripts/prepare-broad-market.py",
+      "workflow": ".github/workflows/update-broad-market.yml",
+      "sha256": null,
+      "issues": [
+        {
+          "severity": "error",
+          "code": "unreadable_json",
+          "message": "[Errno 2] No such file or directory: '/home/runner/work/analysis_dashboard_v4/analysis_dashboard_v4/data/broad-market-valuation.json'"
+        }
+      ]
+    },
+    {
+      "id": "curve-us",
+      "path": "data/curve-us.json",
+      "kind": "generated",
+      "status": "ok",
+      "asOf": "2026-10-09",
+      "maxAgeDays": 5,
+      "consumer": [
+        "Yield Curves"
+      ],
+      "producer": "scripts/update-us-yield-curves.py",
+      "workflow": ".github/workflows/update-us-yield-curves.yml",
+      "sha256": "7a5f6eb10f06b6aff966d7b566dd11cfd1bbe884f077baf677b2caf920ecbf45",
+      "maturities": 5,
+      "curveCount": 3,
+      "issues": []
+    },
+    {
+      "id": "fed-policy",
+      "path": "data/fed-policy.json",
+      "kind": "generated",
+      "status": "ok",
+      "asOf": "2026-10-10",
+      "maxAgeDays": 5,
+      "consumer": [
+        "Yield Curves"
+      ],
+      "producer": "scripts/update-fed-policy.py",
+      "workflow": ".github/workflows/update-fed-policy.yml",
+      "sha256": "675468c25c1f499145d971669d95c721475689fa31b3180d13f9ef2369a2dd7b",
+      "issues": []
+    },
+    {
+      "id": "equity-valuation",
+      "path": "data/equity-valuation.json",
+      "kind": "manual",
+      "status": "stale",
+      "asOf": "2026-07-21",
+      "maxAgeDays": 45,
+      "consumer": [
+        "Equity Valuation"
+      ],
+      "producer": null,
+      "workflow": null,
+      "sha256": "dbe51b2f3882593b2bbdf3de66eaedbfd2bf967d78a92a8d2cd43e2886d01ac2",
+      "recordCount": 4,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "stale_dataset",
+          "message": "Dataset asOf=2026-07-21 exceeds maxAgeDays=45"
+        }
+      ]
+    },
+    {
+      "id": "equity-valuation-history",
+      "path": "data/equity-valuation-history.json",
+      "kind": "manual",
+      "status": "manual",
+      "asOf": "2026-07-21",
+      "maxAgeDays": 90,
+      "consumer": [],
+      "producer": null,
+      "workflow": null,
+      "sha256": "540a84818fdf34dad4e60417bf259e192fb0959cf6b1d8f7a8adf51324218194",
+      "recordCount": 1,
+      "issues": []
+    },
+    {
+      "id": "sp500-valuation",
+      "path": "data/sp500-valuation.json",
+      "kind": "generated",
+      "status": "ok",
+      "asOf": "2026-10-02",
+      "maxAgeDays": 14,
+      "consumer": [
+        "Equity Valuation"
+      ],
+      "producer": "scripts/update-sp500-valuation.py",
+      "workflow": ".github/workflows/update-sp500-valuation.yml",
+      "sha256": "a9df360153b069ad415a635189fc7e0ae80350859d7d247107c6d7235d048a3a",
+      "issues": []
+    },
+    {
+      "id": "sp500-pe-history",
+      "path": "data/sp500-pe-history.json",
+      "kind": "generated",
+      "status": "ok",
+      "asOf": "2026-10-07",
+      "maxAgeDays": 45,
+      "consumer": [
+        "Equity Valuation"
+      ],
+      "producer": "scripts/update-sp500-pe-history.py",
+      "workflow": ".github/workflows/update-sp500-pe-history.yml",
+      "sha256": "b84e783e2fb836e592d570dff10a9865f29ce6e0d0e530562640a2c72c03eb36",
+      "recordCount": 1868,
+      "yearEndCount": 156,
+      "issues": []
+    },
+    {
+      "id": "mag7-valuation",
+      "path": "data/mag7-valuation.json",
+      "kind": "generated",
+      "status": "ok",
+      "asOf": "2026-10-09",
+      "maxAgeDays": 5,
+      "consumer": [
+        "Equity Valuation"
+      ],
+      "producer": "scripts/update-mag7-valuation.py",
+      "workflow": ".github/workflows/update-mag7-valuation.yml",
+      "sha256": "89e1ecdd960395774484e5d98aa00f0c99e8ddaf993982689f57d8637c7e46a2",
+      "recordCount": 7,
+      "issues": []
+    },
+    {
+      "id": "etf-universe",
+      "path": "data/etf-universe.json",
+      "kind": "config",
+      "status": "ok",
+      "asOf": null,
+      "maxAgeDays": null,
+      "consumer": [
+        "ETF performance pipeline"
+      ],
+      "producer": null,
+      "workflow": null,
+      "sha256": "ae6abc2539342d66f338774f614649fbc6bf32a3a849b32f51315ddad60a29a6",
+      "recordCount": 197,
+      "assetClassCounts": {
+        "alternative": 13,
+        "commodity": 19,
+        "crypto": 2,
+        "currency": 1,
+        "equity": 117,
+        "fixed_income": 34,
+        "inverse_equity": 8,
+        "volatility": 3
+      },
+      "issues": []
+    },
+    {
+      "id": "etf-performance",
+      "path": "data/etf-performance.json",
+      "kind": "generated",
+      "status": "partial",
+      "asOf": "2026-10-09",
+      "maxAgeDays": 5,
+      "consumer": [
+        "Data Lab"
+      ],
+      "producer": "scripts/update-etf-performance.py",
+      "workflow": ".github/workflows/update-etf-performance.yml",
+      "sha256": "17a9b282bbfcb4cdaa43eb3760649cb6fe0d8e3b67f78debd4790d1e5f3461ed",
+      "recordCount": 197,
+      "chartCoverage": 1.0,
+      "statusCounts": {
+        "ok": 197
+      },
+      "staleCount": 2,
+      "staleBenchmarkCount": 31,
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "stale_instruments",
+          "message": "2 instrument(s) use prior valid data"
+        },
+        {
+          "severity": "warning",
+          "code": "stale_benchmarks",
+          "message": "31 instrument(s) use a prior benchmark series"
+        }
+      ]
+    },
+    {
+      "id": "fixed-income-performance",
+      "path": "data/fixed-income-performance.json",
+      "kind": "generated_fallback",
+      "status": "ok",
+      "asOf": "2026-10-09",
+      "maxAgeDays": 5,
+      "consumer": [
+        "Data Lab"
+      ],
+      "producer": "scripts/update-etf-performance.py",
+      "workflow": ".github/workflows/update-etf-performance.yml",
+      "sha256": "ded98001795911ed01a9927a10cc12de4e62f5a05d0b9a02c4d980b7c6829f75",
+      "recordCount": 21,
+      "chartCoverage": 1.0,
+      "statusCounts": {
+        "ok": 21
+      },
+      "staleCount": 0,
+      "issues": []
+    },
+    {
+      "id": "etf-geography",
+      "path": "data/etf-geography.json",
+      "kind": "generated",
+      "status": "stale",
+      "asOf": "2026-06-30",
+      "maxAgeDays": 45,
+      "consumer": [
+        "ETFs"
+      ],
+      "producer": "scripts/update-etf-geography.py",
+      "workflow": ".github/workflows/update-etf-geography.yml",
+      "sha256": "5928d60ca5d479400c6d224d42867600c4aa423a3756a269d716b1d91ba6a83b",
+      "recordCount": 13,
+      "statusCounts": {
+        "ok": 13
+      },
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "stale_dataset",
+          "message": "Dataset asOf=2026-06-30 exceeds maxAgeDays=45"
+        }
+      ]
+    }
+  ]
+}

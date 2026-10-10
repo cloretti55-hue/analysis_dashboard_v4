@@ -1,0 +1,57 @@
+name: Validate dashboard data
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "index.html"
+      - "assets/**"
+      - "data/**"
+      - "scripts/**"
+      - "tests/**"
+      - "vercel.json"
+      - ".github/workflows/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "assets/**"
+      - "data/**"
+      - "scripts/**"
+      - "tests/**"
+      - "vercel.json"
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-dashboard-data-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: python -m pip install pypdf==6.10.0
+
+      - name: Run data validation tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Validate datasets and manifest
+        run: python scripts/validate-data.py --check-manifest
+
+      - name: Publicar diagnóstico em português
+        if: always()
+        run: python scripts/write-action-summary.py
