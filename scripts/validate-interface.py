@@ -56,9 +56,13 @@ def wait_for_home(page: Page, base_url: str) -> None:
 
 
 def check_instrument_registry(page: Page, label: str) -> None:
+    # DataClient loads asynchronously; an empty filter list passes every().
+    # Require rendered instruments before evaluating catalog coverage.
+    page.locator(".data-lab-chip").first.wait_for(state="visible", timeout=30_000)
     page.wait_for_function(
         r"""
         () => window.GCInstrumentRegistry &&
+          document.querySelectorAll(".data-lab-chip").length > 0 &&
           Array.from(document.querySelectorAll('.data-lab-filter'))
             .every((button) => /\(\d+\)/.test(button.textContent || ''))
         """,
