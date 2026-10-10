@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-10-10T17:17:19+00:00",
+  "generatedAt": "2026-10-10T17:18:25+00:00",
   "summary": {
     "datasetCount": 12,
     "statusCounts": {
@@ -64,7 +64,7 @@
       ],
       "producer": "scripts/update-fed-policy.py",
       "workflow": ".github/workflows/update-fed-policy.yml",
-      "sha256": "675468c25c1f499145d971669d95c721475689fa31b3180d13f9ef2369a2dd7b",
+      "sha256": "3972a9eb9f0c22df76f1807eb7188a6a9f9e080c498e5da8bd02164b9ae6e94e",
       "issues": []
     },
     {
