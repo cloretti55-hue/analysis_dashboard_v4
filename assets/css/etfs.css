@@ -1169,6 +1169,17 @@ body.theme-light .etf-shell .hedge-function:has(.liquid-subfamily) .etf-token.et
 }
 
 /* Trading and asset metadata retain their typeface, with clearer size and blue. */
+.liquid-detail .liquid-management-style {
+  margin-block: 6px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--focus);
+  background: color-mix(in srgb, var(--focus) 7%, transparent);
+  color: var(--focus);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .etf-shell .etf-trading-details,
 .etf-shell .etf-trading-details .data-note,
 .etf-shell .etf-fund-assets,
