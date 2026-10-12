@@ -2771,6 +2771,22 @@ const BRAZIL_FAMILIES = {
   "Bitcoin": ["Dedicated Bitcoin exposure through a B3-listed fund.", "The exchange session is shorter than the continuous trading week of the underlying asset."]
 };
 
+const LIQUID_MANAGEMENT_STYLES = {
+  DBMF: "Active Systematic — Quantitative Replication",
+  CTA: "Active Systematic — Quantitative Models",
+  FMF: "Active Systematic",
+  FFUT: "Active Systematic — Trend Following",
+  WTMF: "Active Systematic",
+  SDMF: "Passive Systematic — DBi CTA Index",
+  KMLM: "Passive Systematic — Mount Lucas Index",
+  BTAL: "Passive Systematic — Factor Index",
+  FTLS: "Active Discretionary / Quantitative",
+  MNA: "Passive Systematic — Arbitrage Index",
+  HFGM: "Active Systematic — Quantitative Replication",
+  GMAC: "Active Discretionary",
+  SAMM: "Active Tactical — Macro and Momentum"
+};
+
 const LIQUID_SUBFAMILY_SUMMARIES = {
   "Broad Managed Futures": "Systematic long/short strategies across multiple futures markets, seeking diversified returns from trends and other market signals.",
   "Trend Following": "Systematic long/short strategies designed to capture persistent price trends across markets.",
@@ -2803,6 +2819,8 @@ function LiquidAlternativesModule({ items, initialEtf, dataLabTickers }) {
       React.createElement("div", { className: "detail-role" }, active.name),
       React.createElement("div", { className: "etf-trading-details data-note" }, `Exchange: ${active.exchange} · Trading currency: USD (US dollar) · Listing: ${active.quoteSymbol}`),
       React.createElement(EtfFundAssets, { instruments: active.ticker }),
+      LIQUID_MANAGEMENT_STYLES[active.ticker] && React.createElement("div", { className: "liquid-management-style" },
+        React.createElement("strong", null, "Management Style: "), LIQUID_MANAGEMENT_STYLES[active.ticker]),
       React.createElement("p", null, active.description), React.createElement("p", null, active.detail),
       React.createElement("p", { className: "data-note" }, "DataLab compares the strategy with the S&P 500 and accrued Fed Funds. These are comparison references, not tracked indices. Fed Funds represents a synthetic cash return compounded daily before fees and taxes."),
       React.createElement("a", { className: "data-note", href: active.sourceUrl, target: "_blank", rel: "noopener noreferrer" }, "Fund information ↗")));
