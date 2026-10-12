@@ -2772,19 +2772,19 @@ const BRAZIL_FAMILIES = {
 };
 
 const LIQUID_MANAGEMENT_STYLES = {
-  DBMF: "Active Systematic — Quantitative Replication",
-  CTA: "Active Systematic — Quantitative Models",
-  FMF: "Active Systematic",
-  FFUT: "Active Systematic — Trend Following",
-  WTMF: "Active Systematic",
-  SDMF: "Passive Systematic — DBi CTA Index",
-  KMLM: "Passive Systematic — Mount Lucas Index",
-  BTAL: "Passive Systematic — Factor Index",
-  FTLS: "Active Discretionary / Quantitative",
-  MNA: "Passive Systematic — Arbitrage Index",
-  HFGM: "Active Systematic — Quantitative Replication",
-  GMAC: "Active Discretionary",
-  SAMM: "Active Tactical — Macro and Momentum"
+  DBMF: "Active — Copies Leading Hedge Fund Strategies",
+  CTA: "Active — Mathematical Trading Models",
+  FMF: "Active — Mathematical Trading Models",
+  FFUT: "Active — Follows Market Trends",
+  WTMF: "Active — Follows Market Trends",
+  SDMF: "Passive — DBi CTA Managed Futures Index",
+  KMLM: "Passive — KFA MLM Index",
+  BTAL: "Active — Buys Low-Risk Stocks, Shorts High-Risk Stocks",
+  FTLS: "Active — Manager Selects Long and Short Stocks",
+  MNA: "Passive — NYLIM Merger Arbitrage Index",
+  HFGM: "Active — Copies Global Macro Hedge Fund Strategies",
+  GMAC: "Active — Manager Makes Global Economic Bets",
+  SAMM: "Active — Invests in Markets Showing Strong Momentum"
 };
 
 const LIQUID_SUBFAMILY_SUMMARIES = {
