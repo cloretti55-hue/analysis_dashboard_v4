@@ -2,7 +2,7 @@
   "version": 1,
   "asOf": "2026-10-12",
   "oldestComponentAsOf": "2026-10-12",
-  "generatedAt": "2026-10-12T20:26:44+00:00",
+  "generatedAt": "2026-10-12T21:53:50+00:00",
   "source": "Fixed income instruments from the ETF performance pipeline; benchmark is synthetic accrued Fed Funds from NY Fed EFFR or FRED DFF.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. Charts use a synthetic Fed Funds cash benchmark from NY Fed EFFR or FRED DFF, compounded daily on an ACT/360 basis, before taxes and costs. ETF and benchmark start at 100 on a common observation date. A prior valid instrument may be retained and marked stale when refresh fails.",
   "instruments": [
@@ -13592,7 +13592,7 @@
           },
           {
             "date": "2024-10-01",
-            "etf": 111.37,
+            "etf": 111.38,
             "cash": 105.36
           },
           {
@@ -14889,7 +14889,7 @@
           },
           {
             "date": "2025-12-02",
-            "etf": 110.89,
+            "etf": 110.88,
             "cash": 110.93
           },
           {
@@ -15059,7 +15059,7 @@
           },
           {
             "date": "2026-06-29",
-            "etf": 111.69,
+            "etf": 111.68,
             "cash": 113.3
           },
           {
@@ -17410,7 +17410,7 @@
           },
           {
             "date": "2024-11-05",
-            "etf": 113.11,
+            "etf": 113.1,
             "cash": 105.86
           },
           {
@@ -18282,7 +18282,7 @@
           },
           {
             "date": "2024-08-08",
-            "etf": 112.8,
+            "etf": 112.79,
             "cash": 104.54
           },
           {
