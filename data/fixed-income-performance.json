@@ -2,7 +2,7 @@
   "version": 1,
   "asOf": "2026-10-14",
   "oldestComponentAsOf": "2026-10-13",
-  "generatedAt": "2026-10-14T15:57:19+00:00",
+  "generatedAt": "2026-10-14T18:12:14+00:00",
   "source": "Fixed income instruments from the ETF performance pipeline; benchmark is synthetic accrued Fed Funds from NY Fed EFFR or FRED DFF.",
   "methodology": "Return metrics use adjusted close from Yahoo Finance chart data when available. Charts use a synthetic Fed Funds cash benchmark from NY Fed EFFR or FRED DFF, compounded daily on an ACT/360 basis, before taxes and costs. ETF and benchmark start at 100 on a common observation date. A prior valid instrument may be retained and marked stale when refresh fails.",
   "instruments": [
@@ -2861,11 +2861,11 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-10-14",
-      "lastClose": 5.0145,
+      "lastClose": 5.0195,
       "historyStartDate": "2025-03-31",
       "historyObservationCount": 393,
-      "returnYtdPct": -4.69,
-      "return1yPct": -3.95,
+      "returnYtdPct": -4.6,
+      "return1yPct": -3.85,
       "return3yAnnPct": null,
       "return5yAnnPct": null,
       "vol1yAnnPct": 4.5,
@@ -5702,13 +5702,13 @@
       "comparisonBenchmarks": [],
       "status": "ok",
       "asOf": "2026-10-14",
-      "lastClose": 250.55,
+      "lastClose": 250.85,
       "historyStartDate": "2021-09-27",
       "historyObservationCount": 1272,
-      "returnYtdPct": -2.15,
-      "return1yPct": -2.3,
-      "return3yAnnPct": 3.76,
-      "return5yAnnPct": -0.41,
+      "returnYtdPct": -2.03,
+      "return1yPct": -2.18,
+      "return3yAnnPct": 3.8,
+      "return5yAnnPct": -0.39,
       "vol1yAnnPct": 3.66,
       "maxDrawdown1yPct": -4.04,
       "benchmarkSource": "Federal Reserve Bank of New York EFFR",
@@ -11703,7 +11703,7 @@
           },
           {
             "date": "2024-10-09",
-            "etf": 105.84,
+            "etf": 105.83,
             "cash": 105.43
           },
           {
@@ -13542,7 +13542,7 @@
           },
           {
             "date": "2024-08-05",
-            "etf": 110.91,
+            "etf": 110.92,
             "cash": 104.45
           },
           {
@@ -16923,7 +16923,7 @@
           },
           {
             "date": "2026-05-27",
-            "etf": 115.24,
+            "etf": 115.25,
             "cash": 112.88
           },
           {
