@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "environment": "labs",
-  "generatedAt": "2026-10-15T23:41:12+00:00",
+  "generatedAt": "2026-10-15T23:45:33+00:00",
   "summary": {
     "datasetCount": 11,
     "statusCounts": {
@@ -18,14 +18,14 @@
       "path": "data/curve-us.json",
       "kind": "generated",
       "status": "ok",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-15",
       "maxAgeDays": 5,
       "consumer": [
         "Yield Curves"
       ],
       "producer": "scripts/update-us-yield-curves.py",
       "workflow": ".github/workflows/update-us-yield-curves.yml",
-      "sha256": "d599003d72ac53e219890596b4f60cbd99f772a84455b671364063d67ef7080a",
+      "sha256": "3797e0e897d597fc4fa6959f7a029acee3e9d1a376413b572fe7f54b44f44933",
       "maturities": 5,
       "curveCount": 3,
       "issues": []
