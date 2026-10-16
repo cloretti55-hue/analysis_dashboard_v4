@@ -93,7 +93,7 @@
       ],
       "producer": "scripts/update-sp500-valuation.py",
       "workflow": ".github/workflows/update-sp500-valuation.yml",
-      "sha256": "ba69235674666847e5306e77c44aecfcaace2b9da56d36bc3650138d9d682552",
+      "sha256": "333020e809ba287f2a4ae5046fb7037270a799f76d5dcc550a62fae66bbfc13c",
       "issues": []
     },
     {
